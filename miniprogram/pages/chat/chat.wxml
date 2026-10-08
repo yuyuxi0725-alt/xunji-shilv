@@ -1,0 +1,182 @@
+<!-- pages/chat/chat.wxml —— 视觉小说式对话页 -->
+<view class="vn-stage">
+
+  <!-- 场景背景（双层交叉淡入淡出：旧图垫底，新图淡入） -->
+  <image class="vn-bg vn-bg-under" src="{{scenePrev}}" mode="aspectFill" wx:if="{{scenePrev}}" />
+  <image class="vn-bg vn-bg-over {{sceneFadeSlow ? 'scene-slow' : ''}} {{sceneReady ? 'scene-on' : ''}}" src="{{sceneImage}}" mode="aspectFill" />
+  <!-- 氛围暗角层：压暗四周，突出中央人物与文字，增强沉浸 -->
+  <view class="vn-vignette"></view>
+
+  <!-- 顶部信息条 -->
+  <view class="vn-topbar">
+    <view class="vn-back" bindtap="goBack">‹ 返回</view>
+    <view class="vn-title">{{periodName}}</view>
+    <view class="vn-anchor">锚点 {{anchorCount}}/{{anchorTotal}}</view>
+  </view>
+  <!-- AI 生成内容标识（依《人工智能生成合成内容标识办法》强制要求） -->
+  <view class="vn-ai-mark">AI 生成</view>
+
+  <!-- 立绘（对话时登场，旁白时隐藏；结尾讲述时不显示） -->
+  <image
+    class="vn-npc {{npcVisible ? 'vn-npc-show' : ''}} {{npcSpeaking ? 'vn-npc-active' : ''}}"
+    src="{{npcImage}}"
+    mode="aspectFit"
+    binderror="onNpcImgError"
+  />
+
+  <!-- 打字机文本框 -->
+  <view class="vn-dialog" bindtap="onDialogTap" wx:if="{{nodeType === 'narrate' || nodeType === 'talk'}}">
+    <view class="vn-dialog-name" wx:if="{{nodeType === 'talk'}}">{{npcName}}</view>
+    <view class="vn-dialog-text">{{displayedText}}<text class="vn-caret" wx:if="{{typing}}">▌</text></view>
+
+    <!-- 考据挑战：先生这句话里藏着错漏，等少年捉出来 -->
+    <block wx:if="{{!typing && trapActive && !trapCaught}}">
+      <view class="vn-trap-hint">⟡ 先生此言，你听着可有不对之处？</view>
+      <view class="vn-trap-actions">
+        <view class="vn-trap-btn catch" catchtap="onTrapChallenge">这里不对！</view>
+        <view class="vn-trap-btn pass" catchtap="onTrapContinue">接着听</view>
+      </view>
+    </block>
+    <!-- 捉出之后：先生的反应 -->
+    <block wx:elif="{{trapCaught}}">
+      <view class="vn-trap-catch">{{trapCatchText}}</view>
+      <view class="vn-dialog-next" catchtap="onTrapContinue">继续 ›</view>
+    </block>
+    <view class="vn-dialog-next" wx:elif="{{!typing}}">点击继续 ›</view>
+  </view>
+
+  <!-- 选项面板 -->
+  <view class="vn-choices" wx:if="{{nodeType === 'choice'}}">
+    <view class="vn-choices-card">
+      <view class="vn-key-tag" wx:if="{{isKeyChoice}}">⚖ 关键抉择</view>
+      <view class="vn-choices-question">{{question}}</view>
+      <view
+        class="vn-choice-btn {{choiceFeedback ? 'vn-choice-locked' : ''}}"
+        wx:for="{{options}}"
+        wx:key="index"
+        data-index="{{index}}"
+        bindtap="onChoiceTap"
+      >{{item.text}}</view>
+      <!-- 选对/选错轻量反馈 -->
+      <view class="vn-choice-feedback {{choiceFeedback ? (choiceFeedback.type === 'right' ? 'right' : 'wrong') : ''}}" wx:if="{{choiceFeedback}}">
+        {{choiceFeedback.type === 'right' ? '✦' : '○'}} {{choiceFeedback.text}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 结尾"完整讲述"面板（同游者回望） -->
+  <view class="vn-reflect" wx:if="{{nodeType === 'reflect'}}">
+    <view class="vn-reflect-inner">
+      <view
+        class="vn-reflect-line"
+        wx:for="{{reflectLines}}"
+        wx:key="*this"
+      >{{item}}</view>
+    </view>
+    <view class="vn-reflect-continue" wx:if="{{reflectDone}}" bindtap="onReflectContinue">
+      继续 ›
+    </view>
+  </view>
+
+  <!-- AI 自由对话面板 -->
+  <view class="vn-aifree" wx:if="{{nodeType === 'aiFree'}}">
+    <!-- 探究式对话头部：AI 标识 + 探究进度 -->
+    <view class="vn-ai-head">
+      <text class="vn-ai-badge">AI</text>
+      <text class="vn-ai-note">与{{npcName}}当面请教 · 已探究 {{_covered.length}} 处史料</text>
+    </view>
+
+    <!-- 聊天记录区 -->
+    <scroll-view class="vn-chat-list" scroll-y scroll-into-view="{{scrollToId}}">
+      <view
+        class="vn-chat-item {{item.role}}"
+        wx:for="{{chatLog}}"
+        wx:key="id"
+        id="msg-{{item.id}}"
+      >
+        <view class="vn-chat-bubble">{{item.content}}</view>
+      </view>
+      <view class="vn-chat-item npc" wx:if="{{aiTyping && !aiStreaming}}">
+        <view class="vn-chat-bubble">…</view>
+      </view>
+    </scroll-view>
+
+    <!-- 考据挑战：先生这句开场白里藏着一处史实错漏，等少年捉 -->
+    <view class="vn-trap" wx:if="{{trapActive}}">
+      <view class="vn-trap-hint">⟡ 先生此言，你听着可有不对之处？</view>
+      <view class="vn-trap-actions" wx:if="{{!trapCaught}}">
+        <view class="vn-trap-btn catch" bindtap="onTrapChallenge">这里不对！</view>
+        <view class="vn-trap-btn pass" bindtap="onTrapContinue">接着听</view>
+      </view>
+      <view class="vn-trap-actions" wx:else>
+        <view class="vn-trap-btn pass" bindtap="onTrapContinue">原来如此，继续请教 ›</view>
+      </view>
+    </view>
+
+    <!-- 输入区 -->
+    <view class="vn-chat-input">
+      <input
+        class="vn-chat-input-field"
+        value="{{inputText}}"
+        placeholder="{{aiHint}}"
+        placeholder-class="vn-input-ph"
+        bindinput="onAiInput"
+        confirm-type="send"
+        bindconfirm="onAiSend"
+      />
+      <view class="vn-send-btn {{inputText ? '' : 'disabled'}}" bindtap="onAiSend">发送</view>
+    </view>
+
+    <!-- 推荐提问 -->
+    <view class="vn-suggestions" wx:if="{{suggestions.length}}">
+      <view class="vn-suggest-title">💬 试着问问：</view>
+      <view
+        class="vn-suggest-chip"
+        wx:for="{{suggestions}}"
+        wx:key="*this"
+        data-q="{{item}}"
+        bindtap="onSuggestionTap"
+      >{{item}}</view>
+    </view>
+
+    <!-- 节点检验：由史料卡动态出题（答完才放行"继续剧情"） -->
+    <view class="vn-quiz" wx:if="{{quiz}}">
+      <view class="vn-quiz-tag">✦ 先生考校</view>
+      <view class="vn-quiz-q">{{quiz.q}}</view>
+      <view
+        class="vn-quiz-opt {{quizPicked === index ? (quizResult === 'right' ? 'picked-right' : 'picked-wrong') : ''}} {{quizResult && index === quiz.answer ? 'is-answer' : ''}}"
+        wx:for="{{quiz.options}}"
+        wx:key="index"
+        data-index="{{index}}"
+        bindtap="onQuizPick"
+      >{{item}}</view>
+      <view class="vn-quiz-explain" wx:if="{{quizResult}}">
+        {{quizResult === 'right' ? '✦ 答得好。' : '○ 不要紧，'}}{{quiz.explain}}
+      </view>
+    </view>
+
+    <!-- 继续剧情按钮（聊过即可点，主动权在用户） -->
+    <view class="vn-continue" wx:if="{{canContinue}}" bindtap="onContinueStory">
+      ▶ 继续剧情
+    </view>
+  </view>
+
+  <!-- 锚点触发提示 -->
+  <view class="vn-anchor-toast {{showAnchorToast ? 'show' : ''}}" wx:if="{{anchorToastText}}">
+    ✦ 触发知识锚点：{{anchorToastText}}
+  </view>
+
+  <!-- 通关收束面板：时期完成 + 锚点回顾 + 情感收尾 -->
+  <view class="vn-questend-mask" wx:if="{{questEndVisible}}">
+    <view class="vn-questend-card">
+      <view class="vn-questend-seal">通</view>
+      <view class="vn-questend-title">{{questEndAllDone ? '全篇告成' : '本章已毕'}}</view>
+      <view class="vn-questend-body">{{questEndSummary}}</view>
+      <view class="vn-questend-extra" wx:if="{{questEndAllDone}}">
+        四程已尽，诗心长存。愿这些字句，陪你走更远的路。
+      </view>
+      <view class="vn-questend-btn" bindtap="onQuestEndClose">返回剧本 ›</view>
+    </view>
+  </view>
+
+</view>

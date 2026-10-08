@@ -1,0 +1,149 @@
+<!-- pages/map/map.wxml —— 行迹地图（可点亮） -->
+
+<view class="page">
+
+  <!-- ===== 顶部：标题 / 切换古人 / 进度总览 ===== -->
+  <view class="map-head">
+    <view class="head-row">
+      <view class="head-left">
+        <view class="head-title">行迹 · 舆图</view>
+        <view class="head-sub">循着他的足迹，走一遍他的人生</view>
+      </view>
+      <view class="head-btn" bindtap="goPoemAll">
+        <text class="head-btn-seal">笺</text>
+        <text class="head-btn-text">我的诗笺</text>
+      </view>
+    </view>
+
+    <!-- 切换条：复用 stories.getOnlineLines() -->
+    <view class="line-tabs">
+      <view
+        wx:for="{{lines}}"
+        wx:key="id"
+        class="tab {{item.id === currentLineId ? 'on' : ''}}"
+        bindtap="onSwitchLine"
+        data-id="{{item.id}}"
+      >{{item.name}}行迹</view>
+    </view>
+
+    <!-- 进度总览 -->
+    <view class="progress-wrap">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progressPercent}}%;"></view>
+      </view>
+      <view class="progress-text">已走过 {{litCount}} / {{total}} 处</view>
+    </view>
+  </view>
+
+  <!-- ===== 地图 ===== -->
+  <view class="map-wrap">
+    <view class="map-stage" style="height: {{stageH}}px;">
+
+      <!-- 底图（云存储；取不到就不渲染，自动走下面的水墨降级层） -->
+      <image
+        wx:if="{{mapImage}}"
+        class="map-bg"
+        src="{{mapImage}}"
+        mode="aspectFill"
+        bindload="onMapLoad"
+        binderror="onMapError"
+      />
+
+      <!-- 降级层：纯 CSS 水墨示意布局（无底图也能跑、不空白） -->
+      <view wx:if="{{!mapImage}}" class="map-fallback">
+        <view class="fb-grid"></view>
+        <view class="fb-blob b1"></view>
+        <view class="fb-blob b2"></view>
+        <view class="fb-blob b3"></view>
+        <view class="fb-blob b4"></view>
+        <view class="fb-river r1"></view>
+        <view class="fb-river r2"></view>
+        <view class="fb-river r3"></view>
+        <view class="fb-tip">水墨示意 · 未加载底图</view>
+      </view>
+
+      <!-- 路线层：已走过的地方之间连起一条水墨行迹 -->
+      <view class="route-layer">
+        <view
+          wx:for="{{segments}}"
+          wx:key="k"
+          class="seg {{item.cls}}"
+          style="left: {{item.left}}px; top: {{item.top}}px; width: {{item.width}}px; transform: rotate({{item.angle}}deg);"
+        ></view>
+      </view>
+
+      <!-- 地点层 -->
+      <view class="wp-layer">
+        <view
+          wx:for="{{waypoints}}"
+          wx:key="k"
+          class="wp {{item.state}} lp-{{item.lp}}"
+          style="left: {{item.x}}%; top: {{item.y}}%;"
+          bindtap="onWpTap"
+          data-k="{{item.k}}"
+        >
+          <view class="wp-dot">
+            <view wx:if="{{item.state === 'active'}}" class="wp-pulse"></view>
+            <view class="wp-core"></view>
+          </view>
+          <view class="wp-label">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 图例 -->
+    <view class="legend">
+      <view class="legend-item"><view class="legend-dot done"></view><text>已走过</text></view>
+      <view class="legend-item"><view class="legend-dot now"></view><text>正在此间</text></view>
+      <view class="legend-item"><view class="legend-dot lock"></view><text>尚未抵达</text></view>
+    </view>
+
+    <view class="map-caption" wx:if="{{currentLine}}">{{currentLine.caption}}</view>
+  </view>
+
+  <!-- ===== 地点卡片（自定义古风弹层） ===== -->
+  <view wx:if="{{card.show}}" class="card-mask" bindtap="onCloseCard">
+    <view class="wp-card" catchtap="noop">
+      <view class="wp-card-seal">迹</view>
+
+      <view class="wp-card-scene" wx:if="{{card.scene}}">
+        <image class="wp-card-img {{card.state === 'locked' ? 'img-locked' : ''}}" src="{{card.scene}}" mode="aspectFill" />
+      </view>
+
+      <view class="wp-card-body">
+        <view class="wp-card-name">{{card.name}}</view>
+        <view class="wp-card-meta">{{card.lineName}} · {{card.periodName}}<text wx:if="{{card.range}}"> · {{card.range}}</text></view>
+        <view class="wp-card-state {{card.state}}">{{card.stateText}}</view>
+
+        <view class="wp-card-note">{{card.note}}</view>
+
+        <view class="wp-card-poem" wx:if="{{card.poem}}">
+          <text class="poem-text">「{{card.poem}}」</text>
+          <text class="poem-src" wx:if="{{card.poemTitle}}">—— {{card.poemTitle}}</text>
+        </view>
+
+        <view class="wp-card-anchor" wx:if="{{card.state === 'completed'}}">
+          本时期点亮 {{card.anchorLit}} / {{card.anchorTotal}} 个锚点
+        </view>
+
+        <view class="wp-card-actions">
+          <view class="act act-main" wx:if="{{card.state === 'completed'}}" bindtap="goPoemPeriod">看这一程的诗笺 ›</view>
+          <view class="act act-main" wx:elif="{{card.canEnter}}" bindtap="goPeriod">进入这一程 ›</view>
+          <view class="act act-ghost" bindtap="onCloseCard">收起</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 底部：我的诗笺入口 ===== -->
+  <view class="poem-entry" bindtap="goPoemAll">
+    <view class="poem-entry-seal">笺</view>
+    <view class="poem-entry-text">
+      <view class="poem-entry-title">我的诗笺</view>
+      <view class="poem-entry-sub">把你走过的每一程，收成一张可保存、可分享的诗笺</view>
+    </view>
+    <text class="poem-entry-arrow">›</text>
+  </view>
+
+  <view class="foot-note">点亮的地方，是你陪他走过的路。</view>
+</view>

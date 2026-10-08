@@ -1,0 +1,645 @@
+/* pages/chat/chat.wxss —— 视觉小说式对话页 */
+page {
+  height: 100%;
+  overflow: hidden;
+}
+
+.vn-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #1a1612;
+}
+
+/* ---------- 场景背景（双层交叉淡入淡出） ---------- */
+.vn-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.92;
+}
+/* 旧背景垫底层（过渡期间存在） */
+.vn-bg-under {
+  z-index: 0;
+}
+/* 新背景淡入层：0.9s 交叉溶解，营造"镜头切换"的电影感 */
+.vn-bg-over {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+.vn-bg-over.scene-on {
+  opacity: 0.92;
+}
+/* 回忆闪回：更慢、更舒缓的淡入淡出（1.6s），让思绪"飘回过去" */
+.vn-bg-over.scene-slow {
+  transition: opacity 1.6s ease-in-out;
+}
+/* 氛围暗角层：四周压暗，聚焦中央，增强电影感 */
+.vn-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 42%, rgba(0,0,0,0) 38%, rgba(0,0,0,0.42) 78%, rgba(0,0,0,0.62) 100%);
+  z-index: 2;
+}
+
+/* ---------- 顶部信息条 ---------- */
+.vn-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: calc(env(safe-area-inset-top) + 16rpx) 24rpx 16rpx;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55), transparent);
+  z-index: 10;
+}
+.vn-back {
+  color: #f0e6d2;
+  font-size: 28rpx;
+  padding: 8rpx 20rpx 8rpx 0;
+}
+.vn-title {
+  flex: 1;
+  text-align: center;
+  color: #f0e6d2;
+  font-size: 32rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 4rpx;
+}
+.vn-anchor {
+  color: #c9b99a;
+  font-size: 24rpx;
+  margin-left: 8rpx;
+}
+
+/* ---------- 立绘（淡入淡出登场/退场） ---------- */
+/* z-index 必须高于背景层(1)与暗角层(2)，否则立绘会被全屏背景盖住（踩过坑） */
+.vn-npc {
+  position: absolute;
+  bottom: 340rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560rpx;
+  height: 720rpx;
+  object-fit: contain;
+  filter: drop-shadow(0 8rpx 24rpx rgba(0,0,0,0.45));
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.3s ease, bottom 0.7s ease, width 0.7s ease, height 0.7s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+.vn-npc-show {
+  opacity: 0.96;
+}
+.vn-npc-active {
+  transform: translateX(-50%) translateY(-10rpx);
+}
+
+/* ---------- 对话文本框 ---------- */
+.vn-dialog {
+  position: absolute;
+  left: 32rpx;
+  right: 32rpx;
+  bottom: 60rpx;
+  min-height: 240rpx;
+  background: rgba(26, 22, 18, 0.88);
+  border: 1rpx solid rgba(200, 170, 110, 0.35);
+  border-radius: 20rpx;
+  padding: 32rpx 36rpx 44rpx;
+  z-index: 20;
+}
+.vn-dialog-name {
+  position: absolute;
+  top: -34rpx;
+  left: 32rpx;
+  background: linear-gradient(135deg, #8b5a2b, #a9743c);
+  color: #fff;
+  font-size: 28rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  padding: 8rpx 32rpx;
+  border-radius: 32rpx;
+  letter-spacing: 4rpx;
+}
+.vn-dialog-text {
+  color: #f5eddc;
+  font-size: 30rpx;
+  line-height: 1.8;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-caret {
+  animation: blink 0.8s infinite;
+  color: #c9b99a;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.vn-dialog-next {
+  position: absolute;
+  right: 28rpx;
+  bottom: 12rpx;
+  color: #a89b87;
+  font-size: 22rpx;
+  animation: pulse 1.6s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ---------- 选项面板 ---------- */
+.vn-choices {
+  position: absolute;
+  left: 32rpx;
+  right: 32rpx;
+  bottom: 70rpx;
+  z-index: 30;
+}
+/* 选项区独立卡片：垫深色底，让问题与选项都清晰可读 */
+.vn-choices-card {
+  background: rgba(16, 12, 8, 0.94);
+  border: 1rpx solid rgba(200, 170, 110, 0.45);
+  border-radius: 28rpx;
+  padding: 32rpx 36rpx 28rpx;
+  box-shadow: 0 12rpx 40rpx rgba(0,0,0,0.55);
+}
+.vn-choices-question {
+  text-align: center;
+  color: #fff7e6;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 30rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+  text-shadow: 0 2rpx 10rpx rgba(0,0,0,0.9), 0 0 20rpx rgba(0,0,0,0.6);
+}
+.vn-key-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #b8860b, #d4a017);
+  color: #fff;
+  font-size: 22rpx;
+  padding: 6rpx 20rpx;
+  border-radius: 24rpx;
+  margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
+}
+.vn-choice-btn {
+  background: rgba(52, 42, 30, 0.95);
+  border: 1rpx solid rgba(200, 170, 110, 0.55);
+  border-radius: 44rpx;
+  color: #fdf6e3;
+  font-size: 30rpx;
+  text-align: center;
+  padding: 26rpx 32rpx;
+  margin-bottom: 22rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  box-shadow: inset 0 1rpx 0 rgba(255,255,255,0.06), 0 4rpx 14rpx rgba(0,0,0,0.35);
+  transition: transform 0.15s ease;
+}
+.vn-choice-btn:active {
+  transform: scale(0.97);
+  background: rgba(118, 84, 44, 0.98);
+}
+.vn-choice-locked {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.vn-choice-feedback {
+  text-align: center;
+  font-size: 28rpx;
+  padding: 18rpx 24rpx;
+  border-radius: 14rpx;
+  margin-top: 8rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  animation: fadeInUp 0.4s ease;
+}
+.vn-choice-feedback.right {
+  color: #e8c87a;
+  background: rgba(184, 134, 11, 0.18);
+  border: 1rpx solid rgba(232, 200, 122, 0.5);
+}
+.vn-choice-feedback.wrong {
+  color: #c9b99a;
+  background: rgba(38, 30, 22, 0.85);
+  border: 1rpx solid rgba(200, 170, 110, 0.35);
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- AI 自由对话面板 ---------- */
+.vn-aifree {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 200rpx;
+  display: flex;
+  flex-direction: column;
+  z-index: 25;
+}
+.vn-chat-list {
+  flex: 1;
+  padding: 24rpx;
+  overflow-y: auto;
+}
+.vn-chat-item {
+  display: flex;
+  margin-bottom: 24rpx;
+}
+.vn-chat-item.user {
+  justify-content: flex-end;
+}
+.vn-chat-bubble {
+  max-width: 78%;
+  padding: 20rpx 28rpx;
+  border-radius: 18rpx;
+  font-size: 28rpx;
+  line-height: 1.7;
+}
+.vn-chat-item.npc .vn-chat-bubble {
+  background: rgba(26, 22, 18, 0.88);
+  border: 1rpx solid rgba(200, 170, 110, 0.35);
+  color: #f5eddc;
+  border-top-left-radius: 4rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-chat-item.user .vn-chat-bubble {
+  background: rgba(139, 90, 43, 0.92);
+  color: #fff;
+  border-top-right-radius: 4rpx;
+}
+
+/* 输入区 */
+.vn-chat-input {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx calc(env(safe-area-inset-bottom) + 16rpx);
+  background: rgba(26, 22, 18, 0.94);
+  border-top: 1rpx solid rgba(200, 170, 110, 0.25);
+}
+.vn-chat-input .vn-chat-input-field {
+  flex: 1;
+  background: rgba(255, 253, 247, 0.1);
+  border: 1rpx solid rgba(200, 170, 110, 0.3);
+  border-radius: 36rpx;
+  color: #f5eddc;
+  font-size: 28rpx;
+  padding: 16rpx 28rpx;
+}
+.vn-input-ph {
+  color: #8c7b6b;
+}
+.vn-send-btn {
+  margin-left: 16rpx;
+  background: linear-gradient(135deg, #8b5a2b, #a9743c);
+  color: #fff;
+  font-size: 27rpx;
+  padding: 16rpx 32rpx;
+  border-radius: 36rpx;
+}
+.vn-send-btn.disabled {
+  opacity: 0.4;
+}
+
+/* 推荐提问 */
+.vn-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14rpx;
+  padding: 12rpx 24rpx 16rpx;
+  background: rgba(26, 22, 18, 0.94);
+}
+.vn-suggest-title {
+  width: 100%;
+  color: #c9b99a;
+  font-size: 22rpx;
+  margin-bottom: 4rpx;
+}
+.vn-suggest-chip {
+  background: rgba(139, 90, 43, 0.18);
+  border: 1rpx solid rgba(200, 170, 110, 0.4);
+  border-radius: 28rpx;
+  color: #e8d9b8;
+  font-size: 24rpx;
+  padding: 12rpx 24rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  transition: all 0.15s ease;
+}
+.vn-suggest-chip:active {
+  background: rgba(139, 90, 43, 0.4);
+  transform: scale(0.96);
+}
+
+/* 继续剧情按钮 */
+.vn-continue {
+  position: absolute;
+  right: 32rpx;
+  bottom: calc(env(safe-area-inset-bottom) + 140rpx);
+  background: linear-gradient(135deg, #b8860b, #d4a017);
+  color: #fff;
+  font-size: 28rpx;
+  padding: 18rpx 40rpx;
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 16rpx rgba(184, 134, 11, 0.5);
+  animation: pulse 1.6s infinite;
+  z-index: 40;
+}
+
+/* ---------- 锚点提示 ---------- */
+.vn-anchor-toast {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background: rgba(26, 22, 18, 0.95);
+  border: 1rpx solid #b8860b;
+  color: #f0e6d2;
+  font-size: 28rpx;
+  padding: 24rpx 48rpx;
+  border-radius: 16rpx;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 50;
+  white-space: nowrap;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-anchor-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* ---------- 结尾"完整讲述"（reflect） ---------- */
+/* 全屏深黑幕：隐去立绘，纯文字沉浸式回望 */
+.vn-reflect {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 6, 0.97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 56rpx calc(env(safe-area-inset-bottom) + 60rpx);
+  z-index: 60;
+  animation: fadeIn 0.6s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.vn-reflect-inner {
+  width: 100%;
+}
+.vn-reflect-line {
+  color: #f0e6d2;
+  font-size: 30rpx;
+  line-height: 1.9;
+  text-align: center;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+  margin-bottom: 14rpx;
+  animation: fadeInUp 0.8s ease;
+}
+.vn-reflect-continue {
+  margin-top: 36rpx;
+  text-align: center;
+  color: #d4a017;
+  font-size: 30rpx;
+  letter-spacing: 4rpx;
+  animation: pulse 1.6s infinite;
+}
+
+/* ---------- 通关收束面板（时期完成 + 锚点回顾 + 情感收尾） ---------- */
+.vn-questend-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 6, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 56rpx;
+  z-index: 80;
+  animation: fadeIn 0.4s ease;
+}
+.vn-questend-card {
+  width: 100%;
+  max-width: 620rpx;
+  background: linear-gradient(180deg, #fbf6ec 0%, #f3ead8 100%);
+  border-radius: 24rpx;
+  padding: 56rpx 48rpx 44rpx;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.45);
+  text-align: center;
+  animation: questEndPop 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+@keyframes questEndPop {
+  from { transform: scale(0.86); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.vn-questend-seal {
+  width: 88rpx;
+  height: 88rpx;
+  margin: 0 auto 20rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a33a2b, #c05a3c);
+  color: #fdf6e8;
+  font-size: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  box-shadow: 0 6rpx 16rpx rgba(163, 58, 43, 0.35);
+}
+.vn-questend-title {
+  font-size: 40rpx;
+  color: #5a3c1e;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 6rpx;
+  margin-bottom: 28rpx;
+}
+.vn-questend-body {
+  font-size: 28rpx;
+  line-height: 1.8;
+  color: #6b4a26;
+  white-space: pre-line;
+  text-align: center;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+}
+.vn-questend-extra {
+  margin-top: 28rpx;
+  padding-top: 24rpx;
+  border-top: 1rpx solid #e2d0ae;
+  font-size: 24rpx;
+  color: #9a6b34;
+  line-height: 1.7;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+}
+.vn-questend-btn {
+  margin-top: 40rpx;
+  display: inline-block;
+  padding: 20rpx 64rpx;
+  background: linear-gradient(135deg, #8b5a2b, #a9743c);
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 44rpx;
+  letter-spacing: 4rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  box-shadow: 0 8rpx 20rpx rgba(139, 90, 43, 0.35);
+}
+
+/* ============================================================
+   AI 生成内容标识（依《人工智能生成合成内容标识办法》）
+   立绘 / 场景 / 对话均为 AI 生成，故全程常驻标识
+   ============================================================ */
+.vn-ai-mark {
+  position: absolute;
+  right: 24rpx;
+  top: calc(env(safe-area-inset-top) + 96rpx);
+  z-index: 12;
+  padding: 4rpx 14rpx;
+  border-radius: 20rpx;
+  background: rgba(26, 22, 18, 0.55);
+  border: 1rpx solid rgba(200, 170, 110, 0.35);
+  color: #cbb894;
+  font-size: 20rpx;
+  letter-spacing: 2rpx;
+  pointer-events: none;
+}
+
+/* ============================================================
+   探究式对话头部
+   ============================================================ */
+.vn-ai-head {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 12rpx 24rpx;
+  background: rgba(26, 22, 18, 0.9);
+}
+.vn-ai-badge {
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+  background: linear-gradient(135deg, #8b5a2b, #b8863f);
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 600;
+  letter-spacing: 1rpx;
+}
+.vn-ai-note {
+  font-size: 22rpx;
+  color: #b3a189;
+}
+
+/* ============================================================
+   考据挑战（先生故露错漏，等少年捉）
+   ============================================================ */
+.vn-trap {
+  padding: 16rpx 24rpx;
+  background: rgba(26, 22, 18, 0.9);
+  border-top: 1rpx solid rgba(200, 170, 110, 0.28);
+}
+.vn-trap-hint {
+  margin-top: 0;
+  font-size: 25rpx;
+  color: #d8b878;
+  letter-spacing: 2rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-trap-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 18rpx;
+}
+.vn-trap-btn {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 40rpx;
+  font-size: 27rpx;
+  letter-spacing: 2rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-trap-btn.catch {
+  background: linear-gradient(135deg, #8b5a2b, #b8863f);
+  color: #fff;
+  box-shadow: 0 6rpx 16rpx rgba(139, 90, 43, 0.4);
+}
+.vn-trap-btn.pass {
+  background: transparent;
+  border: 1rpx solid rgba(200, 170, 110, 0.5);
+  color: #cbb894;
+}
+.vn-trap-catch {
+  margin-top: 18rpx;
+  padding: 16rpx 20rpx;
+  border-left: 4rpx solid #c8aa6e;
+  background: rgba(200, 170, 110, 0.12);
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: #f0e2c6;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+/* ============================================================
+   节点检验（由史料卡动态出题，答完才放行"继续剧情"）
+   ============================================================ */
+.vn-quiz {
+  padding: 20rpx 24rpx;
+  background: rgba(26, 22, 18, 0.94);
+  border-top: 1rpx solid rgba(200, 170, 110, 0.25);
+}
+.vn-quiz-tag {
+  font-size: 23rpx;
+  color: #d8b878;
+  letter-spacing: 2rpx;
+  margin-bottom: 12rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-quiz-q {
+  font-size: 27rpx;
+  line-height: 1.6;
+  color: #f5eddc;
+  margin-bottom: 16rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-quiz-opt {
+  padding: 14rpx 22rpx;
+  margin-bottom: 12rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(200, 170, 110, 0.3);
+  background: rgba(255, 253, 247, 0.06);
+  color: #e8dcc4;
+  font-size: 26rpx;
+  line-height: 1.5;
+}
+.vn-quiz-opt.picked-right {
+  border-color: #7fae6a;
+  background: rgba(127, 174, 106, 0.22);
+  color: #e6f5dd;
+}
+.vn-quiz-opt.picked-wrong {
+  border-color: #b06a6a;
+  background: rgba(176, 106, 106, 0.2);
+  color: #f6dede;
+}
+.vn-quiz-opt.is-answer {
+  border-color: #c8aa6e;
+  box-shadow: inset 0 0 0 1rpx rgba(200, 170, 110, 0.5);
+}
+.vn-quiz-explain {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #cbb894;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}

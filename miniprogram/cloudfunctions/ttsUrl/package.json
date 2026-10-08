@@ -1,0 +1,9 @@
+{
+  "name": "ttsUrl",
+  "version": "1.0.0",
+  "description": "代取云存储音频临时链接（管理端权限，绕过免费版存储权限限制）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

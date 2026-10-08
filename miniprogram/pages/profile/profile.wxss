@@ -1,0 +1,196 @@
+/* pages/profile/profile.wxss —— 我的（视觉重做版） */
+.page {
+  min-height: 100vh;
+  padding-bottom: 60rpx;
+}
+
+/* ===== 头部：暖棕渐变 + 古风头像 ===== */
+.profile-head {
+  padding: 70rpx 40rpx 56rpx;
+  text-align: center;
+  background: linear-gradient(180deg, #3b2d1c 0%, #5a4230 55%, #f5f0e8 100%);
+}
+.avatar {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5a2b, #b8860b);
+  color: #fff8ea;
+  font-size: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.25);
+  border: 3rpx solid rgba(255, 248, 234, 0.55);
+}
+.name-row {
+  margin-top: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.name {
+  font-size: 38rpx;
+  color: #fff8ea;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 4rpx;
+}
+.edit-icon {
+  margin-left: 12rpx;
+  font-size: 30rpx;
+  color: rgba(255, 248, 234, 0.7);
+}
+.login-tag {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: rgba(255, 248, 234, 0.55);
+  letter-spacing: 2rpx;
+}
+
+/* ===== 学习总览：三格数字 ===== */
+.summary-card {
+  margin-top: -28rpx;
+}
+.summary-grid {
+  display: flex;
+}
+.summary-item {
+  flex: 1;
+  text-align: center;
+}
+.summary-item + .summary-item {
+  border-left: 1rpx solid var(--color-border);
+}
+.summary-num {
+  display: block;
+  font-size: 46rpx;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.summary-total {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  font-weight: normal;
+}
+.summary-label {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: var(--color-text-secondary);
+  letter-spacing: 2rpx;
+}
+
+/* ===== 标题与进度 ===== */
+.section-title {
+  font-size: 32rpx;
+  margin-bottom: 24rpx;
+}
+.progress-bar {
+  height: 16rpx;
+  background: #efe6d4;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b5a2b, #b8860b);
+  border-radius: 8rpx;
+  transition: width 0.4s ease;
+}
+.progress-summary {
+  margin-top: 18rpx;
+  font-size: 26rpx;
+  color: var(--color-text);
+  text-align: center;
+}
+.next-hint {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+.next-hint.done {
+  color: var(--color-accent);
+}
+
+/* ===== 设置行 ===== */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22rpx 4rpx;
+  border-bottom: 1rpx solid var(--color-border);
+}
+.setting-row:last-child {
+  border-bottom: none;
+}
+.setting-label {
+  font-size: 28rpx;
+  color: var(--color-text);
+}
+.setting-arrow {
+  font-size: 34rpx;
+  color: var(--color-text-secondary);
+}
+
+/* ===== 知识锚点集卡 ===== */
+.anchor-count {
+  font-size: 26rpx;
+  color: var(--color-text-secondary);
+  margin-bottom: 22rpx;
+}
+.anchor-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.anchor-chip {
+  padding: 12rpx 22rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  background: #efe6d4;
+  color: #b5a892;
+  border: 1rpx solid #e2d5bd;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+}
+.anchor-chip.on {
+  background: linear-gradient(135deg, #8b5a2b, #a9743c);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4rpx 12rpx rgba(139, 90, 43, 0.25);
+}
+.anchor-tip {
+  margin-top: 18rpx;
+  font-size: 22rpx;
+  color: #b5a892;
+  text-align: center;
+}
+
+/* ===== 底部重置入口 ===== */
+.reset-link {
+  margin-top: 56rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #b5a892;
+  text-decoration: underline;
+}
+
+/* ===== 我的诗笺入口 ===== */
+.poem-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.poem-entry-left {
+  flex: 1;
+}
+.poem-entry-desc {
+  margin-top: 10rpx;
+  font-size: 23rpx;
+  color: #9a8b74;
+  letter-spacing: 1rpx;
+}

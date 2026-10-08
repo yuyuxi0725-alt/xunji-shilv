@@ -1,0 +1,9 @@
+{
+  "name": "story",
+  "version": "1.0.0",
+  "description": "剧情云函数：剧本总览与进度管理",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

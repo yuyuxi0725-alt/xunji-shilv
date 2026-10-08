@@ -1,0 +1,82 @@
+<!-- pages/profile/profile.wxml —— 我的（昵称可改 + 学习总览 + 设置） -->
+<view class="page">
+
+  <!-- 头部：头像 + 昵称（可改）+ 登录状态 -->
+  <view class="profile-head">
+    <view class="avatar" bindtap="onEditNickname">{{avatarText}}</view>
+    <view class="name-row" bindtap="onEditNickname">
+      <text class="name">{{nickname}}</text>
+      <text class="edit-icon">✎</text>
+    </view>
+    <view class="login-tag">{{loggedIn ? '已登录 · 微信账号' : '正在登录…'}}</view>
+  </view>
+
+  <!-- 学习总览 -->
+  <view class="card summary-card">
+    <view class="section-title gufeng-title">学习总览</view>
+    <view class="summary-grid">
+      <view class="summary-item">
+        <text class="summary-num">{{summary.lines}}</text>
+        <text class="summary-label">位古人</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-num">{{summary.completed}}<text class="summary-total">/{{summary.total}}</text></text>
+        <text class="summary-label">通关时期</text>
+      </view>
+      <view class="summary-item">
+        <text class="summary-num">{{summary.anchorsGot}}<text class="summary-total">/{{summary.anchorsTotal}}</text></text>
+        <text class="summary-label">知识锚点</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 各主线进度 -->
+  <view class="card" wx:for="{{lineProgress}}" wx:key="id">
+    <view class="section-title gufeng-title">{{item.name}} · {{item.tagline}}</view>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{item.percent}}%;"></view>
+    </view>
+    <view class="progress-summary">已通关 {{item.completed}} / {{item.total}} 个时期</view>
+    <view class="next-hint" wx:if="{{item.nextName}}">下一程 · {{item.nextName}}</view>
+    <view class="next-hint done" wx:elif="{{item.allDone}}">主线已全部通关，静候新的旅程</view>
+  </view>
+
+  <!-- 知识锚点回顾（集卡） -->
+  <view class="card" wx:for="{{lineAnchors}}" wx:key="storyId">
+    <view class="section-title gufeng-title">知识锚点 · {{item.name}}</view>
+    <view class="anchor-count">已收集 {{item.collected}} / {{item.total}}</view>
+    <view class="anchor-grid">
+      <view
+        class="anchor-chip {{it.collected ? 'on' : ''}}"
+        wx:for="{{item.cards}}"
+        wx:for-item="it"
+        wx:key="id"
+      >{{it.collected ? '✦' : '·'}} {{it.name}}</view>
+    </view>
+    <view class="anchor-tip" wx:if="{{item.collected < item.total}}">通关各时期，即可点亮全部知识锚点</view>
+  </view>
+
+  <!-- 我的诗笺（通关产出物入口） -->
+  <view class="card poem-entry" bindtap="onOpenPoem">
+    <view class="poem-entry-left">
+      <view class="section-title gufeng-title">我的诗笺</view>
+      <view class="poem-entry-desc">通关所得，皆书于此 · 可存可分享</view>
+    </view>
+    <text class="setting-arrow">›</text>
+  </view>
+
+  <!-- 设置 -->
+  <view class="card">
+    <view class="section-title gufeng-title">设置</view>
+    <view class="setting-row">
+      <text class="setting-label">背景音乐</text>
+      <switch checked="{{bgmOn}}" bindchange="onToggleBgm" color="#8b5a2b" />
+    </view>
+    <view class="setting-row" bindtap="onAbout">
+      <text class="setting-label">关于寻迹古今</text>
+      <text class="setting-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="reset-link" bindtap="onResetProgress">清除进度，重新开始</view>
+</view>

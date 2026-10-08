@@ -1,0 +1,115 @@
+<!-- pages/story/story.wxml —— 剧本首页（多主线选择 + 选线后时期列表） -->
+
+<!-- ===== 视图一：多主线选择 ===== -->
+<block wx:if="{{view === 'lines'}}">
+  <view class="lines-page">
+    <view class="lines-head">
+      <view class="lines-title">寻迹 · 古今</view>
+      <view class="lines-subtitle">循一卷诗书，赴一场千年之约</view>
+    </view>
+
+    <view class="line-list">
+      <view
+        wx:for="{{lines}}"
+        wx:key="id"
+        class="line-card {{item.status}}"
+        bindtap="onLineTap"
+        data-id="{{item.id}}"
+        data-status="{{item.status}}"
+      >
+        <view class="line-thumb-wrap">
+          <image class="line-thumb {{item.status === 'coming' ? 'thumb-dim' : ''}}" src="{{item.cover}}" mode="aspectFill" lazy-load="{{true}}" />
+          <view wx:if="{{item.status === 'coming'}}" class="line-overlay">
+            <text class="line-coming">敬请期待</text>
+          </view>
+        </view>
+        <view class="line-body">
+          <view class="line-name">{{item.name}}</view>
+          <view class="line-tagline">{{item.tagline}}</view>
+          <view class="line-meta" wx:if="{{item.status === 'online'}}">
+            <text>{{item.periodCount}} 段人生</text>
+            <text class="line-enter">进入 →</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!-- ===== 视图二：某条线的时期列表（卷轴卡片） ===== -->
+<block wx:else>
+  <view class="page">
+    <!-- 返回多主线 -->
+    <view class="back-bar" bindtap="backToLines">
+      <text class="back-arrow">‹</text>
+      <text>全部古人</text>
+    </view>
+
+    <!-- 卷轴轴杆 -->
+    <view class="scroll-rod rod-top">
+      <view class="rod-knob knob-left"></view>
+      <view class="rod-knob knob-right"></view>
+    </view>
+
+    <!-- 卷轴纸面 -->
+    <view class="scroll-paper">
+      <view class="story-head">
+        <view class="story-title">主线 · {{currentLine.name}}</view>
+        <view class="story-subtitle">{{currentLine.tagline}}</view>
+        <view class="progress-wrap">
+          <view class="progress-bar">
+            <view class="progress-fill" style="width: {{progressPercent}}%;"></view>
+          </view>
+          <view class="progress-text">已通关 {{completedCount}} / {{periods.length}}</view>
+        </view>
+      </view>
+
+      <view class="period-list">
+        <view
+          wx:for="{{periods}}"
+          wx:key="id"
+          class="period-card {{item.state}}"
+          bindtap="onPeriodTap"
+          data-id="{{item.id}}"
+          data-state="{{item.state}}"
+        >
+          <view class="card-thumb-wrap">
+            <image
+              class="card-thumb {{item.state === 'locked' ? 'thumb-locked' : ''}}"
+              src="{{item.scene}}"
+              mode="aspectFill"
+              lazy-load="{{true}}"
+            />
+            <view wx:if="{{item.state === 'locked'}}" class="thumb-overlay">
+              <text class="lock-icon">🔒</text>
+              <text class="lock-text">完成前一章解锁</text>
+            </view>
+            <view wx:elif="{{item.state === 'completed'}}" class="state-badge badge-done">✓ 已通关</view>
+            <view wx:elif="{{item.state === 'active'}}" class="state-badge badge-active">▶ 进行中</view>
+            <view class="chapter-seal">{{item.index}}</view>
+          </view>
+
+          <view class="card-body">
+            <view class="card-title-row">
+              <text class="card-name">{{item.name}}</text>
+              <text class="card-range">{{item.range}}</text>
+            </view>
+            <view class="card-poem" wx:if="{{item.poem}}">「{{item.poem}}」</view>
+            <view class="card-desc-row">
+              <text class="card-desc">{{item.desc}}</text>
+              <text wx:if="{{item.state !== 'locked'}}" class="card-enter">进入 →</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部卷轴轴杆 -->
+    <view class="scroll-rod rod-bottom">
+      <view class="rod-knob knob-left"></view>
+      <view class="rod-knob knob-right"></view>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading-tip">加载中…</view>
+  </view>
+</block>

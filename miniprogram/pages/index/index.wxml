@@ -1,0 +1,80 @@
+<!-- pages/index/index.wxml —— 首页（动态封面 + 穿越开场动画） -->
+<view class="page">
+
+  <!-- ===== 穿越开场动画层（点击"开始穿越"后播放） ===== -->
+  <view class="portal-layer {{portalFade ? 'portal-fade' : ''}}" wx:if="{{showPortal}}">
+    <!-- 纯 CSS 穿越动画：水墨晕染 + 卷轴展开（无水印、无加载延迟） -->
+    <view class="portal-ink ink-1"></view>
+    <view class="portal-ink ink-2"></view>
+    <view class="portal-ink ink-3"></view>
+
+    <!-- 卷轴：自画面中央向上下展开 -->
+    <view class="portal-scroll">
+      <view class="portal-rod rod-top">
+        <view class="rod-knob k-l"></view>
+        <view class="rod-knob k-r"></view>
+      </view>
+      <view class="portal-paper">
+        <view class="paper-seal">夢</view>
+        <view class="paper-poem poem-l1">一夢千年</view>
+        <view class="paper-poem poem-l2">循一卷詩書 · 赴一場千年之約</view>
+        <view class="portal-figures">
+          <view class="pf pf-1"><image src="{{linePortraits[0]}}" mode="aspectFit" /></view>
+          <view class="pf pf-2"><image src="{{linePortraits[1]}}" mode="aspectFit" /></view>
+          <view class="pf pf-3"><image src="{{linePortraits[2]}}" mode="aspectFit" /></view>
+        </view>
+      </view>
+      <view class="portal-rod rod-bottom">
+        <view class="rod-knob k-l"></view>
+        <view class="rod-knob k-r"></view>
+      </view>
+    </view>
+
+    <!-- 收束白光：卷轴定格后泛白切入 -->
+    <view class="portal-flash"></view>
+  </view>
+
+  <!-- ===== 封面层 ===== -->
+  <view class="cover" wx:if="{{!showPortal}}">
+    <!-- 背景：动态视频（云存储） + 静态竖版图兜底 -->
+    <!-- 视频未取到链接时由下方 cover-bg 静态图兜底，poster 不支持本地路径故不用 -->
+    <video
+      class="cover-video"
+      src="{{coverVideoUrl}}"
+      autoplay
+      loop
+      muted
+      object-fit="cover"
+      show-center-play-btn="{{false}}"
+      show-fullscreen-btn="{{false}}"
+      show-play-btn="{{false}}"
+      controls="{{false}}"
+      binderror="onVideoError"
+    ></video>
+    <!-- 视频尚未取到链接时，显示静态底图（视频 ready 后覆盖其上） -->
+    <image
+      class="cover-bg"
+      wx:if="{{!coverVideoUrl}}"
+      src="{{coverImage}}"
+      mode="aspectFill"
+    />
+
+    <!-- 渐变遮罩（让文字清晰） -->
+    <view class="cover-mask"></view>
+
+    <!-- 标题区 -->
+    <view class="cover-title-wrap">
+      <view class="cover-title gufeng-title">寻迹 · 古今</view>
+      <view class="cover-subtitle">一梦千年，与先贤同游</view>
+    </view>
+
+    <!-- 登录 / 入口 -->
+    <view class="cover-action">
+      <button class="btn-start" bindtap="onStart" loading="{{logging}}">开始穿越之旅</button>
+      <view class="privacy-tip" wx:if="{{!loggedIn}}">
+        登录即代表同意
+        <navigator open-type="openPrivacyContract" class="privacy-link">《隐私保护指引》</navigator>
+      </view>
+    </view>
+  </view>
+</view>

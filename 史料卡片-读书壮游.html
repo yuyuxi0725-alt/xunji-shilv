@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="docx-page-size" content="A4">
+<title>寻迹·古今 史料卡片 · 读书壮游</title>
+<style>
+:root {
+  --fs-h1: 20pt;
+  --fs-h2: 12pt;
+  --fs-h3: 11pt;
+  --fs-body: 10.5pt;
+  --fs-small: 9pt;
+  --ff-heading: "微软雅黑", "Microsoft YaHei", sans-serif;
+  --ff-body: "微软雅黑", "Microsoft YaHei", sans-serif;
+  --color-primary: #1565C0;
+  --color-secondary: #0288D1;
+  --color-accent: #00897B;
+  --color-text: #212121;
+  --color-textSecondary: #616161;
+  --color-heading: #1A237E;
+  --color-divider: #E0E0E0;
+  --color-background: #FFFFFF;
+  --color-surface: #F5F7FA;
+  --spacing-paragraph: 0.75em;
+  --spacing-section: 1.6em;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-background);
+  max-width: 160mm;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cover-eyebrow {
+  text-align: center;
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  color: var(--color-primary);
+  letter-spacing: 0.12em;
+  margin-bottom: 2.5em;
+}
+.cover-title {
+  text-align: center;
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: 26pt;
+  color: var(--color-heading);
+  margin-bottom: 0.6em;
+}
+.cover-subtitle {
+  text-align: center;
+  font-size: var(--fs-h2);
+  color: var(--color-textSecondary);
+  margin-bottom: 2em;
+}
+.cover-meta {
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--color-textSecondary);
+}
+.report-body h1 {
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: var(--fs-h1);
+  color: var(--color-heading);
+  margin-top: var(--spacing-section);
+  margin-bottom: var(--spacing-paragraph);
+}
+.report-body h2 {
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  color: var(--color-primary);
+  border-left: 4px solid var(--color-primary);
+  padding-left: 0.6em;
+  margin-top: var(--spacing-section);
+  margin-bottom: var(--spacing-paragraph);
+}
+.report-body h3 {
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  color: var(--color-heading);
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+}
+.report-body p {
+  margin-bottom: var(--spacing-paragraph);
+}
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0 1.2em 0;
+}
+table.data-table th {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  padding: 0.6em 0.7em;
+  text-align: left;
+}
+table.data-table td {
+  border: 1px solid var(--color-divider);
+  padding: 0.6em 0.7em;
+  font-size: var(--fs-body);
+  vertical-align: top;
+}
+table.data-table tr:nth-child(even) td {
+  background: var(--color-surface);
+}
+table.card-table td:first-child {
+  width: 20%;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+</style>
+</head>
+<body>
+
+<section role="cover" class="report-cover">
+  <p class="cover-eyebrow">寻迹·古今 · 史料卡片</p>
+  <h1 class="cover-title">第一期「读书壮游」</h1>
+  <p class="cover-subtitle">结构化史料卡片 · 供 AI 对话追问与检验使用</p>
+  <p class="cover-meta">版本 v1.0 &nbsp;|&nbsp; 2026 年 10 月</p>
+</section>
+
+<section role="body" class="report-body" data-page-restart="1">
+
+<h1>一、填写说明</h1>
+<p>每条史料不是「百科条目」，而是一张<strong>能驱动 AI 对话追问的卡片</strong>。AI 靠这些字段判断「学生答没答到点子上」「下一步怎么追问」「怎么出题检验」。七个字段的职责如下：</p>
+<table class="data-table">
+  <tr><th>字段</th><th>职责</th><th>填写要求</th></tr>
+  <tr><td>id</td><td>唯一标识，关联锚点</td><td>k_p1_ 前缀 + 英文小写拼音，全局不重复</td></tr>
+  <tr><td>title</td><td>知识点名称</td><td>简短、学生能看懂</td></tr>
+  <tr><td>content</td><td>事实内容（AI 的依据）</td><td>150–200 字，只写确定无疑的事实，不写争议</td></tr>
+  <tr><td>guide_question</td><td>AI 引导用的反问</td><td>必须是「反问句」，不直接给答案</td></tr>
+  <tr><td>target_keywords</td><td>学生应说出的关键词</td><td>列 2–4 个同义说法，AI 命中任一个即算答对</td></tr>
+  <tr><td>anchor</td><td>命中的知识锚点</td><td>a1~aN，与主线锚点系统对应</td></tr>
+  <tr><td>quiz</td><td>配套检验题</td><td>一道能唯一判对错的选择题 / 填空题</td></tr>
+</table>
+<p><strong>核验基准</strong>：本卡片的事实均依据《旧唐书·杜甫传》《新唐书·杜甫传》、杜甫自述诗（《壮游》《奉赠韦左丞丈二十二韵》）、仇兆鳌《杜诗详注》及中华书局《杜甫集校注》等权威来源；凡学术界有争议的年份，一律以「中学教材共识」为准，争议处已单独标注。</p>
+
+<h1>二、本期 8 张史料卡片</h1>
+
+<h2>卡片 1 · 出身与生年</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_chusheng</td></tr>
+  <tr><td>title</td><td>杜甫的出身与生年</td></tr>
+  <tr><td>content</td><td>杜甫（712—770），字子美，祖籍襄阳，生于河南巩县（今河南巩义）瑶湾村。他出身京兆杜氏，是西晋名将、学者杜预的十三世孙。杜家世代「奉儒守官，未坠素业」，祖父杜审言、父亲杜闲都曾为官，是典型的官宦书香门第。</td></tr>
+  <tr><td>guide_question</td><td>「我生于哪一年？你可知我这一家，从西晋到如今，世代守着怎样的家风？」</td></tr>
+  <tr><td>target_keywords</td><td>712年、巩县 / 巩义、杜预、书香门第 / 官宦世家</td></tr>
+  <tr><td>anchor</td><td>a1</td></tr>
+  <tr><td>quiz</td><td>「杜甫出生于公元哪一年？」（712 年）</td></tr>
+</table>
+
+<h2>卡片 2 · 祖父杜审言与家学</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_jiashi</td></tr>
+  <tr><td>title</td><td>祖父杜审言与「诗是吾家事」</td></tr>
+  <tr><td>content</td><td>祖父杜审言是武则天时期的著名诗人，位列「文章四友」，是五言律诗的奠基者之一，官至修文馆直学士。杜甫十分推崇祖父，自称「吾祖诗冠古」，又自豪地说「诗是吾家事」，家学渊源给了他最早的诗学启蒙。</td></tr>
+  <tr><td>guide_question</td><td>「我杜家祖上，也出过一位武后朝的大诗人，你可知是谁？我的诗才，与他又有什么渊源？」</td></tr>
+  <tr><td>target_keywords</td><td>杜审言、祖父、文章四友、家学</td></tr>
+  <tr><td>anchor</td><td>a2</td></tr>
+  <tr><td>quiz</td><td>「杜甫的祖父是哪位著名诗人？」（杜审言）</td></tr>
+</table>
+
+<h2>卡片 3 · 七岁咏凤凰</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_qisui</td></tr>
+  <tr><td>title</td><td>七岁开口咏凤凰</td></tr>
+  <tr><td>content</td><td>杜甫自幼聪慧，在诗中自述「七龄思即壮，开口咏凤凰；九龄书大字，有作成一囊」，意思是七岁时就能写出咏凤凰的诗，九岁时书法习作已经装了满满一囊。他少年早慧，又受家风熏陶，从小读书刻苦。</td></tr>
+  <tr><td>guide_question</td><td>「我七岁时写过一句诗，你猜猜，我第一个吟咏的是什么神鸟？」</td></tr>
+  <tr><td>target_keywords</td><td>凤凰、七岁、咏凤凰、开口咏凤凰</td></tr>
+  <tr><td>anchor</td><td>a3</td></tr>
+  <tr><td>quiz</td><td>「杜甫七岁时作诗吟咏的是哪种鸟？」（凤凰）</td></tr>
+</table>
+
+<h2>卡片 4 · 少年优游洛阳</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_luoyang</td></tr>
+  <tr><td>title</td><td>少年时在洛阳见闻</td></tr>
+  <tr><td>content</td><td>杜甫幼年丧母，寄养在洛阳的姑母家，在那里生活了十多年。少年时他常出入翰墨场，在岐王李范宅里、崔涤堂前听过歌唱家李龟年的歌声，在洛阳北邙山的玄元皇帝庙里欣赏过画圣吴道子的壁画，见识了盛唐最顶尖的文艺气象。</td></tr>
+  <tr><td>guide_question</td><td>「我少年时在洛阳见过一位歌声天下闻名的乐人，还在画圣的壁画前流连过，你可知这些见闻给了我什么？」</td></tr>
+  <tr><td>target_keywords</td><td>李龟年、吴道子、洛阳、艺术熏陶</td></tr>
+  <tr><td>anchor</td><td>a4</td></tr>
+  <tr><td>quiz</td><td>「杜甫少年时在洛阳听过的著名歌唱家是谁？」（李龟年）</td></tr>
+</table>
+
+<h2>卡片 5 · 漫游吴越</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_wuyue</td></tr>
+  <tr><td>title</td><td>二十岁漫游吴越</td></tr>
+  <tr><td>content</td><td>开元十九年（731），十九岁的杜甫出游郇瑕（今山西临猗）；二十岁起漫游吴越（今江浙一带），历时数年，陶醉于江南的秀丽山水与六朝遗风。唐代读书人崇尚「读万卷书，行万里路」，漫游是开阔眼界、结交名流的时尚。</td></tr>
+  <tr><td>guide_question</td><td>「我二十岁那年离开洛阳，先去了哪一片江南水乡？你可知读书人为何要千里远游？」</td></tr>
+  <tr><td>target_keywords</td><td>吴越 / 江南、漫游、行万里路、开阔眼界</td></tr>
+  <tr><td>anchor</td><td>a5</td></tr>
+  <tr><td>quiz</td><td>「杜甫二十岁左右漫游的是哪个地区？」（吴越，今江浙一带）</td></tr>
+</table>
+
+<h2>卡片 6 · 洛阳应试落第</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_luodi</td></tr>
+  <tr><td>title</td><td>洛阳应试落第</td></tr>
+  <tr><td>content</td><td>开元二十三年（735），杜甫回故乡参加「乡贡」选拔；次年（736）在洛阳参加进士考试，结果落第。此时他只有二十四五岁，年轻气盛，落第并未让他消沉，反而很快又踏上了齐赵之游。</td></tr>
+  <tr><td>guide_question</td><td>「我二十四五岁时赴东都考进士，结果如何？你可知落第之后，我为何没有消沉？」</td></tr>
+  <tr><td>target_keywords</td><td>落第、洛阳、进士、没消沉 / 年轻</td></tr>
+  <tr><td>anchor</td><td>a6</td></tr>
+  <tr><td>quiz</td><td>「杜甫二十四五岁时在洛阳参加进士考试，结果是什么？」（落第）</td></tr>
+</table>
+
+<h2>卡片 7 · 漫游齐赵与《望岳》</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_wangyue</td></tr>
+  <tr><td>title</td><td>漫游齐赵与名篇《望岳》</td></tr>
+  <tr><td>content</td><td>因父亲杜闲时任兖州司马，杜甫赴兖州省亲，此后漫游齐赵（今山东、河北一带）四五年，过着「放荡齐赵间，裘马颇清狂」的快意生活。他登临泰山，写下千古名篇《望岳》，结句「会当凌绝顶，一览众山小」抒发了青年诗人不凡的抱负。</td></tr>
+  <tr><td>guide_question</td><td>「我在泰山之麓写下过一首诗，最后一句说'会当凌绝顶，一览众山小'，你可知这句寄托了我怎样的心志？」</td></tr>
+  <tr><td>target_keywords</td><td>望岳、泰山、会当凌绝顶 / 一览众山小、抱负 / 壮志</td></tr>
+  <tr><td>anchor</td><td>a7</td></tr>
+  <tr><td>quiz</td><td>「『会当凌绝顶，一览众山小』出自杜甫的哪首诗？」（《望岳》）</td></tr>
+</table>
+
+<h2>卡片 8 · 与李白相遇</h2>
+<table class="data-table card-table">
+  <tr><td>id</td><td>k_p1_libai</td></tr>
+  <tr><td>title</td><td>与李白相遇结游</td></tr>
+  <tr><td>content</td><td>天宝三载（744）四月，杜甫在洛阳与被唐玄宗赐金放还的李白相遇，二人一见如故，相约同游梁宋，又与诗人高适相遇，三人同游。次年（745）在齐鲁又与李白重逢，杜甫赠诗云「醉眠秋共被，携手日同行」，可见情谊之深。</td></tr>
+  <tr><td>guide_question</td><td>「我在洛阳遇到了一位被天子赐金放还的大诗人，与他同游梁宋、齐鲁，你可知他是谁？」</td></tr>
+  <tr><td>target_keywords</td><td>李白、高适、梁宋、赐金放还</td></tr>
+  <tr><td>anchor</td><td>a8</td></tr>
+  <tr><td>quiz</td><td>「天宝三载，杜甫在洛阳遇到并同游的大诗人是谁？」（李白）</td></tr>
+</table>
+
+<h1>三、来源索引（供追溯核验）</h1>
+<table class="data-table">
+  <tr><th>知识点</th><th>主要依据</th></tr>
+  <tr><td>出身与生年</td><td>《旧唐书·杜甫传》《新唐书·杜甫传》、杜甫《祭远祖当阳君文》</td></tr>
+  <tr><td>祖父杜审言</td><td>《新唐书·杜审言传》、杜甫《宗武生日》「诗是吾家事」</td></tr>
+  <tr><td>七岁咏凤凰</td><td>杜甫《壮游》「七龄思即壮，开口咏凤凰；九龄书大字，有作成一囊」</td></tr>
+  <tr><td>少年优游洛阳</td><td>杜甫《江南逢李龟年》、自述「脱略小时辈，结交皆老苍」</td></tr>
+  <tr><td>漫游吴越</td><td>杜甫《壮游》「东下姑苏台，已具浮海航」、年谱</td></tr>
+  <tr><td>洛阳应试落第</td><td>杜甫《壮游》「忤下考功第」、《奉赠韦左丞丈二十二韵》</td></tr>
+  <tr><td>齐赵与《望岳》</td><td>杜甫《壮游》「放荡齐赵间，裘马颇清狂」、《望岳》</td></tr>
+  <tr><td>与李白相遇</td><td>杜甫《与李十二白同寻范十隐居》、闻一多《杜甫》年谱</td></tr>
+</table>
+
+<h1>四、待你拍板的三个点</h1>
+<p>第一，<strong>史实精度</strong>：本期 8 张卡片，事实是否都准确、有无需要修改或删除的？（尤其请核对你觉得可能存疑的年份）</p>
+<p>第二，<strong>追问深度</strong>：guide_question 的反问语气、难易度，是否符合 12–18 岁学生的认知水平？</p>
+<p>第三，<strong>卡片数量</strong>：一期 8 张是否合适？需要增补（如加入「公孙大娘剑器舞」「杜预其人」等）还是精简？</p>
+
+<p style="color: var(--color-textSecondary); font-size: var(--fs-small); margin-top: 2em;">确认后，我将把这 8 张卡片转成代码数据结构（替换 SAMPLE_KNOWLEDGE），再继续做后面三期的史料。</p>
+
+</section>
+</body>
+</html>

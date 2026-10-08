@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/story/story",
+    "pages/map/map",
+    "pages/chat/chat",
+    "pages/poem/poem",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#2c3e50",
+    "navigationBarTitleText": "寻迹·古今",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f0e8",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#8c7b6b",
+    "selectedColor": "#8b5a2b",
+    "backgroundColor": "#fffdf7",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/story/story",
+        "text": "剧本",
+        "iconPath": "assets/icons/story.png",
+        "selectedIconPath": "assets/icons/story-active.png"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "text": "行迹",
+        "iconPath": "assets/icons/map.png",
+        "selectedIconPath": "assets/icons/map-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/icons/mine.png",
+        "selectedIconPath": "assets/icons/mine-active.png"
+      }
+    ]
+  },
+  "permission": {},
+  "requiredPrivateInfos": [],
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "style": "v2"
+}

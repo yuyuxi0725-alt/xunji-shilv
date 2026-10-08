@@ -1,0 +1,31 @@
+# ===== 依赖 =====
+node_modules/
+miniprogram/cloudfunctions/*/node_modules/
+
+# ===== 开发工具产物 =====
+.workbuddy/
+_frames/
+_frames.json
+_proc.json
+_verify.json
+_chk.py
+_proc.py
+_vfy.py
+
+# ===== 素材生成中间产物（体积大，非源码）=====
+_gen_libai/
+_gen_libai_scenes/
+_assets_backup/
+_cloud_upload/
+video-samples/
+assets_video/
+tts-audio/*.mp3
+_pdf_pages/
+
+# ===== 竞赛 PDF 渲染页（一次性转换产物，27MB）=====
+output/competition/pages/
+
+# ===== 微信开发者工具 =====
+miniprogram/project.private.config.json
+.DS_Store
+Thumbs.db
