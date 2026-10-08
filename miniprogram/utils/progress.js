@@ -42,12 +42,35 @@ function read(key, fallback) {
   }
 }
 
+// ---------- 变更订阅 ----------
+// 写入后通知订阅者（app.js 用它把进度推送到云数据库）。
+// 订阅者抛错绝不影响本地写入 —— 云同步是"尽力而为"，本地存储始终是唯一真相源。
+const listeners = [];
+
+function notify() {
+  listeners.forEach((cb) => {
+    try { cb(); } catch (e) { console.warn('[progress] 订阅回调异常（已忽略）', e); }
+  });
+}
+
+/** 订阅本地进度变更；返回取消订阅函数 */
+function onChange(cb) {
+  if (typeof cb !== 'function') return () => {};
+  listeners.push(cb);
+  return () => {
+    const i = listeners.indexOf(cb);
+    if (i >= 0) listeners.splice(i, 1);
+  };
+}
+
 function write(key, val) {
   try {
     wx.setStorageSync(key, val);
   } catch (e) {
     console.warn('[progress] 写入失败', key, e);
+    return;
   }
+  notify();
 }
 
 // 判断一个对象是不是「按主线分组」的二级结构
@@ -201,6 +224,99 @@ function resetAll() {
   } catch (e) {
     console.warn('[progress] 清除失败', e);
   }
+  notify();
+}
+
+// ---------- 云同步支持（供 utils/sync.js 使用） ----------
+
+/** 导出本地全量快照（用于推送到云数据库） */
+function snapshot() {
+  migrate();
+  return {
+    states: read(KEY_STATES, {}),
+    anchors: read(KEY_ANCHORS, {}),
+    records: read(KEY_RECORDS, {}),
+    updatedAt: Date.now()
+  };
+}
+
+/**
+ * 把云端快照**合并**进本地（只增不减，适用于多设备）
+ *
+ * 合并规则（刻意设计成"永远只会让进度变多，不会变少"）：
+ *   · 进度状态按 locked < active < completed 取较优者
+ *   · 锚点取并集
+ *   · 探究档案按 completedAt 取较新者；云端缺 completedAt 而本地有，则保留本地
+ *
+ * @param {object} remote 云端快照（结构同 snapshot()）
+ * @returns {boolean} 是否发生了实际变更
+ */
+function mergeRemote(remote) {
+  if (!remote || typeof remote !== 'object') return false;
+  migrate();
+
+  const RANK = { locked: 0, active: 1, completed: 2 };
+  const rank = s => (RANK[s] === undefined ? -1 : RANK[s]);
+  let changed = false;
+
+  // ---- 进度：取较优状态 ----
+  const localStates = read(KEY_STATES, {});
+  const remoteStates = remote.states || {};
+  Object.keys(remoteStates).forEach((lineId) => {
+    const rl = remoteStates[lineId];
+    if (!rl || typeof rl !== 'object') return;
+    const ll = Object.assign({}, localStates[lineId]);
+    Object.keys(rl).forEach((pid) => {
+      if (rank(rl[pid]) > rank(ll[pid])) { ll[pid] = rl[pid]; changed = true; }
+    });
+    if (Object.keys(ll).length) localStates[lineId] = ll;
+  });
+  if (changed) {
+    try { wx.setStorageSync(KEY_STATES, localStates); } catch (e) { /* 忽略 */ }
+  }
+
+  // ---- 锚点：并集 ----
+  let anchorChanged = false;
+  const localAnchors = read(KEY_ANCHORS, {});
+  const remoteAnchors = remote.anchors || {};
+  Object.keys(remoteAnchors).forEach((lineId) => {
+    const ra = remoteAnchors[lineId];
+    if (!ra || typeof ra !== 'object') return;
+    const la = Object.assign({}, localAnchors[lineId]);
+    Object.keys(ra).forEach((aid) => {
+      if (ra[aid] && !la[aid]) { la[aid] = true; anchorChanged = true; }
+    });
+    if (Object.keys(la).length) localAnchors[lineId] = la;
+  });
+  if (anchorChanged) {
+    try { wx.setStorageSync(KEY_ANCHORS, localAnchors); } catch (e) { /* 忽略 */ }
+  }
+
+  // ---- 探究档案：按 completedAt 取较新者 ----
+  let recChanged = false;
+  const localRecs = read(KEY_RECORDS, {});
+  const remoteRecs = remote.records || {};
+  Object.keys(remoteRecs).forEach((lineId) => {
+    const rr = remoteRecs[lineId];
+    if (!rr || typeof rr !== 'object') return;
+    const lr = Object.assign({}, localRecs[lineId]);
+    Object.keys(rr).forEach((pid) => {
+      const incoming = rr[pid];
+      const mine = lr[pid];
+      if (!incoming || typeof incoming !== 'object') return;
+      if (!mine) { lr[pid] = incoming; recChanged = true; return; }
+      const a = Number(mine.completedAt) || 0;
+      const b = Number(incoming.completedAt) || 0;
+      if (b > a) { lr[pid] = incoming; recChanged = true; }
+    });
+    if (Object.keys(lr).length) localRecs[lineId] = lr;
+  });
+  if (recChanged) {
+    try { wx.setStorageSync(KEY_RECORDS, localRecs); } catch (e) { /* 忽略 */ }
+  }
+
+  if (changed || anchorChanged || recChanged) notify();
+  return changed || anchorChanged || recChanged;
 }
 
 module.exports = {
@@ -217,6 +333,10 @@ module.exports = {
   getLineRecords,
   getRecord,
   saveRecord,
+  // 云同步
+  snapshot,
+  mergeRemote,
+  onChange,
   // 维护
   migrate,
   resetAll,

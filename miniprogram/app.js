@@ -1,4 +1,6 @@
 // app.js —— 寻迹·古今 小程序入口
+const sync = require('./utils/sync');
+
 App({
   globalData: {
     openid: null,        // 用户 openid，登录后写入
@@ -147,6 +149,9 @@ App({
               this.globalData.openid = result.data.openid;
               this.globalData.isNewUser = result.data.isNew;
               this.globalData.guardianAuthorized = result.data.guardianAuthorized || false;
+              // 拿到 openid 后初始化进度云同步
+              // （首次拉取云端进度做并集合并；并订阅本地变更自动防抖上传。失败静默，不影响本地）
+              try { sync.init(); } catch (e) { console.warn('[app] 进度云同步初始化失败（已忽略）', e); }
               resolve(result.data);
             } else {
               reject(new Error(result && result.msg || '登录异常'));

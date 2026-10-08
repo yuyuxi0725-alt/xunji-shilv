@@ -2,6 +2,7 @@
 // 登录说明：已静默登录（wx.login 换 openid），无需注册流程；此处只展示登录状态
 const stories = require('../../utils/stories/index');
 const progress = require('../../utils/progress');
+const sync = require('../../utils/sync');
 const app = getApp();
 
 const DEFAULT_NICK = '少年史官';
@@ -142,6 +143,9 @@ Page({
         if (!res.confirm) return;
         // 走统一存储层：一次清掉进度、锚点、探究档案
         progress.resetAll();
+        // 云端也要清：否则下次启动拉取云端进度时，会把刚清掉的进度又合并回来
+        // （服务端的合并是"只增不减"的，传空快照清不掉，必须走 clearState）
+        sync.resetCloud();
         const lp = this.buildProgress();
         const la = this.buildAnchors();
         this.setData({
