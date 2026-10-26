@@ -2,14 +2,18 @@
   "pages": [
     "pages/index/index",
     "pages/story/story",
+    "pages/transition/transition",
+    "pages/player/player",
     "pages/map/map",
     "pages/chat/chat",
+    "pages/agreement/agreement",
     "pages/poem/poem",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/about/about"
   ],
   "window": {
     "navigationBarBackgroundColor": "#2c3e50",
-    "navigationBarTitleText": "寻迹·古今",
+    "navigationBarTitleText": "寻迹诗旅",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#f5f0e8",
     "backgroundTextStyle": "dark",
@@ -21,12 +25,6 @@
     "backgroundColor": "#fffdf7",
     "borderStyle": "black",
     "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "assets/icons/home.png",
-        "selectedIconPath": "assets/icons/home-active.png"
-      },
       {
         "pagePath": "pages/story/story",
         "text": "剧本",
@@ -40,6 +38,12 @@
         "selectedIconPath": "assets/icons/map-active.png"
       },
       {
+        "pagePath": "pages/poem/poem",
+        "text": "诗笺",
+        "iconPath": "assets/icons/poem.png",
+        "selectedIconPath": "assets/icons/poem-active.png"
+      },
+      {
         "pagePath": "pages/profile/profile",
         "text": "我的",
         "iconPath": "assets/icons/mine.png",
@@ -49,7 +53,9 @@
   },
   "permission": {},
   "requiredPrivateInfos": [],
-  "usingComponents": {},
+  "usingComponents": {
+    "privacy-popup": "/components/privacy-popup/privacy-popup"
+  },
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "style": "v2"

@@ -35,6 +35,10 @@ exports.main = async (event, context) => {
       // 必须单独一个 action：saveState 的合并是"只增不减"的，传空快照清不掉云端数据，
       // 会让下次拉取把已清掉的进度又合并回来。
       return await clearState(openid);
+    case 'deleteAccount':
+      // 删除当前微信身份在本小程序内的全部云端学习档案。
+      // openid 只从可信的云函数上下文取得，不能由前端指定，避免越权删除。
+      return await deleteAccount(openid);
     default:
       return { code: 1, msg: '未知 action' };
   }
@@ -77,12 +81,13 @@ async function saveState(openid, incoming) {
           openid,
           createdAt: db.serverDate(),
           updatedAt: db.serverDate(),
-          guardianAuthorized: false,
           progress: merged
         }
       });
     }
-    return { code: 0, data: { ok: true, updatedAt: merged.updatedAt } };
+    // 保存成功后返回合并后的权威快照，客户端据此吸收（尤其 playerProfiles 的合并结果），
+    // 避免本地显示刚编辑的角色而云端保留另一份。
+    return { code: 0, data: { ok: true, updatedAt: merged.updatedAt, snapshot: merged } };
   } catch (err) {
     console.error('[story] 保存进度失败', err);
     // 保存失败不抛错到前端：本地存储才是唯一真相源，下次写入会重试
@@ -92,7 +97,8 @@ async function saveState(openid, incoming) {
 
 // 清空云端进度（「重新开始」用）
 async function clearState(openid) {
-  const empty = { states: {}, anchors: {}, records: {}, updatedAt: Date.now() };
+  // 空快照包含 playerProfiles: {}，一并清除杜甫角色资料（账号昵称在本地，不在云端进度内）。
+  const empty = merge.emptySnapshot();
   try {
     const res = await db.collection(COLLECTION).where({ openid }).limit(1).get();
     const doc = res.data && res.data[0];
@@ -105,6 +111,23 @@ async function clearState(openid) {
   } catch (err) {
     console.error('[story] 清空进度失败', err);
     return { code: 0, data: { ok: false }, msg: '清空失败（本地已清）' };
+  }
+}
+
+// 永久删除当前用户的云端学习档案（含 OpenID、进度和建档时间）。
+async function deleteAccount(openid) {
+  try {
+    const res = await db.collection(COLLECTION).where({ openid }).remove();
+    return {
+      code: 0,
+      data: {
+        ok: true,
+        deleted: (res.stats && res.stats.removed) || 0
+      }
+    };
+  } catch (err) {
+    console.error('[story] 删除学习档案失败', err);
+    return { code: 500, data: { ok: false }, msg: '删除失败，请稍后重试' };
   }
 }
 

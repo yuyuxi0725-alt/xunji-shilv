@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-09T17:19:41.647Z",
+  "character": "dufu",
+  "period": "p2",
+  "title": "困守长安",
+  "range": "746–755",
+  "source": "miniprogram\\utils\\stories\\line-dufu.js",
+  "count": 18,
+  "items": [
+    {
+      "index": 1,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n2",
+      "emotion": "sad",
+      "text": "（听见你的声音，回头勉强一笑）小兄弟？是你……数年不见，你怎也到长安了。先别问我——你看这榜，满城举子，竟无一人中式。你可知，这是为何？",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n2b",
+      "emotion": "sad",
+      "text": "我也但愿是贴错了。可那朱笔榜文，写得明明白白——不是没人应试，是不许有人中式。这里头的缘故，说来话长。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n2c",
+      "emotion": "calm",
+      "text": "好不好的，你且看这榜便知。我自齐赵归来，苦读数年，一心来搏这一榜……到头来，连那榜的边角，都没摸到。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "吓着你了？不必为我难过。这一榜，不只我一人落第，是所有人。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n3",
+      "emotion": "angry",
+      "text": "后来我才知道，是宰相李林甫一句\"野无遗贤\"，说天下贤才早已尽入朝堂，此科竟无一人合格。一场制举，满城举子，尽数做了他谄媚的祭品。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n5",
+      "emotion": "serious",
+      "text": "争？凭我一介书生，拿什么同当朝宰相争。可我不肯就这么认了——留在长安，总有熬出头的一天。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n6",
+      "emotion": "thoughtful",
+      "text": "走？天下之大，又能走到哪去。长安是读书人唯一的进身之处。我不走，我要留下来，看看这城，究竟容不容得下一个\"真\"字。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n7",
+      "emotion": "calm",
+      "text": "正是。一走了之容易，难的是留下。我留下来了——这一留，便是十年。十年长安，我见尽了人世的凉薄。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n8",
+      "emotion": "sad",
+      "text": "为了谋个出身，我常到权贵门前献诗。\"朝扣富儿门，暮随肥马尘。残杯与冷炙，到处潜悲辛。\"你可知，读书人跪着求人，是什么滋味？",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n10",
+      "emotion": "thoughtful",
+      "text": "是啊，受点委屈不算什么。可当我看见咸阳桥上，白发人送别从军的儿郎——\"信知生男恶，反是生女好\"——我才明白，这世道的苦，远不止我一人受。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n11",
+      "emotion": "sad",
+      "text": "不值得。可放眼这长安，除了求人，还有别的路吗？后来我看见了更让我心寒的事——征兵，开边，百姓的血泪。到那时我才懂得，读书人真正该写的，不是求人的诗。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n12",
+      "emotion": "thoughtful",
+      "text": "谁不是如此。可人这一低头，头就再难抬起来了。直到我见尽民间疾苦，才把心思从\"求人\"，转到\"写实\"上。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n13",
+      "emotion": "serious",
+      "text": "咸阳桥头，征夫与亲人哭作一团，尘埃蔽日。\"信知生男恶，反是生女好\"——若不是被逼到绝路，哪个做父母的，会说出这样锥心的话？",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 14,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n14",
+      "emotion": "angry",
+      "text": "可就在同一座长安城里，曲江边上，杨氏兄妹锦衣玉食，前呼后拥。一边是征夫的泪，一边是权贵的乐。这长安城，朱门酒肉臭，路有冻死骨。",
+      "fileName": "n14.mp3"
+    },
+    {
+      "index": 15,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n16",
+      "emotion": "serious",
+      "text": "写下来，对。诗人不能救世，却能让这时代的真，不被抹去。诗若只为风花雪月，又与这满目疮痍何干？",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 16,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n17",
+      "emotion": "thoughtful",
+      "text": "改变？我一介书生，无兵无权。可我能做的，是让圣上、让后人，看见这真实的人间。这，便是读书人的\"致君尧舜\"。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 17,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n18",
+      "emotion": "calm",
+      "text": "你这话，让我怔了怔。值不值得？若连读书人都灰了心，这天下，还有谁来替百姓说话。我信，总还值得。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 18,
+      "character": "dufu",
+      "period": "p2",
+      "periodTitle": "困守长安",
+      "nodeId": "n19",
+      "emotion": "thoughtful",
+      "text": "这十年，我困在长安，看过最脏的官场，也看过最苦的百姓。你心里定有许多想问的——尽管开口，我知无不言。",
+      "fileName": "n19.mp3"
+    }
+  ]
+}

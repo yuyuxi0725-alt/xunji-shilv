@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T16:54:02.964Z",
+  "character": "libai",
+  "period": "p3",
+  "title": "供奉翰林",
+  "range": "742–744",
+  "source": "miniprogram\\utils\\stories\\line-libai.js",
+  "count": 21,
+  "items": [
+    {
+      "index": 1,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "（见你，笑着迎上来）你怎么也进宫来了！来来，你看这满园牡丹——今日玄宗天子设宴赏花，正缺一个会写诗的人，便召我来了。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n2b",
+      "emotion": "joy",
+      "text": "等到了！想当年我四处碰壁，如今是天子亲自下诏请我入京。这一程，总算没白走。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "哈哈，是有这么回事。天子见我诗文，降辇步迎，赐我七宝床，亲手调羹。可这些虚礼，我不大放在心上。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "（他看出你的神色，笑了笑）高兴是高兴，只是这宫里……处处是规矩，处处是眼睛，远不如外面自在。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n3",
+      "emotion": "joy",
+      "text": "最得意的一回，是沉香亭赏牡丹，天子命我作诗。我那时已饮了几杯，借着酒兴，一挥而就——\"云想衣裳花想容，春风拂槛露华浓\"。天子大喜，命我接连作了三首。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n5",
+      "emotion": "joy",
+      "text": "不错，正是为贵妃作的。花与人相映，人比花更艳。只是这诗，说它好，好在一时；说它险，也险在一时。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n6",
+      "emotion": "thoughtful",
+      "text": "风光？明面上风光。可这翰林待诏，说穿了，不过是个陪天子饮酒赋诗的弄臣。我的抱负，是经世济民，不是写这些应景的句子。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n7",
+      "emotion": "calm",
+      "text": "你也瞧出来了。这深宫里的风光，像浮在水上的花，好看，却扎不下根。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n8",
+      "emotion": "serious",
+      "text": "我在宫里，依旧我行我素，纵酒使气。有一回醉中，竟伸出脚去，让那权倾一时的高力士为我脱靴。高力士记恨在心，常在贵妃面前进我的谗言。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n10",
+      "emotion": "joy",
+      "text": "哈哈，痛快是痛快，祸也果然来了。可我那时想的是——我李白连天子的酒都能喝，一个宦官，凭什么让我弯腰。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n11",
+      "emotion": "calm",
+      "text": "祸，到底还是来了。高力士那等人，我本不该招惹。可若时光倒流，我大概还是会伸出那只脚——有些气，忍不得。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n12",
+      "emotion": "joy",
+      "text": "吓着你了？在这宫里，我早就看明白了——与其战战兢兢地活，不如痛痛快快地活。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n13",
+      "emotion": "sad",
+      "text": "渐渐地，谗言日盛。天子待我，也不如从前。我明白，这翰林是待不下去了。有同僚劝我：收敛些，少饮几杯，多奉承几句，这位置谁也夺不走。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 14,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n15",
+      "emotion": "serious",
+      "text": "收敛？我若真能收敛，当初就不会让高力士脱靴了。这官，做成一味讨好人的样子，那还是我李白吗？",
+      "fileName": "n15.mp3"
+    },
+    {
+      "index": 15,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n16",
+      "emotion": "serious",
+      "text": "对！安能摧眉折腰事权贵，使我不得开心颜！这翰林，我不做了。宁可被放还，还我一个自在身。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 16,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n17",
+      "emotion": "calm",
+      "text": "应付？我这一辈子，最学不会的就是两面。开心颜就是开心颜，摧眉折腰就是摧眉折腰，装不出第二种样子。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 17,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n18",
+      "emotion": "thoughtful",
+      "text": "天宝三载，天子赐金放还——说得体面，其实是变相把我撵出了长安。我牵着马走出城门，回头望那宫阙，心里反倒一阵轻松。只是出城那刻，我仍对天默念了一句：长风破浪会有时，直挂云帆济沧海。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 18,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n20",
+      "emotion": "calm",
+      "text": "荣宠？那本就是枷锁。我要的不是天子的宠，是我自己的快意。出了这道门，我才是真的李白。",
+      "fileName": "n20.mp3"
+    },
+    {
+      "index": 19,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n21",
+      "emotion": "joy",
+      "text": "爽快！还是你懂我！这宫里待了两年，我早憋坏了。如今还我自由，纵情山水去，饮酒赋诗去，岂不快哉！",
+      "fileName": "n21.mp3"
+    },
+    {
+      "index": 20,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n22",
+      "emotion": "thoughtful",
+      "text": "（他拍拍你的肩）不必为我惋惜。有些人求的是功名，我求的，是这颗心不委屈。如今，我找回来了。",
+      "fileName": "n22.mp3"
+    },
+    {
+      "index": 21,
+      "character": "libai",
+      "period": "p3",
+      "periodTitle": "供奉翰林",
+      "nodeId": "n23",
+      "emotion": "calm",
+      "text": "这宫里的两年，你也看尽了。心里若还有疑问——我的诗也好，这官场也好，趁现在问个痛快。出了这城，咱们再难回头了。",
+      "fileName": "n23.mp3"
+    }
+  ]
+}

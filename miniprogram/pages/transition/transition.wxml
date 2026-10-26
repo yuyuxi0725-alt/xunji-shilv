@@ -1,0 +1,29 @@
+<!-- pages/transition/transition.wxml —— 选完诗人后的穿越过渡页 -->
+<view class="page">
+
+  <!-- 视频尚未就绪时给加载提示（纯黑背景 + 一行字），避免黑屏像坏了 -->
+  <view wx:if="{{!videoUrl}}" class="trans-loading">
+    <text class="trans-loading-text">穿越中…</text>
+  </view>
+
+  <!-- 全屏过渡视频（muted 保证自动播放不被拦截；播完自动跳地图） -->
+  <video
+    wx:if="{{videoUrl}}"
+    class="trans-video"
+    src="{{videoUrl}}"
+    autoplay
+    muted
+    object-fit="cover"
+    show-center-play-btn="{{false}}"
+    show-fullscreen-btn="{{false}}"
+    show-play-btn="{{false}}"
+    controls="{{false}}"
+    binderror="onVideoError"
+    bindended="onVideoEnded"
+    bindplay="onVideoPlay"
+  ></video>
+
+  <!-- 右下角「跳过」 -->
+  <view class="skip-btn" bindtap="onSkip">跳过 ›</view>
+
+</view>

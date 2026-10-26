@@ -1,6 +1,5 @@
-// pages/index/index.js —— 首页（动态封面 + 穿越开场动画）
+// pages/index/index.js —— 首页（动态封面）
 const app = getApp();
-const stories = require('../../utils/stories/index');
 const assets = require('../../utils/cloudAssets');
 
 // 封面视频：云存储 fileID（与音频同理，走云函数代取临时链接绕过存储权限）
@@ -10,23 +9,46 @@ const COVER_IMAGE = '/assets/' + 'images/cover/cover-vertical.jpg';
 
 Page({
   data: {
-    loggedIn: false,
+    agreementChecked: false,
+    ageConfirmed: false,
     logging: false,
-    showPortal: false,
-    portalFade: false,  // 穿越层淡出（切页前的柔和过渡）
     coverVideoUrl: '',  // 封面视频临时链接（取到后 video 自动播放）
-    coverImage: '',     // 封面底图临时链接（视频加载前显示）
-    linePortraits: []   // 古人生像（穿越时浮现）
+    coverImage: ''      // 封面底图临时链接（视频加载前显示）
   },
 
   onLoad() {
-    // 收集各故事线的生像图，用于封面与穿越动画（立绘已迁云存储，换临时链接）
-    const lines = stories.getAllLines();
-    assets.resolvePaths(lines.map(l => l.portrait)).then((map) => {
+    // 首次进入必须保持未勾选；只有用户此前主动确认过，才恢复其选择。
+    const agreementChecked = app.globalData.agreementAccepted === true;
+    const ageConfirmed = app.globalData.ageConfirmed === true;
+    this.setData({ agreementChecked, ageConfirmed });
+    if (!agreementChecked || !ageConfirmed) {
+      return;
+    }
+
+    this.loadConsentAssets();
+  },
+
+  // Tab 页面再次显示时不会重跑 onLoad。删除学习档案后需在这里同步恢复未同意状态，
+  // 避免旧页面残留的勾选状态被误认为用户重新同意。
+  // 注意：封面已从 tabBar 移除，是纯冷启动页，不再有「切回首页 tab」的场景。
+  onShow() {
+    const accepted = app.globalData.agreementAccepted === true;
+    const ageConfirmed = app.globalData.ageConfirmed === true;
+    this.setData({ agreementChecked: accepted, ageConfirmed });
+    if (!accepted || !ageConfirmed) {
+      this._consentAssetsLoading = false;
       this.setData({
-        linePortraits: lines.map(l => map[l.portrait] || l.portrait)
+        coverVideoUrl: '',
+        coverImage: ''
       });
-    });
+    }
+  },
+
+  // 需要访问云端的封面图和音乐，仅在用户已经主动同意协议后加载。
+  loadConsentAssets() {
+    if (this._consentAssetsLoading) return;
+    this._consentAssetsLoading = true;
+
     // 封面底图换云链接
     assets.resolvePaths([COVER_IMAGE]).then((map) => {
       this.setData({ coverImage: map[COVER_IMAGE] || COVER_IMAGE });
@@ -34,8 +56,8 @@ Page({
 
     // 预取封面视频、背景音乐的临时链接（云函数代取，绕过免费版存储权限限制）
     this.loadCloudVideo(COVER_VIDEO_FILE_ID, 'coverVideoUrl');
-    // 背景音乐链接预取到全局（由 app.ensureBgm 在首次手势时启动，之后全程常驻）
-    app.fetchBgmUrl();
+    // 背景音乐：一进首页就尝试自动播放（若环境拦截自动播放，由首次手势 ensureBgm 兜底解锁）
+    app.autoStartBgm();
   },
 
   // 通过 ttsUrl 云函数代取云端视频的临时播放链接（2 小时有效，挂全局缓存）
@@ -71,69 +93,97 @@ Page({
     this.setData({ coverVideoUrl: '' });
   },
 
-  onShow() {
-    if (app.globalData.openid) {
-      this.setData({ loggedIn: true });
+  // 打开《隐私政策》：调微信官方接口展示《用户隐私保护指引》
+  // （navigator 的 open-type 无 openPrivacyContract 取值，故用 bindtap 调 API）
+  onOpenPrivacy() {
+    if (wx.openPrivacyContract) {
+      wx.openPrivacyContract({
+        fail: (err) => console.warn('[index] 打开隐私政策失败', err)
+      });
+    } else {
+      // 基础库过低时兜底：跳转到自行展示的协议页
+      wx.navigateTo({ url: '/pages/agreement/agreement' });
     }
+  },
+
+  // 协议勾选状态完全由用户操作产生，不能默认代替用户同意。
+  onAgreementChange(e) {
+    const values = (e && e.detail && e.detail.value) || [];
+    this.setData({ agreementChecked: values.indexOf('agree') !== -1 });
+  },
+
+  // 年龄确认与协议同意相互独立，均须由用户主动勾选，不能默认代替确认。
+  onAgeChange(e) {
+    const values = (e && e.detail && e.detail.value) || [];
+    this.setData({ ageConfirmed: values.indexOf('age14') !== -1 });
   },
 
   // 离开首页（切 tab 等）时，音乐保持常驻不停止（全局单例由 app 管理）
   onHide() {
-    if (this.data.showPortal) {
-      clearTimeout(this._portalTimer);
-      this.finishPortal();
-    }
   },
 
-  onUnload() {
-    clearTimeout(this._portalTimer);
-  },
-
-  // 开始穿越：先登录（若未登录），再播穿越动画
+  // 开始穿越：先同步微信官方隐私授权（未授权则弹官方授权窗），授权成功后再登录、进入业务
   async onStart() {
+    // 防重复：授权、登录、穿越整条链路执行期间拒绝再次触发
     if (this.data.logging) return;
 
-    // 未登录则先静默登录
-    if (!app.globalData.openid) {
-      this.setData({ logging: true });
-      try {
-        await app.silentLogin();
-        this.setData({ loggedIn: true });
-      } catch (err) {
-        console.error('[index] 登录失败', err);
-        wx.showToast({ title: '登录失败，请重试', icon: 'none' });
-        this.setData({ logging: false });
-        return;
-      } finally {
-        this.setData({ logging: false });
-      }
+    if (!this.data.ageConfirmed) {
+      wx.showToast({ title: '请确认已满14周岁', icon: 'none' });
+      return;
     }
 
-    // 播放穿越动画
-    this.playPortal();
-  },
+    if (!this.data.agreementChecked) {
+      wx.showToast({ title: '请先阅读并自主勾选协议', icon: 'none' });
+      return;
+    }
 
-  // 开始穿越：播放纯 CSS 穿越动画（水墨晕染 + 卷轴展开，无视频、无水印）
-  playPortal() {
-    this._portalDone = false;
-    this.setData({ showPortal: true, portalFade: false });
-    // 首次手势触发全局背景音乐（之后全程常驻，切页不停止）
-    app.ensureBgm();
+    // 进入流程即加锁，避免授权/登录/穿越并发执行
+    this.setData({ logging: true });
 
-    // CSS 动画兜底：墨晕漫开→卷轴展开→诗句浮现→白光收束，约 3.4 秒
-    this._portalTimer = setTimeout(() => this.finishPortal(), 3400);
-  },
+    try {
+      // 1) 以微信侧状态为准同步官方隐私授权；未同意前不登录、不建档、不进入业务页
+      const privacyOk = await app.ensurePrivacyAuth();
+      if (!privacyOk) {
+        wx.showToast({ title: '需同意隐私保护指引后才能开始使用', icon: 'none' });
+        return;
+      }
 
-  // 穿越结束：淡出过渡层，切入剧本页（音乐保持常驻，不在此停止）
-  finishPortal() {
-    if (this._portalDone) return;
-    this._portalDone = true;
-    clearTimeout(this._portalTimer);
-    this.setData({ portalFade: true });
-    setTimeout(() => {
+      // 2) 官方授权成功后才落本地同意状态（仅用户主动勾选并点击开始后记录）
+      if (!app.globalData.agreementAccepted) {
+        app.globalData.agreementAccepted = true;
+        wx.setStorageSync('agreementAccepted', true);
+      }
+      if (!app.globalData.ageConfirmed) {
+        app.globalData.ageConfirmed = true;
+        wx.setStorageSync('ageConfirmed', true);
+      }
+
+      this.loadConsentAssets();
+
+      // 3) 用户确认协议且取得官方授权后，未登录时才发起登录换取 OpenID、初始化学习档案
+      if (!app.globalData.openid) {
+        try {
+          await app.silentLogin();
+        } catch (err) {
+          console.error('[index] 登录失败', err);
+          // 真机排查：把云函数 errMsg 直接带到 toast 上（截断防溢出），一眼定位失败原因
+          const raw = (err && (err.errMsg || err.message)) || '';
+          const detail = String(raw).replace(/\s+/g, ' ').slice(0, 40);
+          wx.showToast({ title: detail ? '登录失败: ' + detail : '登录失败，请重试', icon: 'none', duration: 5000 });
+          return;
+        }
+      }
+
+      // 4) 进入剧本选择页（诗人卡牌），首次手势解锁背景音乐。
+      //    switchTab 会关闭所有非 tab 页面（含本启动封面），故封面只出现这一次，
+      //    之后不会在 tab 切换中再次闪现——真正的「游戏式启动页」。
+      app.ensureBgm();
       wx.switchTab({ url: '/pages/story/story' });
-      // 切走后重置动画状态，便于下次进入
-      setTimeout(() => this.setData({ showPortal: false, portalFade: false }), 400);
-    }, 300);
+    } catch (err) {
+      console.error('[index] 启动异常', err);
+      wx.showToast({ title: '启动失败，请重试', icon: 'none' });
+    } finally {
+      this.setData({ logging: false });
+    }
   },
 });

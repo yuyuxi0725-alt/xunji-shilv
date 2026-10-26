@@ -1,0 +1,71 @@
+/* components/privacy-popup/privacy-popup.wxss —— 古风暖色调弹窗 */
+.privacy-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: rgba(24, 18, 12, 0.62);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.privacy-dialog {
+  width: 600rpx;
+  background: #fffdf7;
+  border: 1rpx solid #e6d7bf;
+  border-radius: 16rpx;
+  padding: 40rpx 36rpx 32rpx;
+  box-sizing: border-box;
+}
+
+.privacy-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #8b5a2b;
+  text-align: center;
+  margin-bottom: 24rpx;
+}
+
+.privacy-body {
+  font-size: 27rpx;
+  color: #5a4a38;
+  line-height: 1.65;
+}
+
+.privacy-link {
+  font-size: 27rpx;
+  color: #8b5a2b;
+  text-decoration: underline;
+  margin: 20rpx 0 28rpx;
+}
+
+.privacy-actions {
+  display: flex;
+}
+
+.privacy-btn {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  font-size: 28rpx;
+  line-height: 2.6;
+  border-radius: 10rpx;
+}
+
+.privacy-btn::after {
+  border: none;
+}
+
+.privacy-btn.cancel {
+  background: #f1ebe0;
+  color: #7a6a56;
+  margin-right: 20rpx;
+}
+
+.privacy-btn.agree {
+  background: #8b5a2b;
+  color: #fffdf7;
+}

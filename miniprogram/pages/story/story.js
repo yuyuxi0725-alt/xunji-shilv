@@ -2,6 +2,7 @@
 const stories = require('../../utils/stories/index');
 const assets = require('../../utils/cloudAssets');
 const progress = require('../../utils/progress');
+const guard = require('../../utils/player-guard');
 
 // 章节中文序号
 const INDEX_CHARS = { p1: '壹', p2: '贰', p3: '叁', p4: '肆', p5: '伍', p6: '陆' };
@@ -12,6 +13,7 @@ Page({
     view: 'lines',
     currentLine: null,
     lines: [],
+    lineCurrent: 0,     // 多主线选择页当前居中的诗人卡下标
     periods: [],
     loading: true,
     completedCount: 0,
@@ -19,16 +21,30 @@ Page({
   },
 
   onLoad() {
-    this.loadLines();
+    if (!this.consumeStoryFocus()) this.loadLines();
   },
 
   onShow() {
+    if (this.consumeStoryFocus()) return;
     // 回到剧本页时刷新当前视图的状态
     if (this.data.view === 'periods') {
       this.loadState();
     } else {
       this.loadLines();
     }
+  },
+
+  // 从通关页返回时，直接落到当前人物的篇章列表，而不是人物总列表。
+  consumeStoryFocus() {
+    const app = getApp();
+    const focus = app.globalData.storyFocus;
+    if (!focus || !focus.lineId) return false;
+    app.globalData.storyFocus = null;
+    const line = stories.getLine(focus.lineId);
+    if (!line || line.status !== 'online') return false;
+    this.setData({ currentLine: line, view: 'periods', loading: true });
+    this.loadState();
+    return true;
   },
 
   // 加载多主线列表
@@ -39,24 +55,57 @@ Page({
       tagline: l.tagline,
       status: l.status,
       cover: l.cover,
+      portrait: l.youngPortrait || l.portrait,  // 选择页卡牌优先用「年轻版」立绘
       periodCount: (l.periods || []).length
     }));
-    // 封面图已迁移云存储，换临时链接后再渲染（有全局缓存）
-    assets.resolvePaths(rawLines.map(l => l.cover)).then((map) => {
-      const lines = rawLines.map(l => Object.assign({}, l, { cover: map[l.cover] || l.cover }));
+    // 封面图与立绘已迁移云存储，换临时链接后再渲染（有全局缓存）
+    const assetPaths = rawLines.reduce((acc, l) => {
+      if (l.cover) acc.push(l.cover);
+      if (l.portrait) acc.push(l.portrait);
+      return acc;
+    }, []);
+    assets.resolvePaths(assetPaths).then((map) => {
+      const lines = rawLines.map(l => Object.assign({}, l, {
+        cover: map[l.cover] || l.cover,
+        portrait: map[l.portrait] || l.portrait
+      }));
       this.setData({ view: 'lines', lines, loading: false });
     });
   },
 
-  // 点击某条主线 → 进入该线时期列表
+  // 左右滑动切换居中的诗人卡
+  onLineSwipe(e) {
+    this.setData({ lineCurrent: e.detail.current });
+  },
+
+  // 点击某张诗人卡：非居中卡先滑到中央；居中卡（在线）进入该线时期列表
   onLineTap(e) {
     const { id, status } = e.currentTarget.dataset;
+    const index = Number(e.currentTarget.dataset.index);
+    if (index !== this.data.lineCurrent) {
+      this.setData({ lineCurrent: index });
+      return;
+    }
     if (status === 'coming') {
       wx.showToast({ title: '敬请期待', icon: 'none' });
       return;
     }
     const line = stories.getLine(id);
     if (!line) return;
+    // 地点模式（杜甫/李白/苏轼）：选人后先播穿越过渡视频，再进入行迹地图
+    if (line.narrativeMode === 'location') {
+      progress.setSelectedLine(id);
+      getApp().globalData.mapFocus = { lineId: id, locationId: '' };
+      // 角色守卫（三条线通用）：无 confirmed 角色（或仅迁移草稿）→ 先到统一角色页确认，
+      // 确认后 redirectTo 穿越转场页，再进入行迹地图。
+      if (guard.isRoleLine(id) && guard.needsRolePage(id, progress.getPlayerProfile(id))) {
+        wx.navigateTo({ url: guard.buildPlayerUrl({ lineId: id, target: 'transition' }) });
+        return;
+      }
+      // 先到过渡页播放穿越视频，播完/跳过后再 switchTab 到行迹地图
+      wx.navigateTo({ url: '/pages/transition/transition?lineId=' + id });
+      return;
+    }
     this.setData({ currentLine: line, view: 'periods' });
     this.loadState();
   },

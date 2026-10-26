@@ -1,0 +1,7 @@
+cairosvg
+geopandas
+lxml
+numpy
+opencv-python
+Pillow
+shapely

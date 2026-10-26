@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T01:51:34.974Z",
+  "character": "dufu",
+  "period": "p4",
+  "title": "漂泊西南",
+  "range": "759–770",
+  "source": "miniprogram\\utils\\stories\\line-dufu.js",
+  "count": 23,
+  "items": [
+    {
+      "index": 1,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "小兄弟！真的是你——哈哈，十多年了，你怎么还是当年模样！快进来。我这草堂总算安顿下来，\"两个黄鹂鸣翠柳，一行白鹭上青天\"——乱世里偷来的这一方安宁，格外珍贵啊。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n2b",
+      "emotion": "joy",
+      "text": "高兴？你且看我这鬓角。弃官入蜀，靠故旧接济才落下这块地……能有一间屋遮头，怎能不高兴。人这一生，笑是给自己撑的伞。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "亲手建谈不上，亲眼看是不错的。堂成之后，我便栽竹百竿，开渠引水。简陋是简陋，可这是逃难半生，头一回有了\"家\"的样子。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "（他顺着你的目光，摸了摸鬓角）老了，老了。不过心还没老——你来得正好，陪我看看这浣花溪的春天。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n3",
+      "emotion": "sad",
+      "text": "你问他这几年的经历，他的神色渐渐沉了下来。华州任上，关辅大饥，谷价腾贵，饿殍载道。我那年四十八岁，一边是仕途灰心，一边是民生凋敝——西行路上，秦州、同谷，一家老小几乎饿死。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n5",
+      "emotion": "serious",
+      "text": "辞官那日，同僚都道我疯了。可我清楚：食朝廷之禄，救不了一郡之民；为一己之生，折半生之腰——这官，做它何用？去成都，投亲靠友，从头活起。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n6",
+      "emotion": "serious",
+      "text": "熬？我在华州熬了一年，眼看着百姓饿死，提笔无言。这官帽底下装着的，已不是当年那个拾遗杜甫了。次日我便挂印而去——穷是穷，心是齐整的。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n7",
+      "emotion": "thoughtful",
+      "text": "投靠权贵？我见过太多\"聪明人\"，如今坟头的草都高了。我这一生不会拐弯，可我不悔——拐了弯，就写不出那些诗了。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n8",
+      "emotion": "thoughtful",
+      "text": "到成都后，总算安顿下来。那年春夜落了一场好雨，我披衣起身，立在檐下听了半宿——\"随风潜入夜，润物细无声\"。你听这十个字，哪里是在写雨，分明是在写他自己：不声不响，只管润物。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n13",
+      "emotion": "sad",
+      "text": "只是这样安稳的日子，也没几年。去年八月，秋风怒号，卷走了我屋上的三重茅草；夜里大雨，床头屋漏，布衾似铁——一家老小，在雨里坐到天亮。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 11,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n15",
+      "emotion": "thoughtful",
+      "text": "是，我命苦。可叫苦的诗人，这世上从来不缺。那一夜我想的是——这世上比我苦的人还有千千万万，他们连一首诗都没有。\"吾庐独破受冻死亦足\"，只要天下寒士都有屋住。",
+      "fileName": "n15.mp3"
+    },
+    {
+      "index": 12,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n16",
+      "emotion": "serious",
+      "text": "正是。\"安得广厦千万间，大庇天下寒士俱欢颜，风雨不动安如山！\"——你说怪不怪：自己冻着，许的愿却是给别人的。可若连这一点念想都没了，人才真的输了。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 13,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n17",
+      "emotion": "thoughtful",
+      "text": "飘零身世，我叹过半生了。可那一夜我没有叹——我的屋破了，尚且有笔；天下人的屋破了，连声音都没有。替他们喊一嗓子，是我这诗人还能做的事。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 14,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n18",
+      "emotion": "thoughtful",
+      "text": "后来严武故去，成都没了依靠，我又一次举家漂泊，出三峡，滞留夔州。两年里我写下四百多首诗——\"无边落木萧萧下，不尽长江滚滚来\"。少年时登泰山，我写的是山；如今登高处，我写的已是这一生。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 15,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n20",
+      "emotion": "calm",
+      "text": "是磨的。年轻时我以为，诗是才华；老了才知道，诗是命的分量。命有多沉，诗就有多沉。",
+      "fileName": "n20.mp3"
+    },
+    {
+      "index": 16,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n21",
+      "emotion": "thoughtful",
+      "text": "写尽人间，不敢当。只是年轻时看山是山，如今看山，山里都是人——落木、长江、白头、浊酒，样样都是人间。",
+      "fileName": "n21.mp3"
+    },
+    {
+      "index": 17,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n22",
+      "emotion": "calm",
+      "text": "不妨事。有些诗，要等你自己走到某一天，才忽然懂。到那一天，你会想起今晚。",
+      "fileName": "n22.mp3"
+    },
+    {
+      "index": 18,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n23",
+      "emotion": "sad",
+      "text": "出峡之后，我以舟为家，漂泊湖湘。亲故尽失，疾病缠身。\"飘飘何所似，天地一沙鸥\"——一叶孤舟，天地之大，竟寻不出一处归程。",
+      "fileName": "n23.mp3"
+    },
+    {
+      "index": 19,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n25",
+      "emotion": "calm",
+      "text": "悔？不悔。我这一生，官没做成，家没安下，可我写下的每一句，都对得起这双眼睛看见的天下。如此，便不算白来。",
+      "fileName": "n25.mp3"
+    },
+    {
+      "index": 20,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n26",
+      "emotion": "thoughtful",
+      "text": "留不留得下来，不是我说了算的。我只管把看到的、疼过的，都如实写下来——后人读与不读，它们都在那里。",
+      "fileName": "n26.mp3"
+    },
+    {
+      "index": 21,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n27",
+      "emotion": "calm",
+      "text": "（许久，他轻声）你看这江水，日日夜夜，不知疲倦地走。我这一生，大概也是这样——走到哪算哪，写着什么算什么。",
+      "fileName": "n27.mp3"
+    },
+    {
+      "index": 22,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n28",
+      "emotion": "thoughtful",
+      "text": "小兄弟，你我泰山初见时，我不过一介狂生；如今再对坐，已是白头。这一路同行，我的话你也都听遍了。心里若还有想问的——这最后一段路，尽管问。",
+      "fileName": "n28.mp3"
+    },
+    {
+      "index": 23,
+      "character": "dufu",
+      "period": "p4",
+      "periodTitle": "漂泊西南",
+      "nodeId": "n30",
+      "emotion": "calm",
+      "text": "罢了，天不早了。若还问我还念着什么——愿后人翻开这些诗，看见的不只是杜甫，还有那千千万万没留下名字的人。他们来过，苦过，也认真活过。",
+      "fileName": "n30.mp3"
+    }
+  ]
+}

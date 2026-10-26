@@ -1,0 +1,50 @@
+/* pages/transition/transition.wxss —— 选完诗人后的穿越过渡页 */
+
+.page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #1a1613;
+}
+
+/* 全屏过渡视频 */
+.trans-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 视频未就绪时的加载提示 */
+.trans-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1613;
+}
+.trans-loading-text {
+  color: #c7baa6;
+  font-size: 30rpx;
+  letter-spacing: 6rpx;
+  font-family: 'STKaiti', 'KaiTi', 'FangSong', serif;
+}
+
+/* 右下角「跳过」：半透明，避开底部安全区与胶囊 */
+.skip-btn {
+  position: absolute;
+  right: 32rpx;
+  bottom: calc(env(safe-area-inset-bottom) + 48rpx);
+  padding: 14rpx 34rpx;
+  border: 1rpx solid rgba(245, 234, 211, 0.55);
+  border-radius: 40rpx;
+  background: rgba(20, 14, 8, 0.45);
+  color: #f5ead3;
+  font-size: 26rpx;
+  line-height: 1;
+  letter-spacing: 2rpx;
+  font-family: 'STKaiti', 'KaiTi', 'FangSong', serif;
+  z-index: 10;
+}

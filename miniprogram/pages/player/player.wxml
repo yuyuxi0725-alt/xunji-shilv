@@ -1,0 +1,76 @@
+<!-- pages/player/player.wxml —— 玩家角色「创建 / 确认 / 编辑」统一页（杜甫/李白/苏轼三线共用） -->
+<view class="page">
+
+  <!-- 顶部：返回 + 标题 -->
+  <view class="pl-head">
+    <view class="pl-back" bindtap="onBack">‹</view>
+    <view class="pl-title">{{edit ? '编辑我的角色' : '我的角色'}}</view>
+    <view class="pl-back-spacer"></view>
+  </view>
+
+  <view class="pl-card">
+    <!-- 朱印 + 标题 + 副标题 -->
+    <view class="pl-seal">选</view>
+    <view class="pl-card-title">选择形象，留下你的名字</view>
+    <view class="pl-card-sub">形象不影响剧情和学习内容</view>
+
+    <!-- 世界观说明 -->
+    <view class="pl-intro">{{intro}}</view>
+
+    <!-- 三张外观卡（只显示「形象一/二/三」，无职业/类型描述） -->
+    <view class="pl-list">
+      <view
+        class="pl-item {{selectedRoleId === item.id ? 'selected' : ''}}"
+        wx:for="{{roleList}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onRoleCardTap"
+      >
+        <view class="pl-portrait">
+          <image
+            wx:if="{{item.portraitImage}}"
+            class="pl-img"
+            src="{{item.portraitImage}}"
+            mode="aspectFit"
+            data-id="{{item.id}}"
+            binderror="onPortraitError"
+          />
+          <view class="pl-silhouette" wx:else></view>
+        </view>
+        <view class="pl-info">
+          <view class="pl-name">{{item.name}}</view>
+        </view>
+        <view class="pl-check" wx:if="{{selectedRoleId === item.id}}">✦</view>
+      </view>
+    </view>
+
+    <!--
+      用 form 提交直接读取原生 input 的当前值。这样即使输入法合成或开发者工具热重载
+      导致视图值与 Page.data 短暂不同步，也不会把画面中已输入的姓名当成空值。
+    -->
+    <form class="pl-form" bindsubmit="onConfirm">
+      <!-- 姓名输入（与「我的」页账号昵称分开） -->
+      <view class="pl-name-input">
+        <input
+          class="pl-input"
+          name="playerName"
+          value="{{playerNameInput}}"
+          maxlength="8"
+          placeholder="留下你的名字"
+          bindinput="onNameInput"
+          bindblur="onNameBlur"
+        />
+      </view>
+
+      <!-- 确认按钮：外观 + 姓名均合法才高亮；连点只提交一次 -->
+      <view class="pl-actions">
+        <button
+          class="pl-btn {{confirmReady && !submitting ? '' : 'disabled'}}"
+          form-type="submit"
+          hover-class="none"
+        >{{submitting ? '正在保存…' : confirmText}}</button>
+      </view>
+    </form>
+  </view>
+
+</view>

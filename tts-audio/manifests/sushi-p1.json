@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T12:17:46.689Z",
+  "character": "sushi",
+  "period": "p1",
+  "title": "少年成名",
+  "range": "1056–1061",
+  "source": "miniprogram\\utils\\stories\\line-sushi.js",
+  "count": 19,
+  "items": [
+    {
+      "index": 1,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "（见你走近，朗声一笑）这位小兄弟，你也是要进京赶考去的？在下苏轼，字子瞻，眉山人氏。这是家父苏洵，这是舍弟苏辙。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n2b",
+      "emotion": "joy",
+      "text": "哈哈，不敢当。家父、舍弟同我一道，此去汴京，正是要会一会天下的文章。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "正是。家父早年游学四方，如今携我兄弟二人进京，一心要让我们出去见见世面。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "不必拘束。我这个人，心直口快，最不爱藏着掖着。你且随我同路，咱们边走边聊。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n3",
+      "emotion": "thoughtful",
+      "text": "说起读书，我小时候是母亲亲自教的。她读《后汉书》到范滂传，慨然长叹。我那时不懂，便问她：\"我若做范滂那样的人，母亲可愿意？\"你猜我母亲怎么说？",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n5",
+      "emotion": "thoughtful",
+      "text": "你猜错了。我母亲说：\"你既能做范滂，我难道不能做范滂的母亲？\"——范滂是东汉的名士，因直言获罪而死。母亲这话，是把我的志向，一并担下了。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n6",
+      "emotion": "joy",
+      "text": "正是！她说：\"你既能做范滂，我难道不能做范滂的母亲？\"——范滂是东汉因直言获罪的名士。母亲这一句话，我记了一辈子。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n7",
+      "emotion": "calm",
+      "text": "她说：\"你既能做范滂，我难道不能做范滂的母亲？\"范滂是东汉名士，因直言获罪而死。母亲这话，是愿意我做一个不折腰的人。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n8",
+      "emotion": "thoughtful",
+      "text": "到了汴京，我与舍弟同科应试。主考官是欧阳修先生。据说他读到我的文章，以为是门生曾巩所作，为避嫌，把我压到了第二。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n9a",
+      "emotion": "joy",
+      "text": "公正？是，也不是。他以为是我的同门曾巩，为避嫌才压我——这份不徇私的操守，我敬他。",
+      "fileName": "n9a.mp3"
+    },
+    {
+      "index": 11,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n9b",
+      "emotion": "calm",
+      "text": "可惜？能得先生一句评语，已是天大的造化。名次罢了，我原不看重。",
+      "fileName": "n9b.mp3"
+    },
+    {
+      "index": 12,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n10",
+      "emotion": "joy",
+      "text": "后来欧阳修先生得知真相，对人说：\"老夫当避路，放他出一头地也。\"——先生要把路让开，好叫我这后生露头。你说，这算不算我这一路最大的知遇？",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 13,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n11a",
+      "emotion": "calm",
+      "text": "收着？我也听过这样的劝。可我苏子瞻，生来就不会藏着掖着。",
+      "fileName": "n11a.mp3"
+    },
+    {
+      "index": 14,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n11b",
+      "emotion": "joy",
+      "text": "说得好！心里怎么想，嘴上就怎么说。若要为求安稳去学那圆滑，我还做什么文章、做什么官。",
+      "fileName": "n11b.mp3"
+    },
+    {
+      "index": 15,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n13",
+      "emotion": "calm",
+      "text": "我若肯收敛，便不是我了。这官场再深，我也要凭一颗本心去闯——哪怕日后因此吃苦，我认。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 16,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n14",
+      "emotion": "serious",
+      "text": "对。我这一生，宁可不那么聪明，也不愿做个藏着掖着的人。\"守其初心，始终不变\"——这是我给自己立的誓。",
+      "fileName": "n14.mp3"
+    },
+    {
+      "index": 17,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n15",
+      "emotion": "thoughtful",
+      "text": "藏拙？我最学不会的就是\"藏\"。心里有光，就该让它亮出来，藏着掖着，岂不辜负了这身才学。",
+      "fileName": "n15.mp3"
+    },
+    {
+      "index": 18,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n16",
+      "emotion": "calm",
+      "text": "后来我签判凤翔，才算真正入了仕。离京那日，我心里清楚——这一脚踏进官场，往后的路，怕是不好走了。只是当时，谁也料不到后来的事。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 19,
+      "character": "sushi",
+      "period": "p1",
+      "periodTitle": "少年成名",
+      "nodeId": "n17",
+      "emotion": "joy",
+      "text": "小兄弟，这一路同你说了这许多，还没顾上听你问。家学也好、应试也好、我的志向也好，你心里憋着什么话，尽管问，我知无不言。",
+      "fileName": "n17.mp3"
+    }
+  ]
+}

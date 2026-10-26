@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T16:54:03.083Z",
+  "character": "libai",
+  "period": "p4",
+  "title": "纵酒漫游",
+  "range": "744–755",
+  "source": "miniprogram\\utils\\stories\\line-libai.js",
+  "count": 17,
+  "items": [
+    {
+      "index": 1,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "（见你，大笑）你也来了！快来，我给你引见——这位是杜甫，杜子美；这位是高适，高三十五。我们三人结伴，正要寻一处山水，痛饮三日！",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n2b",
+      "emotion": "joy",
+      "text": "奇观谈不上，快意是真。我与子美、高三十五，都是不肯低头的人，凑在一起，自然是酒逢知己千杯少！",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "自在多了！出得长安，天高地阔。这官我虽不做了，可这天下的山水、美酒、知己，都是我的。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n2d",
+      "emotion": "joy",
+      "text": "高兴就对了！人生在世，最难得的，就是有三两知己，一壶好酒。来，你也同去，咱们一醉方休！",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n3",
+      "emotion": "joy",
+      "text": "那一回在嵩山元丹丘的山居，我饮到酣处，举杯高歌：\"人生得意须尽欢，莫使金樽空对月。天生我材必有用，千金散尽还复来！\"子美他们听得直拍案。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n5",
+      "emotion": "joy",
+      "text": "豪情是真。可我自己心里清楚，这豪情，一半是给知己听的，一半是说给自己听的。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n6",
+      "emotion": "thoughtful",
+      "text": "（他顿了顿，笑意淡了些）你听出来了。天生我材必有用——我一遍遍这样说，是因为，我还没真的证明这句话。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n7",
+      "emotion": "joy",
+      "text": "（他举杯与你一碰）来！今朝有酒今朝醉，明日的事，明日再说。这世上的烦恼，且都抛给这杯酒！",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n8",
+      "emotion": "thoughtful",
+      "text": "可你别看我纵酒放歌，我北游幽燕的时候，瞧出那安禄山招兵买马、广结死党，恐有异心。我忧心如焚，却无计可施。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n10",
+      "emotion": "serious",
+      "text": "我但愿是我看错了。可那安禄山，狼子野心，昭然若揭。这太平盛世，怕是撑不了几年了。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n11",
+      "emotion": "thoughtful",
+      "text": "我离了朝，本可不管。可这天下若乱，受苦的是万千百姓。我李白，到底还是放不下这一腔热血。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n12",
+      "emotion": "sad",
+      "text": "（他叹了口气）我这个人，嘴上说着求仙问道，可这尘世，终究是放不下的。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n13",
+      "emotion": "thoughtful",
+      "text": "我也曾想，索性归隐，去天姥山寻仙去。\"安能摧眉折腰事权贵，使我不得开心颜\"——可当真要去时，又迈不开这双脚。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 14,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n15",
+      "emotion": "thoughtful",
+      "text": "我也劝过自己放下。可放不下。这天下，有我的诗、我的知己、还有那些把命押在这片土地上的百姓。我做不到袖手旁观。",
+      "fileName": "n15.mp3"
+    },
+    {
+      "index": 15,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n16",
+      "emotion": "serious",
+      "text": "对。我嘴上求仙，脚却总往长安的方向走。这腔热血，泼不出去，也凉不下来。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 16,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n17",
+      "emotion": "thoughtful",
+      "text": "酒，我饮过千杯，也浇不灭这心头的火。\"抽刀断水水更流，举杯消愁愁更愁\"——这愁，不是酒能解的。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 17,
+      "character": "libai",
+      "period": "p4",
+      "periodTitle": "纵酒漫游",
+      "nodeId": "n18",
+      "emotion": "calm",
+      "text": "后来我在宣州谢朓楼上，送别一位故人，写下\"抽刀断水水更流，举杯消愁愁更愁\"。这半生的愁，就像这江水，抽刀也断不开。这一程山水，你也陪我走遍了。还有什么想问的，只管问，我李白，何时吝啬过话。",
+      "fileName": "n18.mp3"
+    }
+  ]
+}

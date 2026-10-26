@@ -1,46 +1,71 @@
 <!-- pages/chat/chat.wxml —— 视觉小说式对话页 -->
 <view class="vn-stage">
 
-  <!-- 场景背景（双层交叉淡入淡出：旧图垫底，新图淡入） -->
+  <!-- 场景背景（双层交叉淡入淡出：旧图垫底，新图淡入）
+       垫底层 vn-bg-under 只作为静态旧图，不需要事件；
+       淡入层 vn-bg-over 必须由加载事件驱动：
+       - bindload  → 新图确认加载成功，才加 scene-on 开始淡入；
+       - binderror → 新图失败，回退到旧图，避免黑屏；
+       - data-src  → 事件归属判定，丢弃迟到/过期的回调。 -->
   <image class="vn-bg vn-bg-under" src="{{scenePrev}}" mode="aspectFill" wx:if="{{scenePrev}}" />
-  <image class="vn-bg vn-bg-over {{sceneFadeSlow ? 'scene-slow' : ''}} {{sceneReady ? 'scene-on' : ''}}" src="{{sceneImage}}" mode="aspectFill" />
+  <image
+    class="vn-bg vn-bg-over {{sceneFadeSlow ? 'scene-slow' : ''}} {{sceneReady ? 'scene-on' : ''}}"
+    src="{{sceneImage}}"
+    data-src="{{sceneImage}}"
+    mode="aspectFill"
+    bindload="onSceneImgLoad"
+    binderror="onSceneImgError"
+  />
   <!-- 氛围暗角层：压暗四周，突出中央人物与文字，增强沉浸 -->
   <view class="vn-vignette"></view>
 
   <!-- 顶部信息条 -->
-  <view class="vn-topbar">
+  <view class="vn-topbar" style="top: {{topbarTop}}px;">
     <view class="vn-back" bindtap="goBack">‹ 返回</view>
     <view class="vn-title">{{periodName}}</view>
-    <view class="vn-anchor">锚点 {{anchorCount}}/{{anchorTotal}}</view>
+    <!-- 小印章已移出 topbar 改独立悬浮（见下方），这里补等宽空位让标题保持视觉居中 -->
+    <view class="vn-topbar-spacer"></view>
   </view>
 
-  <!-- 立绘（对话时登场，旁白时隐藏；结尾讲述时不显示） -->
+  <!-- 角色姓名条（杜甫线有角色时显示；避开胶囊与标题，不显示职业/信任） -->
+  <view class="vn-rolebar" wx:if="{{playerAvatarId}}" style="top: {{rolebarTop}}px;">
+    <view class="vn-role-tag">同行者 · {{playerName}}</view>
+  </view>
+
+  <!-- 知识落印 · 第三步收成的样子：右上角一轴描金小卷（斜挂微摆），
+       点它可回看最近一张知识卡
+       top 由 applyMenuButtonLayout() 按微信胶囊按钮位置算出，落在胶囊下方 -->
+  <view
+    class="vn-seal-mini {{anchorCount ? 'lit' : ''}} {{sealExpanded ? 'expanded' : ''}} {{sealSlow ? 'seal-slow' : ''}}"
+    style="top: {{miniSealTop}}px;"
+    bindtap="onMiniSealTap"
+  >
+    <text class="vn-seal-mini-char">识</text>
+    <text class="vn-seal-mini-num">{{anchorCount}}/{{anchorTotal}}</text>
+  </view>
+
+  <!-- 立绘（双角色：NPC 在左、玩家在右；对话时登场，旁白时隐藏；结尾讲述时不显示） -->
+  <!-- NPC 立绘：当前说话者高亮，倾听者变暗；narrate 时明显变暗 -->
   <image
-    class="vn-npc {{npcVisible ? 'vn-npc-show' : ''}} {{npcSpeaking ? 'vn-npc-active' : ''}}"
+    class="vn-npc {{npcVisible ? 'vn-npc-show' : ''}} {{npcMotion ? 'vn-npc-motion' : ''}} {{activeSpeaker === 'npc' ? 'vn-npc-speak' : ''}} {{activeSpeaker === 'player' ? 'vn-npc-listen' : ''}} {{activeSpeaker === 'narrator' && npcVisible ? 'vn-npc-dim' : ''}}"
     src="{{npcImage}}"
     mode="aspectFit"
     binderror="onNpcImgError"
   />
+  <!-- 玩家立绘：右侧；无正式图时回退 CSS 剪影（不裂图） -->
+  <view
+    class="vn-player {{playerVisible ? 'vn-player-show' : ''}} {{activeSpeaker === 'player' ? 'vn-player-speak' : ''}} {{activeSpeaker === 'npc' ? 'vn-player-listen' : ''}}"
+  >
+    <image class="vn-player-img" wx:if="{{playerImage}}" src="{{playerImage}}" mode="aspectFit" />
+    <view class="vn-player-silhouette" wx:else></view>
+  </view>
 
   <!-- 打字机文本框 -->
-  <view class="vn-dialog" bindtap="onDialogTap" wx:if="{{nodeType === 'narrate' || nodeType === 'talk'}}">
-    <view class="vn-dialog-name" wx:if="{{nodeType === 'talk'}}">{{npcName}}</view>
+  <view class="vn-dialog vn-dialog-{{dialogSide}}" bindtap="onDialogTap" wx:if="{{nodeType === 'narrate' || nodeType === 'talk'}}">
+    <view class="vn-dialog-name" wx:if="{{nodeType === 'talk'}}">{{dialogName}}</view>
     <view class="vn-dialog-text">{{displayedText}}<text class="vn-caret" wx:if="{{typing}}">▌</text></view>
 
-    <!-- 考据挑战：先生这句话里藏着错漏，等少年捉出来 -->
-    <block wx:if="{{!typing && trapActive && !trapCaught}}">
-      <view class="vn-trap-hint">⟡ 先生此言，你听着可有不对之处？</view>
-      <view class="vn-trap-actions">
-        <view class="vn-trap-btn catch" catchtap="onTrapChallenge">这里不对！</view>
-        <view class="vn-trap-btn pass" catchtap="onTrapContinue">接着听</view>
-      </view>
-    </block>
-    <!-- 捉出之后：先生的反应 -->
-    <block wx:elif="{{trapCaught}}">
-      <view class="vn-trap-catch">{{trapCatchText}}</view>
-      <view class="vn-dialog-next" catchtap="onTrapContinue">继续 ›</view>
-    </block>
-    <view class="vn-dialog-next" wx:elif="{{!typing}}">点击继续 ›</view>
+    <view class="vn-dialog-next" wx:if="{{!typing}}">点击继续 ›</view>
   </view>
 
   <!-- 选项面板 -->
@@ -71,16 +96,28 @@
         wx:key="*this"
       >{{item}}</view>
     </view>
-    <view class="vn-reflect-continue" wx:if="{{reflectDone}}" bindtap="onReflectContinue">
-      继续 ›
-    </view>
+    <!-- 底部统一按钮（同一位置原地切换）：逐句浮现期间=「快速阅读」，点击展开全文后原地变为「继续」；自然读完后同一位置直接显示「继续」；不点则完全保持逐句浮现原样 -->
+    <view
+      class="vn-reflect-btn {{reflectDone ? 'is-continue' : 'is-skip'}}"
+      wx:if="{{reflectDone || reflectTotal > 1}}"
+      bindtap="onReflectBtn"
+    >{{reflectDone ? '继续 ›' : '快速阅读 »'}}</view>
   </view>
 
   <!-- AI 自由对话面板 -->
   <view class="vn-aifree" wx:if="{{nodeType === 'aiFree'}}">
     <!-- 探究式对话头部：探究进度 -->
     <view class="vn-ai-head">
+      <text class="vn-ai-badge">AI 生成 · 仅供参考</text>
       <text class="vn-ai-note">与{{npcName}}当面请教 · 已探究 {{_covered.length}} 处史料</text>
+      <button
+        class="vn-ai-feedback"
+        open-type="contact"
+        session-from="ai-content-feedback"
+        show-message-card
+        send-message-title="反馈 AI 生成内容"
+        send-message-path="/pages/story/story"
+      >反馈 AI 内容</button>
     </view>
 
     <!-- 聊天记录区 -->
@@ -91,24 +128,15 @@
         wx:key="id"
         id="msg-{{item.id}}"
       >
-        <view class="vn-chat-bubble">{{item.content}}</view>
+        <view class="vn-chat-bubble">
+          <text class="vn-ai-inline" wx:if="{{item.role === 'npc'}}">AI 生成</text>
+          <text>{{item.content}}</text>
+        </view>
       </view>
       <view class="vn-chat-item npc" wx:if="{{aiTyping && !aiStreaming}}">
         <view class="vn-chat-bubble">…</view>
       </view>
     </scroll-view>
-
-    <!-- 考据挑战：先生这句开场白里藏着一处史实错漏，等少年捉 -->
-    <view class="vn-trap" wx:if="{{trapActive}}">
-      <view class="vn-trap-hint">⟡ 先生此言，你听着可有不对之处？</view>
-      <view class="vn-trap-actions" wx:if="{{!trapCaught}}">
-        <view class="vn-trap-btn catch" bindtap="onTrapChallenge">这里不对！</view>
-        <view class="vn-trap-btn pass" bindtap="onTrapContinue">接着听</view>
-      </view>
-      <view class="vn-trap-actions" wx:else>
-        <view class="vn-trap-btn pass" bindtap="onTrapContinue">原来如此，继续请教 ›</view>
-      </view>
-    </view>
 
     <!-- 输入区 -->
     <view class="vn-chat-input">
@@ -158,21 +186,104 @@
     </view>
   </view>
 
-  <!-- 锚点触发提示 -->
-  <view class="vn-anchor-toast {{showAnchorToast ? 'show' : ''}}" wx:if="{{anchorToastText}}">
-    ✦ 触发知识锚点：{{anchorToastText}}
+  <!-- ===== 知识落印 · 第一步：朱印点亮（约 0.8s，纯提示，不挡操作） ===== -->
+  <view class="vn-seal-pulse" wx:if="{{sealPulse}}">
+    <view class="vn-seal-ring"></view>
+    <view class="vn-seal-mark">
+      <view class="vn-seal-char">{{sealKicker}}</view>
+    </view>
+    <view class="vn-seal-sub">{{sealTitle}}</view>
   </view>
 
-  <!-- 通关收束面板：时期完成 + 锚点回顾 + 情感收尾 -->
+  <!-- ===== 知识落印 · 第二步：轻量知识卡 =====
+       外套一个安全区容器：上边界在胶囊与小印章之下，下边界在对话框/选项/输入区之上，
+       卡片在容器内垂直、水平居中 —— 因此任何屏高下都不会压住底部 UI。
+       容器本身 pointer-events:none，空白处不拦截点击；卡片自身 pointer-events:auto。 -->
+  <view class="vn-kcard-zone" wx:if="{{anchorCard}}" style="top: {{kcardZoneTop}}px;">
+    <!-- 收起动画：''=展示 → shrink=直线飞向右上角、缩到最小、渐隐。
+         到位后由 JS 驱动右上角小卷轴「张开 → 慢慢收起」完成收尾。 -->
+    <view class="vn-kcard {{kcardPhase === 'shrink' ? 'kc-shrink' : ''}}" style="transform: {{kcardFlyTransform}};">
+      <view class="kc-body">
+        <view class="vn-kcard-head">
+          <text class="vn-kcard-kicker">{{anchorCard.head}}</text>
+          <text class="vn-kcard-label">{{anchorCard.label}}</text>
+        </view>
+        <view class="vn-kcard-name">{{anchorCard.name}}</view>
+        <!-- 为什么获得 -->
+        <view class="vn-kcard-why">{{anchorCard.why}}——</view>
+        <!-- 有原诗：只挑 highlight 的关键句（最多 2 句，替代 know，卡片保持紧凑）；
+             没有原诗：照旧显示一句话知识 -->
+        <block wx:if="{{anchorCard.poem && anchorCard.poemExcerpt.length}}">
+          <view class="vn-kcard-poem-title">《{{anchorCard.poem.title}}》· {{anchorCard.poem.author}}</view>
+          <view class="vn-kcard-poem-lines">
+            <view
+              class="vn-kcard-poem-line"
+              wx:for="{{anchorCard.poemExcerpt}}"
+              wx:key="*this"
+            >{{item}}</view>
+          </view>
+        </block>
+        <view class="vn-kcard-know" wx:elif="{{anchorCard.know}}">{{anchorCard.know}}</view>
+        <view class="vn-kcard-actions">
+          <!-- 有诗时不叫"查看完整史料"——点进去第一眼要看的是诗 -->
+          <view class="vn-kcard-btn ghost" wx:if="{{anchorCard.hasDetail}}" catchtap="onAnchorDetail">{{anchorCard.poem ? '读诗与史料' : '查看完整史料'}}</view>
+          <view class="vn-kcard-btn solid" catchtap="onAnchorCardClose">收下</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 完整史料（用户主动点开才出现） ===== -->
+  <view class="vn-kdetail-mask" wx:if="{{anchorDetailOpen}}" bindtap="onAnchorDetailClose">
+    <view class="vn-kdetail-card" catchtap="noop">
+      <view class="vn-kdetail-seal">{{anchorCard.seal}}</view>
+      <view class="vn-kdetail-name">{{anchorCard.name}}</view>
+
+      <!-- 诗歌区：位置固定在「印记名称下方、史料正文上方」 -->
+      <view class="vn-kpoem {{anchorCard.poem.displayMode === 'excerpt' ? 'vn-kpoem-excerpt' : ''}}" wx:if="{{anchorCard.poem}}">
+        <view class="vn-kpoem-title">《{{anchorCard.poem.title}}》</view>
+        <view class="vn-kpoem-author">{{anchorCard.poem.author}}{{anchorCard.poem.displayMode === 'excerpt' ? ' · 节选' : ''}}</view>
+        <view class="vn-kpoem-lines">
+          <view
+            class="vn-kpoem-line {{item.highlight ? 'hi' : ''}}"
+            wx:for="{{anchorCard.poem.lines}}"
+            wx:key="text"
+          >{{item.text}}</view>
+        </view>
+        <view class="vn-kpoem-insight" wx:if="{{anchorCard.poem.insight}}">{{anchorCard.poem.insight}}</view>
+      </view>
+
+      <view class="vn-kdetail-body">{{anchorCard.detail}}</view>
+      <block wx:if="{{anchorCard.links.length}}">
+        <view class="vn-kdetail-links-t">关联</view>
+        <view class="vn-kdetail-link" wx:for="{{anchorCard.links}}" wx:key="*this">· {{item}}</view>
+      </block>
+      <view class="vn-kdetail-close" catchtap="onAnchorDetailClose">收起</view>
+    </view>
+  </view>
+
+  <!-- 通关收束面板：时期/地点完成 + 锚点回顾 + 情感收尾 -->
   <view class="vn-questend-mask" wx:if="{{questEndVisible}}">
     <view class="vn-questend-card">
       <view class="vn-questend-seal">通</view>
-      <view class="vn-questend-title">{{questEndAllDone ? '全篇告成' : '本章已毕'}}</view>
+      <view class="vn-questend-title">{{questEndAllDone ? '全篇告成' : '本程已成'}}</view>
       <view class="vn-questend-body">{{questEndSummary}}</view>
-      <view class="vn-questend-extra" wx:if="{{questEndAllDone}}">
-        四程已尽，诗心长存。愿这些字句，陪你走更远的路。
+      <!-- 同行者回望（杜甫线）：姓名只是 UI 文本，不进入任何配音 -->
+      <view class="vn-questend-recap" wx:if="{{questEndRecap.length}}">
+        <view class="vn-questend-recap-line" wx:for="{{questEndRecap}}" wx:key="*this">{{item}}</view>
       </view>
-      <view class="vn-questend-btn" bindtap="onQuestEndClose">返回剧本 ›</view>
+      <view class="vn-questend-extra">{{questEndNote}}</view>
+      <view class="vn-questend-actions">
+        <!-- 地点模式：收下诗笺 → 前往下一站（回地图）；重温=返回地图 -->
+        <view class="vn-questend-btn primary" wx:if="{{questEndIsLocation}}" bindtap="onLocationEndPoem">
+          {{questEndIsReplay ? '收下诗笺，返回地图' : (questEndAllDone ? '收下终章诗笺' : '收下诗笺，前往下一站')}}
+        </view>
+        <!-- 时期模式：收下诗笺 → 切到诗笺 Tab -->
+        <view class="vn-questend-btn primary" wx:else bindtap="onQuestEndPoem">
+          {{questEndAllDone ? '收下终章诗笺' : '收下本程诗笺'}}
+        </view>
+        <view class="vn-questend-btn secondary" bindtap="onQuestEndStory">返回篇章</view>
+      </view>
     </view>
   </view>
 

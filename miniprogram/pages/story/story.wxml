@@ -1,38 +1,67 @@
 <!-- pages/story/story.wxml —— 剧本首页（多主线选择 + 选线后时期列表） -->
 
-<!-- ===== 视图一：多主线选择 ===== -->
+<!-- ===== 视图一：多主线选择（左右滑动卡牌） ===== -->
 <block wx:if="{{view === 'lines'}}">
   <view class="lines-page">
     <view class="lines-head">
-      <view class="lines-title">寻迹 · 古今</view>
+      <view class="lines-title">寻迹诗旅</view>
       <view class="lines-subtitle">循一卷诗书，赴一场千年之约</view>
     </view>
 
-    <view class="line-list">
+    <!-- 诗人卡牌滑动区 -->
+    <swiper
+      class="line-swiper"
+      previous-margin="88rpx"
+      next-margin="88rpx"
+      current="{{lineCurrent}}"
+      bindchange="onLineSwipe"
+      circular="{{false}}"
+      duration="320"
+    >
+      <swiper-item wx:for="{{lines}}" wx:key="id">
+        <view
+          class="poet-card {{item.status}} {{lineCurrent === index ? 'is-center' : 'is-side'}}"
+          bindtap="onLineTap"
+          data-id="{{item.id}}"
+          data-status="{{item.status}}"
+          data-index="{{index}}"
+        >
+          <!-- 卡面：立绘 + 场景底衬 -->
+          <view class="poet-card-face">
+            <image class="poet-bg" src="{{item.cover}}" mode="aspectFill" />
+            <view class="poet-bg-mask"></view>
+            <view class="poet-frame">
+              <image class="poet-portrait {{item.status === 'coming' ? 'portrait-dim' : ''}}" src="{{item.portrait}}" mode="aspectFit" />
+              <view class="poet-seal">詩</view>
+            </view>
+            <view wx:if="{{item.status === 'coming'}}" class="poet-overlay">
+              <text class="poet-coming">敬请期待</text>
+            </view>
+          </view>
+
+          <!-- 卡底信息 -->
+          <view class="poet-info">
+            <view class="poet-name">{{item.name}}</view>
+            <view class="poet-tagline">{{item.tagline}}</view>
+            <view class="poet-meta" wx:if="{{item.status === 'online'}}">
+              <text>{{item.periodCount}} 段人生</text>
+              <text class="poet-enter">进入 →</text>
+            </view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+
+    <!-- 自绘指示点 -->
+    <view class="line-dots">
       <view
         wx:for="{{lines}}"
         wx:key="id"
-        class="line-card {{item.status}}"
-        bindtap="onLineTap"
-        data-id="{{item.id}}"
-        data-status="{{item.status}}"
-      >
-        <view class="line-thumb-wrap">
-          <image class="line-thumb {{item.status === 'coming' ? 'thumb-dim' : ''}}" src="{{item.cover}}" mode="aspectFill" lazy-load="{{true}}" />
-          <view wx:if="{{item.status === 'coming'}}" class="line-overlay">
-            <text class="line-coming">敬请期待</text>
-          </view>
-        </view>
-        <view class="line-body">
-          <view class="line-name">{{item.name}}</view>
-          <view class="line-tagline">{{item.tagline}}</view>
-          <view class="line-meta" wx:if="{{item.status === 'online'}}">
-            <text>{{item.periodCount}} 段人生</text>
-            <text class="line-enter">进入 →</text>
-          </view>
-        </view>
-      </view>
+        class="line-dot {{lineCurrent === index ? 'dot-on' : ''}}"
+      ></view>
     </view>
+
+    <view class="lines-hint">← 左右滑动，选择一位诗人 →</view>
   </view>
 </block>
 

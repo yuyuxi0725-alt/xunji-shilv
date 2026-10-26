@@ -1,5 +1,5 @@
 {
-    "description": "寻迹·古今 —— 沉浸式历史文学探究小程序",
+    "description": "寻迹诗旅 —— 沉浸式历史文学探究小程序",
     "setting": {
         "urlCheck": false,
         "es6": true,
@@ -44,6 +44,14 @@
             },
             {
                 "value": "node_modules",
+                "type": "folder"
+            },
+            {
+                "value": "assets/icons/_backup",
+                "type": "folder"
+            },
+            {
+                "value": "assets/maps",
                 "type": "folder"
             }
         ],

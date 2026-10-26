@@ -1,92 +1,112 @@
-<!-- pages/poem/poem.wxml —— 我的诗笺（每通关一期生成一张竖版诗笺卡，可存图、可分享） -->
+<!-- pages/poem/poem.wxml —— 我的诗笺（记录游玩过程中点亮的知识印谱） -->
 
 <view class="page">
 
-  <view class="poem-head">
-    <view class="head-title">我的诗笺</view>
-    <view class="head-sub">你走过的每一程，都值得留下一张笺</view>
-  </view>
-
-  <!-- ===== 空态 ===== -->
-  <view wx:if="{{isEmpty}}" class="empty">
-    <view class="empty-paper">
-      <view class="empty-seal">笺</view>
-      <view class="empty-title">诗笺待书</view>
-      <view class="empty-line"></view>
-      <view class="empty-sub">先随先生走一程吧</view>
-      <view class="empty-hint">通关任一时期，这里就会为你落下一张诗笺——<br />你的抉择、你点亮的锚点、你抓出的史实错漏，都在上面。</view>
-      <view class="empty-btn" bindtap="goStory">去看看剧本 ›</view>
-      <view class="empty-btn ghost" bindtap="goMap">先看行迹地图 ›</view>
+  <!-- 诗人分册 tab -->
+  <view class="line-tabs">
+    <view
+      wx:for="{{lineTabs}}"
+      wx:key="id"
+      class="line-tab {{item.id === currentLineId ? 'on' : ''}}"
+      bindtap="onSwitchLine"
+      data-id="{{item.id}}"
+    >
+      <view class="line-tab-name">{{item.name}}</view>
+      <view class="line-tab-count">{{item.collected}} / {{item.total}}</view>
     </view>
   </view>
 
-  <!-- ===== 诗笺卡列表（按通关时间倒序） ===== -->
-  <block wx:else>
-    <view
-      wx:for="{{cards}}"
-      wx:key="key"
-      class="poem-card {{item.highlight ? 'hl' : ''}}"
-      id="card-{{item.key}}"
-    >
-      <!-- 竖版宣纸 -->
-      <view class="pc-paper">
-        <view class="pc-rules"></view>
-        <view class="pc-seal">笺</view>
-
-        <view class="pc-brand">寻迹 · 古今</view>
-        <view class="pc-title">我 的 诗 笺</view>
-        <view class="pc-nick">{{item.nickname}}</view>
-        <view class="pc-nick-line"></view>
-
-        <view class="pc-hr"></view>
-
-        <view class="pc-chapter">第{{item.indexChar}}程 · {{item.periodName}}</view>
-        <view class="pc-meta">{{item.lineName}} · {{item.range}} · {{item.dateText}}</view>
-
-        <view class="pc-body">
-          <view class="pc-left">
-            <view class="pc-sec" wx:if="{{item.hasChoices}}">
-              <view class="pc-sec-label">我在此间的抉择</view>
-              <view class="pc-choice {{c.cls}}" wx:for="{{item.choices}}" wx:for-item="c" wx:key="text">{{c.label}}{{c.text}}</view>
-            </view>
-
-            <view class="pc-sec" wx:if="{{item.anchorNames.length}}">
-              <view class="pc-sec-label">点亮的锚点 · {{item.anchorLit}}/{{item.anchorTotal}}</view>
-              <view class="pc-anchors">{{item.anchorText}}</view>
-            </view>
-
-            <view class="pc-sec" wx:if="{{item.hasTrap || item.hasQuiz}}">
-              <view class="pc-sec-label">探究战绩</view>
-              <view class="pc-stat" wx:if="{{item.hasTrap}}">考据之眼 · 抓出 {{item.trapCaught}}/{{item.trapTotal}} 处史实错漏</view>
-              <view class="pc-stat" wx:if="{{item.hasQuiz}}">先生考校 · 答对 {{item.quizCorrect}}/{{item.quizTotal}} 题</view>
-            </view>
+  <!-- 印谱正文：按时期分组，每个锚点一枚印记 -->
+  <view class="book-body" wx:if="{{collected}}">
+    <view class="period" wx:for="{{groups}}" wx:key="id">
+      <view class="period-head">
+        <text class="period-name">{{item.name}}</text>
+        <text class="period-range" wx:if="{{item.range}}">{{item.range}}</text>
+      </view>
+      <view
+        class="imprint"
+        wx:for="{{item.cards}}"
+        wx:for-item="card"
+        wx:key="id"
+        bindtap="onOpenAnchor"
+        data-id="{{card.id}}"
+      >
+        <view class="imprint-seal">{{card.seal}}</view>
+        <view class="imprint-main">
+          <view class="imprint-title-row">
+            <text class="imprint-title">{{card.name}}</text>
+            <text class="poem-tag" wx:if="{{card.hasPoem}}">含诗文</text>
           </view>
+          <view class="imprint-know">{{card.know}}</view>
 
-          <view class="pc-poem" wx:if="{{item.poem}}">
-            <view class="pc-poem-col" wx:for="{{item.poemCols}}" wx:for-item="col" wx:key="k">
-              <text class="pc-poem-char" wx:for="{{col.cells}}" wx:for-item="cell" wx:key="k">{{cell.ch}}</text>
+          <!-- 诗句：挂了 poem 的印记，横排呈现（highlight 句标朱砂） -->
+          <view class="imprint-poem" wx:if="{{card.hasPoem}}">
+            <view class="ip-poem-title">《{{card.poem.title}}》{{card.poem.author}}{{card.poem.displayMode === 'excerpt' ? '（节选）' : ''}}</view>
+            <view class="ip-poem-lines">
+              <!-- wx:for-item="line"：默认循环变量是 item，而这里用的是 line.*。
+                   缺这一行会导致诗句渲染为空白（check-wxml-data 一直报 poem.wxml→line）。 -->
+              <view
+                class="ip-poem-line {{line.highlight ? 'hi' : ''}}"
+                wx:for="{{card.poem.lines}}"
+                wx:for-item="line"
+                wx:key="text"
+              >{{line.text}}</view>
             </view>
           </view>
         </view>
-
-        <view class="pc-hr" wx:if="{{item.hasVerdict}}"></view>
-        <view class="pc-verdict" wx:if="{{item.hasVerdict}}">{{item.verdict}}</view>
-
-        <view class="pc-hr"></view>
-        <view class="pc-foot">循一卷诗书，赴一场千年之约</view>
+        <view class="imprint-arrow">›</view>
       </view>
-
-      <!-- 操作 -->
-      <view class="pc-actions">
-        <view class="pc-btn main {{exporting ? 'disabled' : ''}}" bindtap="onExport" data-key="{{item.key}}">保存为图片</view>
-        <view class="pc-btn" bindtap="onCopy" data-key="{{item.key}}">复制文案</view>
-      </view>
-      <view class="pc-tip">「保存为图片」会生成一张竖版诗笺图，可直接分享；也可长按本页截图保存。</view>
     </view>
+  </view>
 
-    <view class="list-foot">循着走过的路，慢慢攒成一部你的诗笺集</view>
-  </block>
+  <!-- 空态 -->
+  <view class="empty" wx:else>
+    <view class="empty-seal">识</view>
+    <view class="empty-title">诗笺尚空</view>
+    <view class="empty-text">在人物旅程中发现知识，点亮的印记会安静地收在这里。</view>
+    <view class="empty-btn" bindtap="goStory">去看看剧本 ›</view>
+  </view>
 
-  <!-- 离屏导出画布（不参与视觉布局；导出时逐笔重绘诗笺版式） -->
+  <!-- 完整史料弹窗 -->
+  <view class="detail-mask" wx:if="{{selectedAnchor}}" bindtap="onCloseAnchor">
+    <scroll-view class="detail-card" scroll-y="true" catchtap="noop">
+      <view class="detail-seal">{{selectedAnchor.seal}}</view>
+      <view class="detail-name">{{selectedAnchor.name}}</view>
+
+      <view class="poem {{selectedAnchor.poem.displayMode === 'excerpt' ? 'excerpt' : ''}}" wx:if="{{selectedAnchor.poem}}">
+        <view class="poem-title">《{{selectedAnchor.poem.title}}》</view>
+        <view class="poem-author">{{selectedAnchor.poem.author}}{{selectedAnchor.poem.displayMode === 'excerpt' ? ' · 节选' : ''}}</view>
+        <view class="poem-lines">
+          <view
+            class="poem-line {{item.highlight ? 'hi' : ''}}"
+            wx:for="{{selectedAnchor.poem.lines}}"
+            wx:key="text"
+          >{{item.text}}</view>
+        </view>
+        <view class="poem-insight" wx:if="{{selectedAnchor.poem.insight}}">{{selectedAnchor.poem.insight}}</view>
+      </view>
+
+      <view class="detail-know">{{selectedAnchor.know}}</view>
+      <view class="detail-divider"></view>
+      <view class="detail-body">{{selectedAnchor.detail}}</view>
+      <view class="detail-links" wx:if="{{selectedAnchor.links.length}}">
+        <view class="detail-links-title">关联</view>
+        <view class="detail-link-list">
+          <text class="detail-link" wx:for="{{selectedAnchor.links}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+
+      <view class="detail-actions">
+        <view class="detail-btn" catchtap="onCopy" data-id="{{selectedAnchor.id}}">复制文案</view>
+        <view class="detail-btn main {{exporting ? 'disabled' : ''}}" catchtap="onExport" data-id="{{selectedAnchor.id}}">保存为图片</view>
+      </view>
+      <view class="detail-close" catchtap="onCloseAnchor">收起</view>
+    </scroll-view>
+  </view>
+
+  <!-- 离屏导出画布 -->
   <canvas type="2d" id="poemCanvas" class="export-canvas" style="width: {{cw}}px; height: {{ch}}px;"></canvas>
+
+  <!-- 微信官方隐私授权弹窗 -->
+  <privacy-popup />
 </view>

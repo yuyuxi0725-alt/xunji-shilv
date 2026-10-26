@@ -1,0 +1,53 @@
+page {
+  height: 100%;
+  background: #f5f0e8;
+}
+.agreement-page {
+  height: 100%;
+  color: #3f3429;
+}
+.paper {
+  margin: 28rpx;
+  padding: 42rpx 34rpx 64rpx;
+  background: #fffdf7;
+  border: 1rpx solid #e2d5c1;
+  border-radius: 20rpx;
+  box-shadow: 0 8rpx 28rpx rgba(82, 57, 31, 0.08);
+}
+.title {
+  color: #5e3d21;
+  font-size: 40rpx;
+  font-weight: 700;
+  text-align: center;
+}
+.meta {
+  margin: 18rpx 0 34rpx;
+  color: #8c7b6b;
+  font-size: 22rpx;
+  text-align: center;
+}
+.intro,
+.paragraph {
+  font-size: 28rpx;
+  line-height: 1.85;
+  text-align: justify;
+}
+.intro {
+  padding: 24rpx;
+  background: #f8f1e5;
+  border-radius: 12rpx;
+}
+.section-title {
+  margin: 38rpx 0 12rpx;
+  color: #6b4423;
+  font-size: 31rpx;
+  font-weight: 700;
+}
+.footer {
+  margin-top: 46rpx;
+  padding-top: 26rpx;
+  border-top: 1rpx solid #e2d5c1;
+  color: #8b5a2b;
+  font-size: 25rpx;
+  text-align: center;
+}

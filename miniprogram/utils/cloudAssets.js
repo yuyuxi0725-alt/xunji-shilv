@@ -14,7 +14,11 @@ const CLOUD_ROOT = 'cloud://cloud1-d0g6bkxs13c9f980d.636c-cloud1-d0g6bkxs13c9f98
 const MIGRATE_PREFIX = '/assets/' + 'images/';  // 已迁移云端的本地路径前缀
 const KEEP_LOCAL = '/assets/' + 'icons/';       // 例外：小图标保留本地
 
-const urlCache = {};  // 本地路径 -> 云端临时链接
+// 云存储临时链接约 2 小时失效；缓存带过期时间，超时自动重取（与 app.js 背景音乐一致）
+const URL_TTL = 100 * 60 * 1000;  // 100 分钟，留足余量
+
+// 本地路径 -> { url: 云端临时链接, at: 获取时间戳 }
+const urlCache = {};
 
 // 是否属于"已迁移云端"的路径
 function isMigratable(p) {
@@ -49,8 +53,11 @@ function fetchBatch(paths) {
         const list = res.result || [];
         paths.forEach((p) => {
           const f = list.find(x => x && x.fileID === CLOUD_ROOT + p);
-          if (f && f.tempFileURL) urlCache[p] = f.tempFileURL;
-          else console.warn('[cloudAssets] 未取到链接（文件未上传云端？）', p, f && f.errMsg);
+          if (f && f.tempFileURL) {
+            urlCache[p] = { url: f.tempFileURL, at: Date.now() };
+          } else {
+            console.warn('[cloudAssets] 未取到链接（文件未上传云端？）', p, f && f.errMsg);
+          }
         });
         resolve();
       },
@@ -65,14 +72,16 @@ function fetchBatch(paths) {
 // 解析一组路径，返回 { 本地路径: 临时链接 } 映射
 function resolvePaths(paths) {
   const unique = [...new Set((paths || []).filter(isMigratable))];
-  const need = unique.filter(p => !urlCache[p]);
+  const now = Date.now();
+  // 未缓存、或缓存已过期（超 URL_TTL）的，都需重新换取
+  const need = unique.filter(p => !urlCache[p] || (now - urlCache[p].at) >= URL_TTL);
   const jobs = [];
   for (let i = 0; i < need.length; i += 50) {
     jobs.push(fetchBatch(need.slice(i, i + 50)));
   }
   return Promise.all(jobs).then(() => {
     const out = {};
-    unique.forEach((p) => { if (urlCache[p]) out[p] = urlCache[p]; });
+    unique.forEach((p) => { if (urlCache[p] && urlCache[p].url) out[p] = urlCache[p].url; });
     return out;
   });
 }

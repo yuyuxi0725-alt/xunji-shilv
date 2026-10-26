@@ -7,7 +7,7 @@
 import asyncio, json, os, re, sys
 import edge_tts
 
-BASE = r'C:/Users/lzz/Desktop/寻迹古今/tts-audio'
+BASE = os.path.dirname(os.path.abspath(__file__))
 sys.stdout.reconfigure(encoding='utf-8')
 
 with open(os.path.join(BASE, 'texts.json'), encoding='utf-8') as f:

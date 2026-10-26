@@ -10,11 +10,6 @@
 .map-head {
   padding: 56rpx 32rpx 28rpx;
 }
-.head-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
 .head-title {
   font-size: 52rpx;
   color: #f0e6d2;
@@ -27,35 +22,6 @@
   color: rgba(240, 230, 210, 0.62);
   letter-spacing: 2rpx;
 }
-.head-btn {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  padding: 10rpx 20rpx 10rpx 12rpx;
-  border: 2rpx solid rgba(240, 230, 210, 0.45);
-  border-radius: 40rpx;
-  background: rgba(240, 230, 210, 0.08);
-}
-.head-btn:active { opacity: 0.7; }
-.head-btn-seal {
-  width: 36rpx;
-  height: 36rpx;
-  line-height: 36rpx;
-  text-align: center;
-  border-radius: 6rpx;
-  background: #9e2a2b;
-  color: #f5e9d5;
-  font-size: 24rpx;
-  font-family: 'STKaiti', 'KaiTi', serif;
-  margin-right: 10rpx;
-}
-.head-btn-text {
-  font-size: 24rpx;
-  color: #f0e6d2;
-  font-family: 'STKaiti', 'KaiTi', serif;
-  letter-spacing: 2rpx;
-}
-
 /* 切换条 */
 .line-tabs {
   margin-top: 30rpx;
@@ -80,11 +46,78 @@
   box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.22);
 }
 
+/* 当前旅程：进入当前可玩剧情的统一入口 */
+.current-journey {
+  margin-top: 26rpx;
+  padding: 22rpx 24rpx;
+  display: flex;
+  align-items: center;
+  border: 2rpx solid rgba(240, 230, 210, 0.30);
+  border-radius: 16rpx;
+  background: rgba(240, 230, 210, 0.10);
+}
+.current-journey:active { opacity: 0.82; }
+.current-seal {
+  flex-shrink: 0;
+  width: 58rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  background: #9e2a2b;
+  color: #f5e9d5;
+  font-size: 30rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.current-body {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+}
+.current-label {
+  font-size: 21rpx;
+  color: rgba(240, 230, 210, 0.62);
+  letter-spacing: 3rpx;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 14rpx;
+}
+/* 同行者：与「当前行迹」同一行、右移一点，用淡金区分，不抢主标题 */
+.current-companion {
+  color: rgba(226, 205, 156, 0.86);
+  letter-spacing: 1rpx;
+}
+.current-title {
+  margin-top: 4rpx;
+  font-size: 31rpx;
+  color: #f0e6d2;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+}
+.current-meta,
+.current-route {
+  margin-top: 5rpx;
+  font-size: 21rpx;
+  color: rgba(240, 230, 210, 0.64);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.current-action {
+  flex-shrink: 0;
+  margin-left: 18rpx;
+  font-size: 24rpx;
+  color: #f0d5a3;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.journey-done { background: rgba(107, 142, 90, 0.14); }
+.journey-done:active { opacity: 1; }
+.journey-done .current-seal { background: #6b8e5a; }
+
 /* 进度总览 */
 .progress-wrap {
   margin-top: 26rpx;
-  display: flex;
-  align-items: center;
 }
 .progress-bar {
   flex: 1;
@@ -100,15 +133,16 @@
   transition: width 0.5s ease;
 }
 .progress-text {
-  margin-left: 18rpx;
+  margin-top: 10rpx;
   font-size: 24rpx;
   color: rgba(240, 230, 210, 0.85);
   letter-spacing: 1rpx;
-  white-space: nowrap;
+  text-align: right;
 }
 
 /* ============ 地图（纸面） ============ */
 .map-wrap {
+  position: relative;
   margin: 0 24rpx;
   padding: 14rpx;
   background: linear-gradient(180deg, #f8f2e3 0%, #f3ebd8 100%);
@@ -117,19 +151,139 @@
   box-shadow: 0 8rpx 24rpx rgba(59, 45, 28, 0.28);
 }
 
+/* 缩放控制：叠在地图右上角（缩放/平移后出现，含倍率提示 + 复位按钮） */
+.map-zoom {
+  position: absolute;
+  top: 26rpx;
+  right: 26rpx;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.map-zoom-tip {
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 21rpx;
+  color: #f0e6d2;
+  background: rgba(59, 45, 28, 0.62);
+  letter-spacing: 1rpx;
+}
+.map-zoom-reset {
+  padding: 6rpx 18rpx;
+  border-radius: 20rpx;
+  font-size: 21rpx;
+  color: #4a3220;
+  background: #f0e6d2;
+  border: 2rpx solid #d8c6a7;
+  letter-spacing: 1rpx;
+}
+.map-zoom-reset:active { opacity: 0.75; }
+
 .map-stage {
   position: relative;
   width: 100%;
   overflow: hidden;
   border-radius: 10rpx;
   background: #f7f1e2;
+  /* 未缩放时允许页面纵向滚动（pan-y），缩放后禁止（none）交地图平移。
+     配合 JS 里「未缩放不平移」的判断，解决地图拖动与页面滚动冲突。 */
+  touch-action: pan-y;
+}
+.map-stage.zoom-status,
+.map-stage.zoom-detail,
+.map-stage.zoom-poem {
+  touch-action: none;
+}
+/* 可缩放内层：只做平移（translate 不产生位图模糊）。缩放由 JS 布局级完成：
+   地点/路线的 left/top 在 JS 重算、原生渲染（文字/线条矢量清晰）；
+   底图位图单独 transform scale（位图放大有固有柔化，属正常）。 */
+.map-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 0px 0px;
+  will-change: transform;
+}
+/* 底图/疆界层/降级层：位图缩放以左上角为原点（与 JS 布局坐标一致） */
+.map-bg,
+.map-boundary,
+.map-fallback {
+  transform-origin: 0px 0px;
+}
+/* 聚焦/复位动画期间：临时开启 left/top/width 与底图 transform 的过渡，
+   动画结束（mapAnim 复位 none、anim 类移除）后关闭，避免手势拖动抖动/滞后。 */
+.map-inner.anim .map-bg,
+.map-inner.anim .map-boundary,
+.map-inner.anim .map-fallback {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease, filter 0.25s ease;
+}
+.map-inner.anim .wp,
+.map-inner.anim .wp-origin,
+.map-inner.anim .seg,
+.map-inner.anim .seg-arrow {
+  transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    top 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .map-bg {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  opacity: 0.92;
+  filter: saturate(0.9) contrast(1.05) brightness(1.0);
+  transition: opacity 0.25s ease, filter 0.25s ease;
+  /* 高度由内联 style 注入 mapH，底部留安全区给标签 */
+}
+.map-bg-status {
+  opacity: 0.94;
+  filter: saturate(0.94) contrast(1.06) brightness(1.0);
+}
+.map-bg-detail,
+.map-bg-poem {
+  opacity: 0.96;
+  filter: saturate(0.96) contrast(1.07) brightness(1.0);
+}
+.map-boundary {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* 朝代说明固定在地图视窗左上角：首屏只显示断代，放大后补充考据口径。 */
+.map-era {
+  position: absolute;
+  left: 16rpx;
+  top: 16rpx;
+  z-index: 8;
+  max-width: 250rpx;
+  padding: 8rpx 12rpx;
+  border: 1rpx solid rgba(112, 81, 47, 0.2);
+  border-radius: 6rpx;
+  background: rgba(248, 242, 227, 0.78);
+  box-shadow: 0 2rpx 8rpx rgba(59, 45, 28, 0.08);
+  pointer-events: none;
+}
+.map-era-title {
+  color: #6d5235;
+  font-size: 19rpx;
+  line-height: 1.2;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+}
+.map-era-note {
+  margin-top: 4rpx;
+  color: rgba(109, 82, 53, 0.68);
+  font-size: 15rpx;
+  line-height: 1.35;
+  letter-spacing: 1rpx;
 }
 
 /* -------- 降级层：纯 CSS 水墨示意 -------- */
@@ -138,8 +292,8 @@
   left: 0;
   top: 0;
   right: 0;
-  bottom: 0;
   overflow: hidden;
+  /* 高度由内联 style 注入 mapH */
   background:
     radial-gradient(ellipse 46% 26% at 26% 14%, rgba(90, 66, 48, 0.20), rgba(90, 66, 48, 0) 72%),
     radial-gradient(ellipse 40% 24% at 20% 30%, rgba(90, 66, 48, 0.15), rgba(90, 66, 48, 0) 72%),
@@ -241,9 +395,9 @@
   left: 0;
   top: 0;
   right: 0;
-  bottom: 0;
   pointer-events: none;
   z-index: 2;
+  /* 高度由内联 style 注入 mapH */
 }
 .seg {
   position: absolute;
@@ -252,21 +406,122 @@
   transform-origin: 0 50%;
   border-radius: 2rpx;
 }
+/* 已点亮段：墨色渐深、像毛笔带过的一笔；入场先晕开，之后墨迹沿路缓缓流动。
+   首屏路线对比度整体压低，让编号地点标签更突出、更易读。 */
 .seg-lit {
-  background: linear-gradient(90deg, rgba(139, 90, 43, 0.8), rgba(176, 123, 62, 0.62));
-  box-shadow: 0 0 6rpx rgba(139, 90, 43, 0.45);
-  animation: inkSpread 0.8s ease-out both;
+  background: linear-gradient(90deg,
+    rgba(139, 90, 43, 0.38) 0%,
+    rgba(176, 123, 62, 0.55) 28%,
+    rgba(139, 90, 43, 0.48) 55%,
+    rgba(176, 123, 62, 0.36) 100%);
+  background-size: 240% 100%;
+  box-shadow: 0 0 5rpx rgba(139, 90, 43, 0.28);
+  animation:
+    inkSpread 0.8s ease-out both,
+    inkFlow 3.6s linear infinite;
 }
 .seg-next {
-  background: repeating-linear-gradient(90deg, rgba(176, 123, 62, 0.65) 0, rgba(176, 123, 62, 0.65) 12rpx, transparent 12rpx, transparent 26rpx);
-  animation: inkSpread 1s ease-out both;
+  background: repeating-linear-gradient(90deg, rgba(176, 123, 62, 0.42) 0, rgba(176, 123, 62, 0.42) 12rpx, transparent 12rpx, transparent 26rpx);
+  animation: inkSpread 1s ease-out both, dashFlow 1.4s linear infinite;
+}
+/* 下一步段：虚线沿方向滚动，形成「往前走」的动态引导 */
+@keyframes dashFlow {
+  from { background-position: 0 0; }
+  to { background-position: 26rpx 0; }
 }
 .seg-locked {
-  background: repeating-linear-gradient(90deg, rgba(160, 140, 107, 0.34) 0, rgba(160, 140, 107, 0.34) 8rpx, transparent 8rpx, transparent 22rpx);
+  background: repeating-linear-gradient(90deg, rgba(160, 140, 107, 0.24) 0, rgba(160, 140, 107, 0.24) 8rpx, transparent 8rpx, transparent 22rpx);
 }
 @keyframes inkSpread {
   from { opacity: 0; filter: blur(7rpx); }
   to { opacity: 1; filter: blur(0); }
+}
+/* 墨迹流动：把背景拉宽后平移，深色墨团沿路线从起点滚向终点，循环不息 */
+@keyframes inkFlow {
+  from { background-position: 0% 0; }
+  to { background-position: -240% 0; }
+}
+
+/* -------- 方向箭头：贴在路线段终点，指向行进方向 -------- */
+.seg-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  margin: -5rpx 0 0 -3rpx;      /* 以箭尖为定位锚点，旋转中心对齐 */
+  border-top: 5rpx solid transparent;
+  border-bottom: 5rpx solid transparent;
+  transform-origin: 3rpx 5rpx;  /* 让箭头绕箭尖旋转，与段方向一致 */
+}
+/* 已走过段：实心金棕箭头 */
+.seg-arrow.seg-lit {
+  border-left: 11rpx solid rgba(176, 123, 62, 0.85);
+  filter: drop-shadow(0 0 2rpx rgba(139, 90, 43, 0.5));
+}
+/* 下一步段：空心朱砂箭头（与「当前地点」朱砂呼应，提示往哪走） */
+.seg-arrow.seg-next {
+  border-left: 11rpx solid rgba(158, 42, 43, 0.85);
+}
+/* 锁定段：浅灰箭头（保留方向指引，但不抢眼、不剧透路线内容） */
+.seg-arrow.seg-locked {
+  border-left: 11rpx solid rgba(160, 140, 107, 0.5);
+}
+
+/* -------- 当前行迹指示：圆形诗人头像 + 竖直向下箭头（替代呼吸圈） -------- */
+/* 位于 .wp 锚点（=圆点）内部，位置随 JS 布局级缩放重算，标签原生尺寸渲染不发虚。
+   头像浮在圆点正上方，箭头竖直向下指向圆点。 */
+.wp-avatar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+.wp-avatar-img {
+  position: absolute;
+  left: 50%;
+  top: 0;                      /* 立绘顶部对齐圆框上缘（浮动动画上移时不裁到头顶） */
+  width: 112rpx;               /* 1024x1536 立绘，widthFix 后高约 168rpx，
+                                  圆框 64rpx 只露出顶部约 38% = 肩膀以上 */
+  transform: translateX(-50%);
+  border-radius: 0;            /* 裁剪交给外层 .wp-avatar-clip */
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  animation: avatarBob 2.4s ease-in-out infinite;
+}
+/* 圆形裁剪容器：只露出立绘上半身（肩膀及以上） */
+.wp-avatar-clip {
+  position: absolute;
+  left: 50%;
+  bottom: 22rpx;               /* 圆点上方，留出箭头空间 */
+  width: 64rpx;
+  height: 64rpx;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3rpx solid #f8edda;
+  box-shadow: 0 2rpx 10rpx rgba(59, 45, 28, 0.35), 0 0 0 2rpx rgba(158, 42, 43, 0.7);
+  background: #e8dcc4;
+}
+/* 竖直向下箭头：从头像底部指向圆点 */
+.wp-avatar-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: 2rpx;                /* 箭头尖端贴近圆点 */
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-left: 8rpx solid transparent;
+  border-right: 8rpx solid transparent;
+  border-top: 12rpx solid rgba(158, 42, 43, 0.92);
+  filter: drop-shadow(0 1rpx 2rpx rgba(59, 45, 28, 0.3));
+}
+/* 头像轻缓上下浮动，强化「指向当前」的动态引导 */
+@keyframes avatarBob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-6rpx); }
 }
 
 /* -------- 地点层 -------- */
@@ -275,85 +530,110 @@
   left: 0;
   top: 0;
   right: 0;
-  bottom: 0;
   z-index: 3;
+  /* 高度由内联 style 注入 mapH；标签在圆点下方，底部安全区由 stageH 提供 */
 }
-.wp {
+/* 真实位置小圆点：钉在原坐标，路线端点与它对齐，永不移动 */
+.wp-origin {
   position: absolute;
-  width: 60rpx;
-  height: 60rpx;
-  transform: translate(-50%, -50%);
-}
-.wp-dot {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 26rpx;
-  height: 26rpx;
-  margin: -13rpx 0 0 -13rpx;
-}
-.wp-core {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  width: 12rpx;
+  height: 12rpx;
+  margin: -6rpx 0 0 -6rpx;
   border-radius: 50%;
   background: radial-gradient(circle at 34% 30%, #d5c8b3, #b3a390);
   border: 2rpx solid #9d8c77;
-  box-shadow: 0 2rpx 6rpx rgba(74, 50, 32, 0.28);
+  pointer-events: none;
+  z-index: 1;
 }
-.wp.completed .wp-core {
+.wp-origin.completed {
   background: radial-gradient(circle at 34% 30%, #cf9243, #8b5a2b);
   border-color: #6b4420;
-  box-shadow: 0 0 12rpx rgba(176, 123, 62, 0.75);
-  animation: dotInk 0.7s ease-out both;
 }
-.wp.active .wp-core {
+.wp-origin.active {
   background: radial-gradient(circle at 34% 30%, #e0ab4e, #a9662a);
   border-color: #8b5a2b;
-  box-shadow: 0 0 14rpx rgba(200, 140, 60, 0.8);
+  box-shadow: 0 0 10rpx rgba(200, 140, 60, 0.8);
 }
-@keyframes dotInk {
-  from { opacity: 0; transform: scale(0.4); filter: blur(4rpx); }
-  to { opacity: 1; transform: scale(1); filter: blur(0); }
+.wp-origin.wp-key.completed,
+.wp-origin.wp-key.active {
+  background: radial-gradient(circle at 34% 30%, #c84b43, #9e2a2b);
+  border-color: #7a1f20;
 }
-.wp.active .wp-pulse {
+/* 标注锚点：零尺寸定位点，子元素环绕；反向缩放由 style 注入 */
+.wp {
   position: absolute;
-  left: -10rpx;
-  top: -10rpx;
-  right: -10rpx;
-  bottom: -10rpx;
-  border-radius: 50%;
-  border: 3rpx solid rgba(200, 140, 60, 0.85);
-  animation: wpPulse 1.8s ease-out infinite;
+  width: 0;
+  height: 0;
+  z-index: 2;
 }
-@keyframes wpPulse {
-  0% { transform: scale(0.65); opacity: 0.95; }
-  100% { transform: scale(2.1); opacity: 0; }
-}
-
-/* 地点名 */
-.wp-label {
+/* 扩大点击热区（约 60–72rpx 见方，随反向缩放后仍保持可点） */
+.wp-hit {
   position: absolute;
-  left: 50%;
-  top: 46rpx;
-  transform: translateX(-50%);
+  left: -34rpx;
+  top: -8rpx;
+  width: 68rpx;
+  height: 56rpx;
+}
+/* ===== 固定组合标签：编号（状态色）+ 地名（宣纸底），横向排列 =====
+   永远位于圆点正下方、以圆点为中心水平居中；与圆点保持约 8rpx 固定间距。 */
+.wp-chip {
+  position: absolute;
+  left: 0;
+  top: 8rpx;                       /* 圆点正下方，固定间距 8rpx（圆点半高 6rpx + 8rpx） */
+  transform: translateX(-50%);     /* 只水平居中，不垂直偏移 */
+  display: flex;
+  align-items: center;
+  height: 30rpx;                   /* 缩小高度，缓解密集区重叠 */
+  border-radius: 7rpx;
+  overflow: hidden;
+  background: rgba(248, 242, 227, 0.86);   /* 半透明宣纸底（提高不透明度，压住路线） */
+  box-shadow: 0 1rpx 4rpx rgba(59, 45, 28, 0.16);
   white-space: nowrap;
-  font-size: 20rpx;
-  color: #a08c6b;
+  pointer-events: none;            /* 命中交给 .wp-hit */
+}
+/* 编号单元：状态色块（统一两位编号，min-width 固定，保证对齐紧凑） */
+.wp-chip-seq {
+  flex-shrink: 0;
+  min-width: 24rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 0 4rpx;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 17rpx;
+  color: #f5e9d5;
   font-family: 'STKaiti', 'KaiTi', serif;
-  letter-spacing: 1rpx;
+  background: rgba(160, 140, 107, 0.92);    /* 默认/锁定：灰 */
 }
-.wp.completed .wp-label,
-.wp.active .wp-label {
-  color: #5a4227;
-  font-weight: 600;
+/* 状态色：已完成 = 金棕，当前 = 朱砂 */
+.wp.completed .wp-chip-seq { background: rgba(176, 123, 62, 0.95); }
+.wp.active .wp-chip-seq { background: rgba(158, 42, 43, 0.92); }
+.wp.wp-key .wp-chip-seq { background: rgba(158, 42, 43, 0.92); }
+/* 多次到访：编号并列，中间用细分割（同一行，不重复地名） */
+.wp-chip-seq + .wp-chip-seq {
+  border-left: 1rpx solid rgba(255, 255, 255, 0.35);
 }
-.wp.locked .wp-label { color: #bdb0a0; }
-.wp.lp-top .wp-label { top: auto; bottom: 46rpx; }
-.wp.lp-left .wp-label { left: auto; right: 46rpx; top: 50%; transform: translateY(-50%); }
-.wp.lp-right .wp-label { left: 46rpx; top: 50%; transform: translateY(-50%); }
+/* 地名：宣纸底上一行文字 */
+.wp-chip-name {
+  flex-shrink: 0;
+  padding: 0 8rpx 0 6rpx;
+  line-height: 30rpx;
+  font-size: 18rpx;
+  color: #4a3a28;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+/* 锁定地点：降低整体透明度（首屏仍显示编号与地名） */
+.wp.locked .wp-chip {
+  opacity: 0.5;
+}
+.wp.locked .wp-chip-name { color: #8a7a66; }
+/* 当前地点：细描边 + 轻微光晕，不叠「行」字印章 */
+.wp-current .wp-chip {
+  border: 2rpx solid #a9662a;
+  box-shadow: 0 0 10rpx rgba(200, 140, 60, 0.7), 0 1rpx 4rpx rgba(59, 45, 28, 0.16);
+}
 
 /* 图例 */
 .legend {
@@ -453,6 +733,11 @@
   font-family: 'STKaiti', 'KaiTi', serif;
   letter-spacing: 4rpx;
 }
+.wp-card-sub {
+  font-size: 26rpx;
+  color: #9e2a2b;
+  letter-spacing: 1rpx;
+}
 .wp-card-meta {
   margin-top: 8rpx;
   font-size: 23rpx;
@@ -470,6 +755,9 @@
 .wp-card-state.completed { background: rgba(107, 142, 90, 0.92); }
 .wp-card-state.active { background: rgba(176, 123, 62, 0.92); }
 .wp-card-state.locked { background: rgba(160, 140, 107, 0.85); }
+/* 关键地点：状态徽章与名称点缀朱砂红 */
+.wp-card-state.wp-key-state.completed { background: rgba(158, 42, 43, 0.92); }
+.wp-card-state.wp-key-state.active { background: rgba(158, 42, 43, 0.92); }
 
 .wp-card-note {
   margin-top: 18rpx;
@@ -532,52 +820,134 @@
 }
 .act-ghost:active { opacity: 0.7; }
 
-/* ============ 底部诗笺入口 ============ */
-.poem-entry {
-  margin: 34rpx 24rpx 0;
-  padding: 26rpx 26rpx;
+/* ============ 同城行迹卡 ============ */
+.city-list {
+  margin-top: 22rpx;
+}
+.city-item {
   display: flex;
   align-items: center;
+  padding: 20rpx 4rpx;
+  border-top: 2rpx solid rgba(139, 90, 43, 0.10);
+}
+.city-item:active { background: rgba(139, 90, 43, 0.04); }
+.city-seq {
+  flex-shrink: 0;
+  width: 46rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  background: rgba(176, 123, 62, 0.92);
+  color: #f5e9d5;
+  font-size: 24rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.city-seq-key { background: rgba(158, 42, 43, 0.92); }
+.city-body {
+  flex: 1;
+  min-width: 0;
+  margin-left: 18rpx;
+}
+.city-sub {
+  font-size: 28rpx;
+  color: #4a3220;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 1rpx;
+}
+.city-meta {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+  color: #9a7d54;
+}
+.city-item.locked .city-sub,
+.city-item.locked .city-meta { color: #bdb0a0; }
+.city-action {
+  flex-shrink: 0;
+  margin-left: 14rpx;
+  padding: 10rpx 16rpx;
+  border-radius: 26rpx;
+  border: 2rpx solid #d8c6a7;
+  font-size: 21rpx;
+  color: #8b5a2b;
+  background: rgba(255, 253, 247, 0.72);
+}
+.city-item.locked .city-action {
+  color: #bdb0a0;
+  border-color: #e6dcc8;
+  background: rgba(247, 239, 221, 0.6);
+}
+
+/* ============ 已完成旅程（程级诗笺入口） ============ */
+.review-section {
+  margin: 34rpx 24rpx 0;
+  padding: 28rpx 26rpx 12rpx;
   background: linear-gradient(135deg, #fffdf7 0%, #f7efdd 100%);
   border: 2rpx solid #e6dcc8;
   border-radius: 16rpx;
   box-shadow: 0 4rpx 14rpx rgba(139, 90, 43, 0.12);
 }
-.poem-entry:active { transform: scale(0.99); }
-.poem-entry-seal {
-  flex-shrink: 0;
-  width: 68rpx;
-  height: 68rpx;
-  line-height: 68rpx;
-  text-align: center;
-  border-radius: 10rpx;
-  background: linear-gradient(135deg, #9e2a2b, #c0392b);
-  color: #f5e9d5;
-  font-size: 36rpx;
-  font-family: 'STKaiti', 'KaiTi', serif;
-  box-shadow: 0 4rpx 12rpx rgba(158, 42, 43, 0.3);
-}
-.poem-entry-text {
-  flex: 1;
-  margin-left: 22rpx;
-}
-.poem-entry-title {
+.review-title {
   font-size: 32rpx;
   color: #4a3220;
   font-family: 'STKaiti', 'KaiTi', serif;
   letter-spacing: 4rpx;
 }
-.poem-entry-sub {
+.review-sub {
   margin-top: 6rpx;
   font-size: 22rpx;
   color: #9a7d54;
   line-height: 1.5;
 }
-.poem-entry-arrow {
-  flex-shrink: 0;
-  font-size: 40rpx;
-  color: #b5a892;
+.review-list { margin-top: 18rpx; }
+.review-item {
+  display: flex;
+  align-items: center;
+  padding: 22rpx 0;
+  border-top: 2rpx solid rgba(139, 90, 43, 0.10);
 }
+.review-seal {
+  flex-shrink: 0;
+  width: 54rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  background: linear-gradient(135deg, #8b5a2b, #b07b3e);
+  color: #f5e9d5;
+  font-size: 28rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.review-body {
+  flex: 1;
+  min-width: 0;
+  margin-left: 18rpx;
+}
+.review-name {
+  font-size: 27rpx;
+  color: #4a3220;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 1rpx;
+}
+.review-meta {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #9a7d54;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.review-action {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 12rpx 18rpx;
+  border-radius: 28rpx;
+  border: 2rpx solid #d8c6a7;
+  font-size: 22rpx;
+  color: #8b5a2b;
+  background: rgba(255, 253, 247, 0.72);
+}
+.review-action:active { opacity: 0.7; }
 
 .foot-note {
   margin-top: 30rpx;

@@ -1,19 +1,11 @@
-<!-- pages/map/map.wxml —— 行迹地图（可点亮） -->
+<!-- pages/map/map.wxml —— 行迹地图（可点亮 + 语义缩放 + 地点去重） -->
 
 <view class="page">
 
   <!-- ===== 顶部：标题 / 切换古人 / 进度总览 ===== -->
   <view class="map-head">
-    <view class="head-row">
-      <view class="head-left">
-        <view class="head-title">行迹 · 舆图</view>
-        <view class="head-sub">循着他的足迹，走一遍他的人生</view>
-      </view>
-      <view class="head-btn" bindtap="goPoemAll">
-        <text class="head-btn-seal">笺</text>
-        <text class="head-btn-text">我的诗笺</text>
-      </view>
-    </view>
+    <view class="head-title">行迹 · 舆图</view>
+    <view class="head-sub">循着他的足迹，走一遍他的人生</view>
 
     <!-- 切换条：复用 stories.getOnlineLines() -->
     <view class="line-tabs">
@@ -26,76 +18,182 @@
       >{{item.name}}行迹</view>
     </view>
 
+    <!-- 当前旅程：进入剧情的统一入口；地点卡仍可进入/重温所属的一程 -->
+    <view wx:if="{{isLocationMode && currentLocation}}" class="current-journey" bindtap="goCurrentLocation">
+      <view class="current-seal">行</view>
+      <view class="current-body">
+        <view class="current-label">
+          <text>当前行迹</text>
+          <!-- 同行者：只放在这张已有卡片里，小屏也不额外占位 -->
+          <text wx:if="{{currentLocation.playerName}}" class="current-companion">同行者：{{currentLocation.playerName}}</text>
+        </view>
+        <view class="current-title">{{currentLocation.name}} · {{currentLocation.subtitle}}</view>
+        <view class="current-meta" wx:if="{{currentLocation.range}}">{{currentLocation.range}}</view>
+      </view>
+      <view class="current-action">进入此地 ›</view>
+    </view>
+    <view wx:elif="{{isLocationMode && allDone}}" class="current-journey journey-done">
+      <view class="current-seal">成</view>
+      <view class="current-body">
+        <view class="current-label">
+          <text>全程已完成</text>
+          <text wx:if="{{playerName}}" class="current-companion">同行者：{{playerName}}</text>
+        </view>
+        <view class="current-title">{{totalChar}}处行迹，皆已走过</view>
+      </view>
+    </view>
+    <view wx:elif="{{currentJourney}}" class="current-journey" bindtap="goCurrentPeriod">
+      <view class="current-seal">行</view>
+      <view class="current-body">
+        <view class="current-label">当前旅程</view>
+        <view class="current-title">第{{currentJourney.indexChar}}程 · {{currentJourney.name}}</view>
+        <view class="current-meta" wx:if="{{currentJourney.range}}">{{currentJourney.range}}</view>
+        <view class="current-route" wx:if="{{currentJourney.waypointNames}}">本程行迹 · {{currentJourney.waypointNames}}</view>
+      </view>
+      <view class="current-action">进入这一程 ›</view>
+    </view>
+    <view wx:elif="{{allDone}}" class="current-journey journey-done">
+      <view class="current-seal">成</view>
+      <view class="current-body">
+        <view class="current-label">全程已完成</view>
+        <view class="current-title">这一路，都已化作你的行迹</view>
+      </view>
+    </view>
+
     <!-- 进度总览 -->
     <view class="progress-wrap">
       <view class="progress-bar">
         <view class="progress-fill" style="width: {{progressPercent}}%;"></view>
       </view>
-      <view class="progress-text">已走过 {{litCount}} / {{total}} 处</view>
+      <view class="progress-text" wx:if="{{isLocationMode}}">已走过 {{completedCount}}/{{periodTotal}} 处 · 点亮 {{litCount}}/{{total}} 处</view>
+      <view class="progress-text" wx:else>已完成 {{completedCount}}/{{periodTotal}} 程 · 解锁 {{litCount}}/{{total}} 处</view>
     </view>
   </view>
 
   <!-- ===== 地图 ===== -->
   <view class="map-wrap">
-    <view class="map-stage" style="height: {{stageH}}px;">
+    <view
+      class="map-stage zoom-{{zoomLevel}}"
+      style="height: {{stageH}}px;"
+      bindtouchstart="onMapTouchStart"
+      bindtouchmove="onMapTouchMove"
+      bindtouchend="onMapTouchEnd"
+      bindtouchcancel="onMapTouchEnd"
+    >
+      <!-- 可缩放内层：只做平移（translate 不产生位图模糊）；缩放由 JS 布局级完成
+           （地点/路线 left-top 重算，原生渲染不发虚），底图位图单独 transform scale。
+           anim 类在聚焦/复位动画期间临时开启 left/top/transform 过渡。 -->
+      <view
+        class="map-inner {{mapAnim !== 'none' ? 'anim' : ''}}"
+        style="transform: translate({{mapTx}}px, {{mapTy}}px); transition: {{mapAnim}};"
+      >
 
-      <!-- 底图（云存储；取不到就不渲染，自动走下面的水墨降级层） -->
-      <image
-        wx:if="{{mapImage}}"
-        class="map-bg"
-        src="{{mapImage}}"
-        mode="aspectFill"
-        bindload="onMapLoad"
-        binderror="onMapError"
-      />
+        <!-- 朝代舆图：李白/杜甫为唐代，苏轼为北宋。底部安全区留给正下方标签。 -->
+        <image
+          wx:if="{{mapImage}}"
+          class="map-bg map-bg-{{zoomLevel}}"
+          style="height: {{mapH}}px; transform: scale({{mapScale}});"
+          src="{{mapImage}}"
+          mode="aspectFill"
+          bindload="onMapLoad"
+          binderror="onMapError"
+        />
 
-      <!-- 降级层：纯 CSS 水墨示意布局（无底图也能跑、不空白） -->
-      <view wx:if="{{!mapImage}}" class="map-fallback">
-        <view class="fb-grid"></view>
-        <view class="fb-blob b1"></view>
-        <view class="fb-blob b2"></view>
-        <view class="fb-blob b3"></view>
-        <view class="fb-blob b4"></view>
-        <view class="fb-river r1"></view>
-        <view class="fb-river r2"></view>
-        <view class="fb-river r3"></view>
-        <view class="fb-tip">水墨示意 · 未加载底图</view>
-      </view>
+        <!-- 与地形底图同投影的朝代疆界透明层；单独切换避免重复打包地貌。 -->
+        <image
+          wx:if="{{mapImage && mapOverlay}}"
+          class="map-boundary"
+          style="height: {{mapH}}px; transform: scale({{mapScale}});"
+          src="{{mapOverlay}}"
+          mode="aspectFill"
+          binderror="onMapOverlayError"
+        />
 
-      <!-- 路线层：已走过的地方之间连起一条水墨行迹 -->
-      <view class="route-layer">
-        <view
-          wx:for="{{segments}}"
-          wx:key="k"
-          class="seg {{item.cls}}"
-          style="left: {{item.left}}px; top: {{item.top}}px; width: {{item.width}}px; transform: rotate({{item.angle}}deg);"
-        ></view>
-      </view>
+        <!-- 降级层：纯 CSS 水墨示意布局（无底图也能跑、不空白） -->
+        <view wx:if="{{!mapImage}}" class="map-fallback" style="height: {{mapH}}px; transform: scale({{mapScale}});">
+          <view class="fb-grid"></view>
+          <view class="fb-blob b1"></view>
+          <view class="fb-blob b2"></view>
+          <view class="fb-blob b3"></view>
+          <view class="fb-blob b4"></view>
+          <view class="fb-river r1"></view>
+          <view class="fb-river r2"></view>
+          <view class="fb-river r3"></view>
+          <view class="fb-tip">水墨示意 · 未加载底图</view>
+        </view>
 
-      <!-- 地点层 -->
-      <view class="wp-layer">
-        <view
-          wx:for="{{waypoints}}"
-          wx:key="k"
-          class="wp {{item.state}} lp-{{item.lp}}"
-          style="left: {{item.x}}%; top: {{item.y}}%;"
-          bindtap="onWpTap"
-          data-k="{{item.k}}"
-        >
-          <view class="wp-dot">
-            <view wx:if="{{item.state === 'active'}}" class="wp-pulse"></view>
-            <view class="wp-core"></view>
-          </view>
-          <view class="wp-label">{{item.name}}</view>
+        <!-- 路线层：已走过的地方之间连起一条水墨行迹（按原始到访顺序） -->
+        <view class="route-layer" style="height: {{mapH}}px;">
+          <view
+            wx:for="{{segments}}"
+            wx:key="k"
+            class="seg {{item.cls}}"
+            style="left: {{item.left}}px; top: {{item.top}}px; width: {{item.width}}px; transform: rotate({{item.angle}}deg);"
+          ></view>
+          <!-- 方向箭头：已走/下一步段终点，箭头指向行进方向 -->
+          <view
+            wx:for="{{segments}}"
+            wx:key="arrow-{{k}}"
+            wx:if="{{item.hasArrow}}"
+            class="seg-arrow {{item.cls}}"
+            style="left: {{item.ax}}px; top: {{item.ay}}px; transform: rotate({{item.aangle}}deg);"
+          ></view>
+        </view>
+
+        <!-- 地点层：真实坐标小圆点 + 固定标签（编号+地名，正下方居中） -->
+        <view class="wp-layer" style="height: {{mapH}}px;">
+          <block wx:for="{{places}}" wx:key="placeId">
+            <!-- 真实位置小圆点（路线端点，永不移动） -->
+            <view class="wp-origin {{item.state}} {{item.isKey ? 'wp-key' : ''}}" style="left: {{item.ox}}px; top: {{item.oy}}px;"></view>
+            <!-- 固定标签：编号（状态色）+ 地名（宣纸底），横向排列，永远在圆点正下方居中
+                 （布局级缩放：位置由 JS 算好，标签原生尺寸渲染，不做反向 scale，不发虚） -->
+            <view
+              class="wp {{item.state}} {{item.isKey ? 'wp-key' : ''}} {{item.isCurrent ? 'wp-current' : ''}}"
+              style="left: {{item.ox}}px; top: {{item.oy}}px;"
+              bindtap="onWpTap"
+              data-k="{{item.placeId}}"
+            >
+              <view class="wp-hit"></view>
+              <!-- 当前行迹指示：圆形诗人头像 + 竖直向下箭头，指向当前地点（替代呼吸圈） -->
+              <view wx:if="{{item.isCurrent && currentLine.portrait}}" class="wp-avatar">
+                <view class="wp-avatar-clip">
+                  <image class="wp-avatar-img" src="{{currentLine.portrait}}" mode="widthFix" />
+                </view>
+                <view class="wp-avatar-arrow"></view>
+              </view>
+              <!-- 编号单元（多次到访：多个独立编号并列）+ 一个地名 -->
+              <view class="wp-chip">
+                <view
+                  class="wp-chip-seq"
+                  wx:for="{{item.visitSeqs}}"
+                  wx:for-item="s"
+                  wx:key="*this"
+                >{{s}}</view>
+                <view class="wp-chip-name">{{item.name}}</view>
+              </view>
+            </view>
+          </block>
         </view>
       </view>
+
+      <!-- 朝代名固定在视窗内，不随地图平移；放大后才补充史料口径说明。 -->
+      <view class="map-era" wx:if="{{mapEra}}">
+        <view class="map-era-title">{{mapEra}}</view>
+        <view class="map-era-note" wx:if="{{zoomLevel === 'detail' || zoomLevel === 'poem'}}">{{mapEraNote}}</view>
+      </view>
+    </view>
+
+    <!-- 缩放控制：当前倍率 + 双击/按钮复位 -->
+    <view class="map-zoom" wx:if="{{mapScale !== 1 || mapTx !== 0 || mapTy !== 0}}">
+      <view class="map-zoom-tip">{{mapScaleText}}</view>
+      <view class="map-zoom-reset" catchtap="onMapReset">复位</view>
     </view>
 
     <!-- 图例 -->
     <view class="legend">
-      <view class="legend-item"><view class="legend-dot done"></view><text>已走过</text></view>
-      <view class="legend-item"><view class="legend-dot now"></view><text>正在此间</text></view>
-      <view class="legend-item"><view class="legend-dot lock"></view><text>尚未抵达</text></view>
+      <view class="legend-item"><view class="legend-dot done"></view><text>已解锁</text></view>
+      <view class="legend-item"><view class="legend-dot now"></view><text>本程行迹</text></view>
+      <view class="legend-item"><view class="legend-dot lock"></view><text>尚未解锁</text></view>
     </view>
 
     <view class="map-caption" wx:if="{{currentLine}}">{{currentLine.caption}}</view>
@@ -111,9 +209,12 @@
       </view>
 
       <view class="wp-card-body">
-        <view class="wp-card-name">{{card.name}}</view>
-        <view class="wp-card-meta">{{card.lineName}} · {{card.periodName}}<text wx:if="{{card.range}}"> · {{card.range}}</text></view>
-        <view class="wp-card-state {{card.state}}">{{card.stateText}}</view>
+        <view class="wp-card-name">{{card.name}}<text wx:if="{{card.subtitle}}" class="wp-card-sub"> · {{card.subtitle}}</text></view>
+        <view class="wp-card-meta">
+          <block wx:if="{{card.locationId}}">{{card.lineName}} · {{card.range}}</block>
+          <block wx:else>{{card.lineName}} · {{card.periodName}}<text wx:if="{{card.range}}"> · {{card.range}}</text></block>
+        </view>
+        <view class="wp-card-state {{card.state}} {{card.isKey ? 'wp-key-state' : ''}}">{{card.stateText}}</view>
 
         <view class="wp-card-note">{{card.note}}</view>
 
@@ -123,26 +224,75 @@
         </view>
 
         <view class="wp-card-anchor" wx:if="{{card.state === 'completed'}}">
-          本时期点亮 {{card.anchorLit}} / {{card.anchorTotal}} 个锚点
+          本程点亮 {{card.anchorLit}} / {{card.anchorTotal}} 个锚点
         </view>
 
         <view class="wp-card-actions">
-          <view class="act act-main" wx:if="{{card.state === 'completed'}}" bindtap="goPoemPeriod">看这一程的诗笺 ›</view>
-          <view class="act act-main" wx:elif="{{card.canEnter}}" bindtap="goPeriod">进入这一程 ›</view>
+          <view class="act act-main" wx:if="{{card.canEnter}}" bindtap="goPeriod">{{card.state === 'completed' ? '重温此地 ›' : '进入此地 ›'}}</view>
           <view class="act act-ghost" bindtap="onCloseCard">收起</view>
         </view>
       </view>
     </view>
   </view>
 
-  <!-- ===== 底部：我的诗笺入口 ===== -->
-  <view class="poem-entry" bindtap="goPoemAll">
-    <view class="poem-entry-seal">笺</view>
-    <view class="poem-entry-text">
-      <view class="poem-entry-title">我的诗笺</view>
-      <view class="poem-entry-sub">把你走过的每一程，收成一张可保存、可分享的诗笺</view>
+  <!-- ===== 多次到访卡（聚合地点点开：列出该地点所有到访编号） ===== -->
+  <view wx:if="{{cityCard.show}}" class="card-mask" bindtap="onCloseCityCard">
+    <view class="wp-card city-card" catchtap="noop">
+      <view class="wp-card-seal">城</view>
+
+      <view class="wp-card-body">
+        <view class="wp-card-name">{{cityCard.name}}</view>
+        <view class="wp-card-meta">{{cityCard.lineName}} · 同一地点，数次行迹</view>
+
+        <view class="city-list">
+          <view
+            class="city-item {{item.state}}"
+            wx:for="{{cityCard.members}}"
+            wx:key="k"
+            bindtap="goCityMember"
+            data-k="{{item.k}}"
+          >
+            <view class="city-seq {{item.isKey ? 'city-seq-key' : ''}}">{{item.seq}}</view>
+            <view class="city-body">
+              <view class="city-sub">{{item.subtitle}}</view>
+              <view class="city-meta">{{item.range}} · {{item.stateText}}</view>
+            </view>
+            <view class="city-action">{{item.state === 'completed' ? '重温 ›' : (item.state === 'active' ? '进入 ›' : '未解锁')}}</view>
+          </view>
+        </view>
+
+        <view class="wp-card-actions">
+          <view class="act act-ghost" bindtap="onCloseCityCard">收起</view>
+        </view>
+      </view>
     </view>
-    <text class="poem-entry-arrow">›</text>
+  </view>
+
+  <!-- ===== 已完成旅程：每程/每地只保留一个诗笺入口 ===== -->
+  <view class="review-section" wx:if="{{periodReviews.length}}">
+    <view class="review-head">
+      <view class="review-title">{{isLocationMode ? '已走过的行迹' : '已完成的旅程'}}</view>
+      <view class="review-sub">{{isLocationMode ? '一地一笺，回望你留下的选择与收获' : '一程一笺，回望你留下的选择与收获'}}</view>
+    </view>
+    <view class="review-list">
+      <view class="review-item" wx:for="{{periodReviews}}" wx:key="key">
+        <view class="review-seal">{{item.indexChar}}</view>
+        <view class="review-body">
+          <view class="review-name" wx:if="{{item.locationId}}">{{item.name}} · {{item.subtitle}}</view>
+          <view class="review-name" wx:else>第{{item.indexChar}}程 · {{item.name}}</view>
+          <view class="review-meta" wx:if="{{item.locationId}}">{{item.range}}</view>
+          <view class="review-meta" wx:else>已解锁 {{item.waypointCount}} 处<text wx:if="{{item.waypointNames}}"> · {{item.waypointNames}}</text></view>
+        </view>
+        <view
+          wx:if="{{item.hasPoem}}"
+          class="review-action"
+          bindtap="goPoemPeriod"
+          data-line-id="{{item.lineId}}"
+          data-period-id="{{item.periodId}}"
+          data-location-id="{{item.locationId}}"
+        >{{item.locationId ? '重温此地 ›' : '查看诗笺 ›'}}</view>
+      </view>
+    </view>
   </view>
 
   <view class="foot-note">点亮的地方，是你陪他走过的路。</view>

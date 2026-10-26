@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T12:17:46.937Z",
+  "character": "sushi",
+  "period": "p3",
+  "title": "乌台诗案",
+  "range": "1079",
+  "source": "miniprogram\\utils\\stories\\line-sushi.js",
+  "count": 18,
+  "items": [
+    {
+      "index": 1,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n2",
+      "emotion": "calm",
+      "text": "（见你，微微一怔，随即苦笑）连你也来了。无妨——他们说我诗里有罪，要拿我去御史台问话。我这一去，也不知还能不能回来。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n2b",
+      "emotion": "calm",
+      "text": "但愿如此。只是这御史台，进去容易出来难。你替我带句话给家里——就说，不必太难过。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n2c",
+      "emotion": "thoughtful",
+      "text": "凭什么？就凭我从诗里写了几句真话。这世道，说实话的，倒成了罪。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "（他反过来拍拍你的肩）别这样。我苏子瞻，风里雨里都闯过来了，这一遭，也未必过不去。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n3",
+      "emotion": "sad",
+      "text": "我被关进了御史台的大狱。那地方，古时多植柏树，常有乌鸦栖息，人唤作\"乌台\"。我就这样，成了\"乌台诗案\"里那个待罪的人。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n5",
+      "emotion": "sad",
+      "text": "我也这样想过。夜里望着铁窗外的天，只觉这一生，怕是到头了。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n6",
+      "emotion": "calm",
+      "text": "是。我怕过，可想来想去，我问心无愧——写过的字，都是心里的话，没一句违心。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n7",
+      "emotion": "sad",
+      "text": "你不必替我难过。我这一生，说过的话、写过的字，都对得起自己的心。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n8",
+      "emotion": "sad",
+      "text": "有一夜，我以为必死，便给舍弟写下诀别的诗，说\"与君世世为兄弟，更结人间未了因\"。若有来世，我还愿同他做兄弟。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n10",
+      "emotion": "sad",
+      "text": "子由与我，自幼同窗，手足情深。若能活下来，这份情谊，比什么都重。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n11",
+      "emotion": "calm",
+      "text": "那些日子，生死只在朝夕。我不是不怕，是怕过之后，反而看开了。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n12",
+      "emotion": "sad",
+      "text": "（他轻声）别哭。诗都写了，人也还在，就是还有希望。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n13",
+      "emotion": "thoughtful",
+      "text": "后来，舍弟上书，愿以自己一官来赎我；朝中几位大人，也替我求情。加上太祖\"不杀士大夫\"的祖训，我这条命，总算保住了。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 14,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n15",
+      "emotion": "serious",
+      "text": "求活？我若为了活命去诬陷别人、糟蹋自己的本心，那活下来的，还是我苏子瞻吗？",
+      "fileName": "n15.mp3"
+    },
+    {
+      "index": 15,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n16",
+      "emotion": "calm",
+      "text": "对。我宁可死在狱里，也不肯为求生而害人、而诬己。这份问心无愧，是我在鬼门关前，唯一攥紧的东西。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 16,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n17",
+      "emotion": "thoughtful",
+      "text": "认命？我不认。命要拿，我认；心要改，我不改。问心无愧，死又何惧。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 17,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n18",
+      "emotion": "calm",
+      "text": "最终，我免了死罪，被贬去黄州，做个无权无势的团练副使。出狱那天，我望着久违的天空，忽然就笑了。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 18,
+      "character": "sushi",
+      "period": "p3",
+      "periodTitle": "乌台诗案",
+      "nodeId": "n19",
+      "emotion": "thoughtful",
+      "text": "小兄弟，你陪我走过了这最暗的一段。死过一回的人，从此把什么都看轻了。你心里若还有想问的，趁这会儿，尽管问。",
+      "fileName": "n19.mp3"
+    }
+  ]
+}

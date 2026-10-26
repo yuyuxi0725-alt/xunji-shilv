@@ -49,7 +49,7 @@
   letter-spacing: 2rpx;
 }
 
-/* ===== 学习总览：三格数字 ===== */
+/* ===== 学习成果：三格数字 ===== */
 .summary-card {
   margin-top: -28rpx;
 }
@@ -60,6 +60,7 @@
   flex: 1;
   text-align: center;
 }
+.summary-item:active { opacity: 0.6; }
 .summary-item + .summary-item {
   border-left: 1rpx solid var(--color-border);
 }
@@ -83,37 +84,117 @@
   letter-spacing: 2rpx;
 }
 
-/* ===== 标题与进度 ===== */
+/* ===== 分区标题 ===== */
 .section-title {
   font-size: 32rpx;
   margin-bottom: 24rpx;
 }
-.progress-bar {
-  height: 16rpx;
-  background: #efe6d4;
-  border-radius: 8rpx;
+
+/* ===== 三条人物线 · 我的角色卡片 ===== */
+.role-card-body {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 4rpx;
+}
+.role-card-body + .role-card-body {
+  border-top: 1rpx solid #efe7d3;
+}
+.role-card-line {
+  flex-shrink: 0;
+  width: 88rpx;
+  margin-right: 16rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #8b5a2b;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  text-align: center;
+}
+.role-card-portrait {
+  width: 108rpx;
+  height: 108rpx;
+  flex-shrink: 0;
+  margin-right: 24rpx;
+  border-radius: 14rpx;
   overflow: hidden;
+  background: #ece1ca;
+  border: 1rpx solid #d8c9a8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #8b5a2b, #b8860b);
-  border-radius: 8rpx;
-  transition: width 0.4s ease;
+.role-card-img { width: 100%; height: 100%; }
+.role-card-silhouette {
+  width: 56rpx;
+  height: 56rpx;
+  position: relative;
 }
-.progress-summary {
-  margin-top: 18rpx;
-  font-size: 26rpx;
-  color: var(--color-text);
-  text-align: center;
+.role-card-silhouette::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 22rpx;
+  height: 22rpx;
+  border-radius: 50%;
+  background: #6b5a3e;
 }
-.next-hint {
-  margin-top: 10rpx;
-  font-size: 24rpx;
+.role-card-silhouette::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 20rpx;
+  transform: translateX(-50%);
+  width: 42rpx;
+  height: 36rpx;
+  border-radius: 20rpx 20rpx 6rpx 6rpx;
+  background: #6b5a3e;
+}
+.role-card-info {
+  flex: 1;
+  min-width: 0;
+}
+.role-card-empty {
+  font-size: 28rpx;
   color: var(--color-text-secondary);
-  text-align: center;
 }
-.next-hint.done {
-  color: var(--color-accent);
+/* 档案损坏态：用朱色提示「需修复」，与「尚未创建」在视觉上区分开 */
+.role-card-invalid {
+  color: #a33a2b;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.role-card-name {
+  font-size: 30rpx;
+  color: var(--color-text);
+  font-family: 'STKaiti', 'KaiTi', serif;
+  font-weight: 600;
+}
+.role-card-avatar {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--color-text-secondary);
+}
+.role-card-note {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: #a99b88;
+}
+.role-card-action {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 10rpx 20rpx;
+  border: 1rpx solid #c9a86a;
+  border-radius: 999rpx;
+}
+.role-card-action-text {
+  font-size: 24rpx;
+  color: #8b5a2b;
+}
+.role-card-arrow {
+  margin-left: 6rpx;
+  font-size: 28rpx;
+  color: #8b5a2b;
 }
 
 /* ===== 设置行 ===== */
@@ -127,6 +208,18 @@
 .setting-row:last-child {
   border-bottom: none;
 }
+.contact-row {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  background: transparent;
+  box-sizing: border-box;
+  line-height: normal;
+  text-align: left;
+}
+.contact-row::after {
+  border: none;
+}
 .setting-label {
   font-size: 28rpx;
   color: var(--color-text);
@@ -134,40 +227,6 @@
 .setting-arrow {
   font-size: 34rpx;
   color: var(--color-text-secondary);
-}
-
-/* ===== 知识锚点集卡 ===== */
-.anchor-count {
-  font-size: 26rpx;
-  color: var(--color-text-secondary);
-  margin-bottom: 22rpx;
-}
-.anchor-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16rpx;
-}
-.anchor-chip {
-  padding: 12rpx 22rpx;
-  border-radius: 32rpx;
-  font-size: 24rpx;
-  background: #efe6d4;
-  color: #b5a892;
-  border: 1rpx solid #e2d5bd;
-  font-family: 'STKaiti', 'KaiTi', serif;
-  letter-spacing: 2rpx;
-}
-.anchor-chip.on {
-  background: linear-gradient(135deg, #8b5a2b, #a9743c);
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 4rpx 12rpx rgba(139, 90, 43, 0.25);
-}
-.anchor-tip {
-  margin-top: 18rpx;
-  font-size: 22rpx;
-  color: #b5a892;
-  text-align: center;
 }
 
 /* ===== 底部重置入口 ===== */
@@ -179,18 +238,20 @@
   text-decoration: underline;
 }
 
-/* ===== 我的诗笺入口 ===== */
-.poem-entry {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.delete-link {
+  margin-top: 28rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #a33a32;
+  text-decoration: underline;
 }
-.poem-entry-left {
-  flex: 1;
+.delete-link.disabled {
+  opacity: 0.45;
 }
-.poem-entry-desc {
-  margin-top: 10rpx;
-  font-size: 23rpx;
-  color: #9a8b74;
-  letter-spacing: 1rpx;
+.delete-hint {
+  margin: 12rpx 48rpx 0;
+  text-align: center;
+  font-size: 20rpx;
+  line-height: 1.6;
+  color: #a99b88;
 }

@@ -1,0 +1,3 @@
+# Reproducible but heavyweight Natural Earth downloads/extractions.
+*.zip
+natural-earth/

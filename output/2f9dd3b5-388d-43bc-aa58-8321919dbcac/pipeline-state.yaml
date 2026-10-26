@@ -4,7 +4,7 @@ created_at: "2026-10-01T23:33:00+08:00"
 updated_at: "2026-10-01T23:33:00+08:00"
 entry_type: full_pipeline
 stage_chain: [1, 2, 3]
-output_docx_path: "D:/我的文件/30_项目成果/寻迹古今/寻迹古今-产品核心层改造方案.docx"
+output_docx_path: "D:/我的文件/30_项目成果/寻迹古今/寻迹诗旅-产品核心层改造方案.docx"
 output_docx_user_specified: false
 current_stage: completed
 stages:
@@ -27,7 +27,7 @@ stages:
     completed_at: "2026-10-01T23:36:00+08:00"
     route: html
     html_sub: template
-    output_path: "stage2/formatted-寻迹古今产品核心层改造方案.html"
+    output_path: "stage2/formatted-寻迹诗旅产品核心层改造方案.html"
     output_format: html
     skills_invoked: ["design-token", "doc-typeset"]
     design_tokens_path: "stage2/design_tokens.json"
@@ -39,7 +39,7 @@ stages:
     completed_at: "2026-10-01T23:37:00+08:00"
     executor: "doc-converter"
     input_format: html
-    output_path: "D:/我的文件/30_项目成果/寻迹古今/寻迹古今-产品核心层改造方案.docx"
+    output_path: "D:/我的文件/30_项目成果/寻迹古今/寻迹诗旅-产品核心层改造方案.docx"
     skill_used: ["html-to-docx"]
     present_files_opened: false
     fallback: false

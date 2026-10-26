@@ -26,7 +26,6 @@ exports.main = async (event, context) => {
         data: {
           openid,
           createdAt: db.serverDate(),
-          guardianAuthorized: false,
           progress: {}
         }
       });
@@ -34,7 +33,6 @@ exports.main = async (event, context) => {
 
     const userData = res.data.length > 0 ? res.data[0] : {
       openid,
-      guardianAuthorized: false,
       progress: {}
     };
 
@@ -43,7 +41,6 @@ exports.main = async (event, context) => {
       data: {
         openid,
         isNew,
-        guardianAuthorized: userData.guardianAuthorized || false,
         progress: userData.progress || {}
       }
     };

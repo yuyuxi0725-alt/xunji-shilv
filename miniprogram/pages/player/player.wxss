@@ -1,0 +1,213 @@
+/* pages/player/player.wxss —— 杜甫玩家角色统一页（宣纸 / 朱印 / 墨线风格） */
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #3b2d1c 0%, #2c2318 100%);
+  padding: 0 32rpx calc(env(safe-area-inset-bottom) + 48rpx);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== 顶部：返回 + 标题 ===== */
+.pl-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 96rpx;
+  padding-top: env(safe-area-inset-top);
+  box-sizing: content-box;
+}
+.pl-back {
+  width: 72rpx;
+  height: 72rpx;
+  line-height: 68rpx;
+  text-align: center;
+  font-size: 52rpx;
+  color: #e8d9bd;
+}
+.pl-title {
+  font-size: 34rpx;
+  color: #f5ecd8;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 4rpx;
+}
+.pl-back-spacer { width: 72rpx; }
+
+/* ===== 卡片主体 ===== */
+.pl-card {
+  flex: 1;
+  margin-top: 24rpx;
+  padding: 40rpx 32rpx 40rpx;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #fbf6ec 0%, #f3ead8 60%, #efe2c8 100%);
+  border: 2rpx solid #b8a27c;
+  border-radius: 20rpx;
+  box-shadow: 0 16rpx 40rpx rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+.pl-seal {
+  align-self: center;
+  width: 72rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  font-size: 40rpx;
+  color: #fdfaf3;
+  background: linear-gradient(135deg, #a33a2b, #c05a3c);
+  border-radius: 14rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 4rpx 10rpx rgba(163, 58, 43, 0.4);
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.pl-card-title {
+  text-align: center;
+  font-size: 36rpx;
+  color: #4a3420;
+  font-weight: 600;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.pl-card-sub {
+  margin-top: 8rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #8b7350;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+/* 世界观说明 */
+.pl-intro {
+  margin: 24rpx 4rpx 8rpx;
+  padding: 20rpx 24rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #6b563a;
+  background: rgba(255, 253, 247, 0.7);
+  border-left: 6rpx solid #c9a86a;
+  border-radius: 8rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+/* 外观卡列表 */
+.pl-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.pl-item {
+  display: flex;
+  align-items: center;
+  padding: 22rpx 24rpx;
+  background: rgba(255, 253, 247, 0.7);
+  border: 2rpx solid #d8c9a8;
+  border-radius: 16rpx;
+  position: relative;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.pl-item.selected {
+  border-color: #a33a2b;
+  background: rgba(253, 247, 238, 0.95);
+  box-shadow: 0 0 0 4rpx rgba(163, 58, 43, 0.12);
+}
+
+/* 立绘：有正式图显示图片，无图渲染剪影占位（不裂图） */
+.pl-portrait {
+  width: 128rpx;
+  height: 128rpx;
+  flex-shrink: 0;
+  margin-right: 22rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: #ece1ca;
+  border: 1rpx solid #d8c9a8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pl-img { width: 100%; height: 100%; }
+.pl-silhouette {
+  width: 64rpx;
+  height: 64rpx;
+  position: relative;
+}
+.pl-silhouette::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 26rpx;
+  height: 26rpx;
+  border-radius: 50%;
+  background: #6b5a3e;
+}
+.pl-silhouette::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 24rpx;
+  transform: translateX(-50%);
+  width: 48rpx;
+  height: 40rpx;
+  border-radius: 24rpx 24rpx 6rpx 6rpx;
+  background: #6b5a3e;
+}
+
+.pl-info { flex: 1; min-width: 0; }
+.pl-name {
+  font-size: 30rpx;
+  color: #3d2c1a;
+  font-weight: 600;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.pl-check {
+  flex-shrink: 0;
+  margin-left: 14rpx;
+  font-size: 34rpx;
+  color: #a33a2b;
+}
+
+/* 姓名输入 */
+.pl-form { flex-shrink: 0; }
+.pl-name-input {
+  margin: 20rpx 6rpx 8rpx;
+  padding: 18rpx 24rpx;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1rpx solid #cbb38a;
+  border-radius: 12rpx;
+}
+.pl-input {
+  font-size: 30rpx;
+  color: #3d2c1a;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+/* 确认按钮 */
+.pl-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 8rpx;
+}
+.pl-btn {
+  flex: 1;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 32rpx;
+  color: #fdfaf3;
+  background: linear-gradient(135deg, #8b5a2b, #a9743c);
+  border-radius: 14rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  transition: opacity 0.2s ease;
+}
+.pl-btn::after { border: 0; }
+.pl-btn.disabled {
+  opacity: 0.4;
+}

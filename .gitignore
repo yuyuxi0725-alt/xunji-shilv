@@ -19,11 +19,28 @@ _assets_backup/
 _cloud_upload/
 video-samples/
 assets_video/
-tts-audio/*.mp3
 _pdf_pages/
+assets_video/
+_cloud_upload/
 
-# ===== 竞赛 PDF 渲染页（一次性转换产物，27MB）=====
+# ===== 大体积生成素材（GIF/PNG/音频，非源码）=====
+output/character-gifs/
+output/native-character-animation/
+output/imagegen/
+output/comfyui-gif/
 output/competition/pages/
+output/*/stage2/*.png
+output/*/stage2/*.gif
+tts-audio/output/
+tts-audio/preview/
+tts-audio/*.mp3
+tts-audio/*.bak
+
+# ===== 超大文档（超过 GitHub 建议体积）=====
+人工智能工具使用情况说明-寻迹诗旅.docx
+
+# ===== 内层残留 git 备份 =====
+miniprogram/.git.bak_*/
 
 # ===== 微信开发者工具 =====
 miniprogram/project.private.config.json

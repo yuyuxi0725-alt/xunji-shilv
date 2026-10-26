@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T12:17:47.166Z",
+  "character": "sushi",
+  "period": "p5",
+  "title": "岭南北归",
+  "range": "1094–1101",
+  "source": "miniprogram\\utils\\stories\\line-sushi.js",
+  "count": 20,
+  "items": [
+    {
+      "index": 1,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "（讲完书，见你，起身相迎）你又来了。这海南岛，山高水远，寻常人一辈子也来不了一回，你倒来了两次。坐，我给你倒碗椰子水。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n2b",
+      "emotion": "calm",
+      "text": "苦？刚来时，是苦的——食无肉，病无药，居无室，出无友。可住久了，也就惯了。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "教书。这海南岛，缺的正是文脉。我这一把年纪，别的做不了，教几个孩子读书认字，还是使得的。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "（他笑望着你）别为我难过。我这辈子，官越做越远，心却越活越开。你来了，是件喜事。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n3",
+      "emotion": "calm",
+      "text": "前几年，我先被贬到惠州。岭南那地方，荔枝极甜，我吃着吃着，便写下\"日啖荔枝三百颗，不辞长作岭南人\"。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n5",
+      "emotion": "joy",
+      "text": "是。心在哪里，家就在哪里。岭南的荔枝甜，海南的椰子清，哪里的日子，不是日子。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n6",
+      "emotion": "joy",
+      "text": "是乐，也是真。日子苦不苦，看你怎么品。我偏要把这苦，品出点甜味来。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n7",
+      "emotion": "joy",
+      "text": "（他哈哈一笑）人生如逆旅，我亦是行人。走到哪儿，就赏哪儿的风光。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n8",
+      "emotion": "thoughtful",
+      "text": "后来我又被贬到这儋州，比惠州更远。可我在这儿办学、传文、交黎族朋友，反倒觉得，这片土地格外亲。我还写过一句——\"我本儋耳人，寄生西蜀州\"。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n10",
+      "emotion": "joy",
+      "text": "正是。人生天地间，走到哪儿，哪儿就是故乡。这海南岛的山水，跟眉山的山水，原也没什么两样。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n11",
+      "emotion": "thoughtful",
+      "text": "谈不上看破红尘，只是把\"故乡\"二字看淡了。心安处，即是家。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n12",
+      "emotion": "calm",
+      "text": "（他望了望海，轻声）人这一生，不过是在天地间寄宿一程。想通了，就哪里都去得。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n12b",
+      "emotion": "calm",
+      "text": "心灰？我这把年纪，若真灰了心，早倒在这路上了。我偏不信，天涯海角就活不出个样子来。",
+      "fileName": "n12b.mp3"
+    },
+    {
+      "index": 14,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n12c",
+      "emotion": "joy",
+      "text": "对。这海南岛，山好，水好，人也亲。我把这儿当家，这儿就真成了我的家。",
+      "fileName": "n12c.mp3"
+    },
+    {
+      "index": 15,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n12d",
+      "emotion": "thoughtful",
+      "text": "熬？我不熬。这儿的椰子清甜，海风也爽快，我住着，是真舒坦。",
+      "fileName": "n12d.mp3"
+    },
+    {
+      "index": 16,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n13",
+      "emotion": "thoughtful",
+      "text": "后来朝廷大赦，我北归。途中游金山寺，回望自己这一生，写下\"问汝平生功业，黄州惠州儋州\"。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 17,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n15",
+      "emotion": "calm",
+      "text": "有自嘲，可也不全是。这三次流放，是苦，可也正是在那些最苦的地方，我活明白了。",
+      "fileName": "n15.mp3"
+    },
+    {
+      "index": 18,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n16",
+      "emotion": "joy",
+      "text": "你懂我！黄州、惠州、儋州，一处比一处远，可正是在这些地方，我写出了最好的文章，也活成了最真的自己。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 19,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n17",
+      "emotion": "calm",
+      "text": "（他拍拍你的肩）不必替我难过。这\"功业\"二字，我写得，心安。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 20,
+      "character": "sushi",
+      "period": "p5",
+      "periodTitle": "岭南北归",
+      "nodeId": "n18",
+      "emotion": "calm",
+      "text": "小兄弟，你陪我走到了这最后一程。我这一生，官没做大，家没安久，可我走过的路、写过的字，都对得起自己的心。你心里若还有想问的，趁这会儿，尽管问。",
+      "fileName": "n18.mp3"
+    }
+  ]
+}

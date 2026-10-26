@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T12:17:47.055Z",
+  "character": "sushi",
+  "period": "p4",
+  "title": "东坡赤壁",
+  "range": "1080–1084",
+  "source": "miniprogram\\utils\\stories\\line-sushi.js",
+  "count": 25,
+  "items": [
+    {
+      "index": 1,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n2",
+      "emotion": "calm",
+      "text": "（直起身，抹了把汗，见你，笑了）是你。黄州这地方，穷是穷，可这天、这水、这地，都是我的。你来得正好，帮我搭把手。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n2b",
+      "emotion": "joy",
+      "text": "种地。我这\"东坡\"，就是这么一块一块锄出来的。地是自己的，种出来的粮，吃着踏实。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n2c",
+      "emotion": "calm",
+      "text": "瘦了，也老了几岁。可这心里的东西，反倒轻快了。走，看看我这几亩地。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "（他拍拍你）不必这样。人到了这一步，才知道什么是本分。地，是我的本分。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n3",
+      "emotion": "sad",
+      "text": "刚到黄州时，我寄居在定惠院，穷得揭不开锅。夜里睡不着，只觉\"心似已灰之木，身如不系之舟\"——那时，我是真觉得，这一生到头了。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n5",
+      "emotion": "thoughtful",
+      "text": "时间是一味药。可更管用的，是我忽然想明白：日子总要过，与其愁眉苦脸，不如种点地、喝口酒。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n6",
+      "emotion": "joy",
+      "text": "你懂我。人不能总躺在灰里。我拿起锄头那一刻，就告诉自己：沉下去的是\"苏轼\"，站起来的，得是另一个人。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n7",
+      "emotion": "calm",
+      "text": "不容易，可也不难。想通了，就什么都放得下了。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n8",
+      "emotion": "joy",
+      "text": "友人帮我在城东求了片坡地，我给它起了个名，叫\"东坡\"，又给自己起了个号——东坡居士。从此，这世上少了个官场里的苏轼，多了个种地的苏东坡。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n10",
+      "emotion": "joy",
+      "text": "是看开了。这\"东坡\"，是我拿锄头一锄一锄开出来的，比什么官都实在。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n11",
+      "emotion": "joy",
+      "text": "自嘲也好，实在也罢。种地怎么了？我这东坡肉、东坡鱼，可都是拿自己的地种出来的。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n12",
+      "emotion": "joy",
+      "text": "你喜欢这名字？我也喜欢。朴素，踏实，像这脚下的地。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n12b",
+      "emotion": "calm",
+      "text": "怨？我也怨过。可怨天尤人，救不了自己。我拿起锄头，把怨气都翻进了土里。",
+      "fileName": "n12b.mp3"
+    },
+    {
+      "index": 14,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n12c",
+      "emotion": "joy",
+      "text": "对。日子总要过，与其愁眉苦脸，不如把这片坡地种好。我种的是地，长出来的，是我的心气。",
+      "fileName": "n12c.mp3"
+    },
+    {
+      "index": 15,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n12d",
+      "emotion": "thoughtful",
+      "text": "酒能解一时之愁，解不了一世。我偏不肯消沉——这泥里，也能开出花来。",
+      "fileName": "n12d.mp3"
+    },
+    {
+      "index": 16,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n13",
+      "emotion": "thoughtful",
+      "text": "那年七月，我与客泛舟赤壁。江风皓月，我写下\"寄蜉蝣于天地，渺沧海之一粟\"——人这一生，不过天地间的一粒粟米。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 17,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n14",
+      "emotion": "joy",
+      "text": "十月再游赤壁，我又写下\"大江东去，浪淘尽，千古风流人物\"。你且看这江——多少英雄，都随着这滚滚江水，流过去了。",
+      "fileName": "n14.mp3"
+    },
+    {
+      "index": 18,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n16",
+      "emotion": "joy",
+      "text": "是。个人的荣辱得失，放到这长江里，算什么。看开了，人就豁达了。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 19,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n17",
+      "emotion": "thoughtful",
+      "text": "看淡，但不悲观。英雄会消逝，可这江水永远在流，人生也该往前走。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 20,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n18",
+      "emotion": "joy",
+      "text": "（他朗声一笑）说得好！江流千古，人生一瞬，正因如此，才更该好好活。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 21,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n19",
+      "emotion": "joy",
+      "text": "那年三月，我过沙湖遇雨，同行的人都狼狈躲雨，我却拄着竹杖，慢慢走。\"竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。\"",
+      "fileName": "n19.mp3"
+    },
+    {
+      "index": 22,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n21",
+      "emotion": "calm",
+      "text": "对。风雨来了，躲不过，就带着斗笠走过去。走过去了，回头看，也不过是\"也无风雨也无晴\"。",
+      "fileName": "n21.mp3"
+    },
+    {
+      "index": 23,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n22",
+      "emotion": "joy",
+      "text": "正是。人生哪能没有风雨，躲是躲不掉的，不如从容一点，笑着走。",
+      "fileName": "n22.mp3"
+    },
+    {
+      "index": 24,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n23",
+      "emotion": "calm",
+      "text": "（他望了望你，会心一笑）你听懂了。这雨，淋在身上是雨，落在心里，就成了诗。",
+      "fileName": "n23.mp3"
+    },
+    {
+      "index": 25,
+      "character": "sushi",
+      "period": "p4",
+      "periodTitle": "东坡赤壁",
+      "nodeId": "n24",
+      "emotion": "thoughtful",
+      "text": "小兄弟，你在黄州陪我这许久，看着我从灰里爬起来。我这一身，如今只爱这东坡的地、赤壁的江。你心里若还有想问的，尽管问，我一边锄地，一边答你。",
+      "fileName": "n24.mp3"
+    }
+  ]
+}

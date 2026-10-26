@@ -49,12 +49,15 @@ page {
 /* ---------- 顶部信息条 ---------- */
 .vn-topbar {
   position: absolute;
-  top: 0;
+  /* top 由 JS 按微信胶囊按钮实测位置算出（chat.js applyMenuButtonLayout，
+     data.topbarTop，wxml 内联 style），保证「返回」和标题与胶囊同一水平线、
+     落在状态栏之下；这里只留一个兜底默认值。 */
+  top: 48px;
   left: 0;
   right: 0;
   display: flex;
   align-items: center;
-  padding: calc(env(safe-area-inset-top) + 16rpx) 24rpx 16rpx;
+  padding: 8rpx 24rpx 16rpx;
   background: linear-gradient(180deg, rgba(0,0,0,0.55), transparent);
   z-index: 10;
 }
@@ -71,40 +74,259 @@ page {
   font-family: 'STKaiti', 'KaiTi', serif;
   letter-spacing: 4rpx;
 }
-.vn-anchor {
-  color: #c9b99a;
-  font-size: 24rpx;
-  margin-left: 8rpx;
+/* 小印章已移出 topbar（改用独立悬浮，见下），补一个与返回按钮等宽的空位，
+   让标题在缺少右侧节点时仍保持视觉居中 */
+.vn-topbar-spacer {
+  flex: 0 0 auto;
+  width: 104rpx;
 }
 
-/* ---------- 立绘（淡入淡出登场/退场） ---------- */
+/* 右上角小印章 —— 知识卡自动收起后的落点，做成一轴「描金小卷」：
+   半透暖白纸面 + 两道细金轴（天杆/地杆），字取褐墨；微微斜挂、慢慢摆动，
+   比原先的木框方印轻、也更灵动，且与页面既有的"暗底暖金"配色是同一套语言。
+   独立悬浮元素 —— 不能放进 .vn-topbar 的 flex 里，否则会和微信原生胶囊按钮
+   抢右上角而重叠。top 由 applyMenuButtonLayout() 按胶囊位置算出（内联 style）。 */
+.vn-seal-mini {
+  position: absolute;
+  right: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 96rpx;
+  padding: 16rpx 14rpx;
+  /* 纸面：半透暖白，底下的场景色能透出一点，避免成为一块死白贴纸 */
+  background: linear-gradient(180deg, rgba(250, 244, 231, 0.92) 0%, rgba(235, 220, 192, 0.90) 55%, rgba(223, 205, 172, 0.92) 100%);
+  border-radius: 2rpx;
+  box-shadow: 0 4rpx 14rpx rgba(0, 0, 0, 0.42), inset 0 0 0 1rpx rgba(255, 255, 255, 0.34);
+  color: #7a5a30;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  /* 高于背景(1/2)与立绘(5)、topbar(10)，低于知识卡安全区(55)与完整史料蒙层(78) */
+  z-index: 45;
+  /* 斜挂微摆：以顶边为轴，像挂在檐下的一轴小卷那样慢慢晃 */
+  transform-origin: 50% 0;
+  animation: sealSway 5.4s ease-in-out infinite;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
+  /* 展开/收拢：纸面高度与字、数的显隐都在这里过渡 */
+  overflow: hidden;
+  max-height: 240rpx;
+  transition: max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1), padding-top 0.45s ease, padding-bottom 0.45s ease;
+}
+/* 收拢态：纸面卷起，只剩一根天杆（上轴）挂在檐下；字与数字隐藏 */
+.vn-seal-mini:not(.expanded) {
+  max-height: 28rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  background: transparent;
+  box-shadow: none;
+}
+.vn-seal-mini:not(.expanded) .vn-seal-mini-char,
+.vn-seal-mini:not(.expanded) .vn-seal-mini-num {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  transform: scale(0.6);
+}
+/* 收拢时地杆（下轴）隐去，只留天杆（上轴）——像卷起来的一轴，只剩一根杆 */
+.vn-seal-mini:not(.expanded)::after {
+  opacity: 0;
+  transform: translateY(10rpx);
+}
+.vn-seal-mini:not(.expanded)::before {
+  top: 50%;
+  transform: translateY(-50%);
+  height: 12rpx;
+}
+.vn-seal-mini-char {
+  font-size: 42rpx;
+  line-height: 1.05;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+.vn-seal-mini-num {
+  margin-top: 2rpx;
+  font-size: 24rpx;
+  letter-spacing: 1rpx;
+  transition: opacity 0.25s ease, transform 0.3s ease;
+}
+/* 慢速收拢：知识卡飞进小卷轴后「慢慢卷起来」，只加长过渡时长，不动其它属性 */
+.vn-seal-mini.seal-slow,
+.vn-seal-mini.seal-slow::before,
+.vn-seal-mini.seal-slow::after {
+  transition-duration: 0.95s;
+}
+
+@keyframes sealSway {
+  0%   { transform: rotate(-5deg); }
+  50%  { transform: rotate(-1.5deg); }
+  100% { transform: rotate(-5deg); }
+}
+/* 天杆（上轴）与地杆（下轴）：细金线、两端圆头，比纸面略宽而探出 */
+.vn-seal-mini::before,
+.vn-seal-mini::after {
+  content: '';
+  position: absolute;
+  left: -14rpx;
+  right: -14rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background: linear-gradient(180deg, #e2cd9c 0%, #b08f56 52%, #d3b884 100%);
+  box-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.40);
+  transition: background 0.3s ease, opacity 0.3s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), top 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vn-seal-mini::before { top: -6rpx; }
+.vn-seal-mini::after { bottom: -6rpx; }
+/* 点亮过至少一枚印记后：纸面泛朱、轴头转成朱漆色，与"蘸朱"的语义一致 */
+.vn-seal-mini.lit {
+  background: linear-gradient(180deg, rgba(252, 239, 229, 0.94) 0%, rgba(239, 213, 195, 0.92) 55%, rgba(227, 197, 176, 0.94) 100%);
+  box-shadow: 0 4rpx 16rpx rgba(120, 40, 25, 0.42), inset 0 0 0 1rpx rgba(255, 255, 255, 0.30);
+  color: #a63a28;
+}
+.vn-seal-mini.lit::before,
+.vn-seal-mini.lit::after {
+  background: linear-gradient(180deg, #d97a5c 0%, #a4381f 52%, #c25a3a 100%);
+}
+.vn-seal-mini-char {
+  font-size: 42rpx;
+  line-height: 1.05;
+}
+.vn-seal-mini-num {
+  margin-top: 2rpx;
+  font-size: 24rpx;
+  letter-spacing: 1rpx;
+}
+
+/* ---------- 立绘（双角色：NPC 左、玩家右；淡入淡出登场/退场） ---------- */
 /* z-index 必须高于背景层(1)与暗角层(2)，否则立绘会被全屏背景盖住（踩过坑） */
+/* 说话/倾听切换过渡 180–240ms，说话者更亮更大、倾听者半透明去饱和 */
+
 .vn-npc {
   position: absolute;
-  bottom: 340rpx;
-  left: 50%;
-  transform: translateX(-50%);
+  /* 人物以舞台底边为共同地面；略向下压一点，消除 PNG 脚底透明边造成的悬空感 */
+  bottom: -24rpx;
+  left: -54rpx;               /* NPC 靠左 */
   width: 560rpx;
-  height: 720rpx;
+  height: 900rpx;
   object-fit: contain;
   filter: drop-shadow(0 8rpx 24rpx rgba(0,0,0,0.45));
   opacity: 0;
-  transition: opacity 0.8s ease, transform 0.3s ease, bottom 0.7s ease, width 0.7s ease, height 0.7s ease;
+  transform: translateX(0) scale(1);
+  transform-origin: bottom center;
+  transition: opacity 0.22s ease, transform 0.22s ease, filter 0.22s ease;
   pointer-events: none;
   z-index: 5;
 }
 .vn-npc-show {
   opacity: 0.96;
 }
-.vn-npc-active {
-  transform: translateX(-50%) translateY(-10rpx);
+/* NPC 说话：最亮、略微放大、z-index 略高 */
+.vn-npc-speak {
+  opacity: 0.98;
+  filter: brightness(1.02) drop-shadow(0 8rpx 24rpx rgba(0,0,0,0.45));
+  transform: translateX(0) scale(1.02);
+  z-index: 6;
+}
+
+/* 只有成功加载轻动效素材的诗人才启用呼吸感，避免静态人物无故晃动。 */
+.vn-npc-motion.vn-npc-speak {
+  animation: vn-npc-breathe 3.6s ease-in-out infinite;
+}
+@keyframes vn-npc-breathe {
+  0%, 100% { transform: translateY(0) scale(1.018); }
+  50% { transform: translateY(-2rpx) scale(1.025); }
+}
+/* NPC 倾听（玩家说话）：半透明 + 去饱和 + 变暗 */
+.vn-npc-listen {
+  opacity: 0.42;
+  filter: grayscale(0.35) brightness(0.55);
+  transform: translateX(0) scale(0.98);
+  z-index: 5;
+}
+/* 旁白：NPC 立绘明显变暗（若仍显示） */
+.vn-npc-dim {
+  opacity: 0.5;
+  filter: grayscale(0.2) brightness(0.7);
+  transform: translateX(0) scale(1);
+}
+
+/* 玩家立绘（右侧）：无正式图时用 CSS 剪影占位，绝不裂图 */
+.vn-player {
+  position: absolute;
+  /* 与 NPC 共用同一条地面基线，避免左右人物一高一低或站在对话框上 */
+  bottom: -24rpx;
+  right: -54rpx;              /* 玩家靠右 */
+  width: 520rpx;
+  height: 860rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(1);
+  transform-origin: bottom center;
+  transition: opacity 0.22s ease, transform 0.22s ease, filter 0.22s ease;
+  pointer-events: none;
+  z-index: 5;
+}
+.vn-player-show {
+  opacity: 0.96;
+}
+.vn-player-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8rpx 24rpx rgba(0,0,0,0.4));
+}
+/* 玩家说话：最亮、略微放大 */
+.vn-player-speak {
+  opacity: 0.98;
+  transform: scale(1.02);
+  z-index: 6;
+}
+/* 玩家倾听（NPC 说话）：半透明 + 去饱和 + 变暗 */
+.vn-player-listen {
+  opacity: 0.42;
+  transform: scale(0.98);
+  z-index: 5;
+}
+.vn-player-listen .vn-player-img {
+  filter: grayscale(0.35) brightness(0.55) drop-shadow(0 8rpx 24rpx rgba(0,0,0,0.4));
+}
+/* 占位剪影：纯 CSS 头部 + 肩身，零图片依赖 */
+.vn-player-silhouette {
+  width: 200rpx;
+  height: 280rpx;
+  position: relative;
+  margin-bottom: 24rpx;
+}
+.vn-player-silhouette::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 50%;
+  background: #6b5a3e;
+}
+.vn-player-silhouette::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 72rpx;
+  transform: translateX(-50%);
+  width: 180rpx;
+  height: 200rpx;
+  border-radius: 90rpx 90rpx 20rpx 20rpx;
+  background: #6b5a3e;
 }
 
 /* ---------- 对话文本框 ---------- */
+/* 保持大文本框可读性：只改姓名方向 + 气泡尾指向，不把长文本塞进小头像气泡 */
 .vn-dialog {
   position: absolute;
   left: 32rpx;
   right: 32rpx;
+  /* 传统视觉小说布局：对话框固定在舞台底端，人物立绘在其后落地 */
   bottom: 60rpx;
   min-height: 240rpx;
   background: rgba(26, 22, 18, 0.88);
@@ -112,6 +334,47 @@ page {
   border-radius: 20rpx;
   padding: 32rpx 36rpx 44rpx;
   z-index: 20;
+}
+/* 人物对话也统一放在底端；左右留白与姓名位置用来区分说话者。 */
+.vn-dialog-left,
+.vn-dialog-right {
+  top: auto;
+  bottom: 60rpx;
+  min-height: 240rpx;
+}
+.vn-dialog-left {
+  left: 40rpx;
+  right: 88rpx;
+}
+.vn-dialog-right {
+  left: 88rpx;
+  right: 40rpx;
+}
+/* 气泡尾（小三角）：NPC 说指向左、玩家说指向右、旁白无尾居中 */
+.vn-dialog::before {
+  content: '';
+  position: absolute;
+  top: 30rpx;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+.vn-dialog-left::before {
+  top: 30rpx;
+  bottom: auto;
+  left: -18rpx;
+  border-width: 14rpx 18rpx 14rpx 0;
+  border-color: transparent rgba(26, 22, 18, 0.88) transparent transparent;
+}
+.vn-dialog-right::before {
+  top: 30rpx;
+  bottom: auto;
+  right: -18rpx;
+  border-width: 14rpx 0 14rpx 18rpx;
+  border-color: transparent transparent transparent rgba(26, 22, 18, 0.88);
+}
+.vn-dialog-center::before {
+  display: none;
 }
 .vn-dialog-name {
   position: absolute;
@@ -124,6 +387,12 @@ page {
   padding: 8rpx 32rpx;
   border-radius: 32rpx;
   letter-spacing: 4rpx;
+}
+/* 玩家说话时姓名栏靠右 */
+.vn-dialog-right .vn-dialog-name {
+  left: auto;
+  right: 32rpx;
+  background: linear-gradient(135deg, #a9743c, #8b5a2b);
 }
 .vn-dialog-text {
   color: #f5eddc;
@@ -271,6 +540,18 @@ page {
   border-top-left-radius: 4rpx;
   font-family: 'STKaiti', 'KaiTi', serif;
 }
+.vn-ai-inline {
+  display: inline-block;
+  margin-right: 12rpx;
+  padding: 1rpx 8rpx;
+  border: 1rpx solid rgba(216, 184, 120, 0.55);
+  border-radius: 6rpx;
+  color: #d8b878;
+  font-family: sans-serif;
+  font-size: 18rpx;
+  line-height: 28rpx;
+  vertical-align: 2rpx;
+}
 .vn-chat-item.user .vn-chat-bubble {
   background: rgba(139, 90, 43, 0.92);
   color: #fff;
@@ -287,23 +568,29 @@ page {
 }
 .vn-chat-input .vn-chat-input-field {
   flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
   background: rgba(255, 253, 247, 0.1);
   border: 1rpx solid rgba(200, 170, 110, 0.3);
-  border-radius: 36rpx;
+  border-radius: 40rpx;
   color: #f5eddc;
   font-size: 28rpx;
-  padding: 16rpx 28rpx;
+  padding: 0 28rpx;
 }
 .vn-input-ph {
   color: #8c7b6b;
 }
 .vn-send-btn {
   margin-left: 16rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
   background: linear-gradient(135deg, #8b5a2b, #a9743c);
   color: #fff;
   font-size: 27rpx;
-  padding: 16rpx 32rpx;
-  border-radius: 36rpx;
+  padding: 0 32rpx;
+  border-radius: 40rpx;
 }
 .vn-send-btn.disabled {
   opacity: 0.4;
@@ -354,27 +641,360 @@ page {
   z-index: 40;
 }
 
-/* ---------- 锚点提示 ---------- */
-.vn-anchor-toast {
+/* ---------- 知识落印 · 第一步：朱印点亮 ---------- */
+/* 纯提示层：pointer-events:none，绝不拦住底下的对话与选项 */
+.vn-seal-pulse {
   position: absolute;
-  top: 30%;
+  top: 34%;
   left: 50%;
-  transform: translateX(-50%) scale(0.9);
-  background: rgba(26, 22, 18, 0.95);
-  border: 1rpx solid #b8860b;
-  color: #f0e6d2;
-  font-size: 28rpx;
-  padding: 24rpx 48rpx;
-  border-radius: 16rpx;
-  opacity: 0;
-  transition: all 0.4s ease;
-  z-index: 50;
-  white-space: nowrap;
+  width: 260rpx;
+  margin-left: -130rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 70;
+}
+/* 朱印本体：从大落到小、略带旋转归正，像真盖下去 */
+.vn-seal-mark {
+  width: 148rpx;
+  height: 148rpx;
+  border-radius: 14rpx;
+  background: linear-gradient(135deg, #a33a2b, #c05a3c);
+  box-shadow: 0 6rpx 24rpx rgba(163, 58, 43, 0.55), inset 0 0 0 4rpx rgba(253, 246, 232, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sealDrop 0.82s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+}
+@keyframes sealDrop {
+  0%   { transform: scale(2.4) rotate(-14deg); opacity: 0; }
+  40%  { transform: scale(0.9) rotate(0deg); opacity: 1; }
+  58%  { transform: scale(1.08) rotate(0deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.vn-seal-char {
+  color: #fdf6e8;
+  font-size: 84rpx;
+  line-height: 1;
   font-family: 'STKaiti', 'KaiTi', serif;
 }
-.vn-anchor-toast.show {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
+/* 印面外一圈扩散的朱色涟漪，强化"落下"的那一下 */
+.vn-seal-ring {
+  position: absolute;
+  top: 74rpx;
+  left: 50%;
+  width: 148rpx;
+  height: 148rpx;
+  margin-left: -74rpx;
+  border-radius: 50%;
+  border: 2rpx solid rgba(192, 90, 60, 0.75);
+  animation: sealRing 0.82s ease-out both;
+}
+@keyframes sealRing {
+  0%   { transform: scale(0.7); opacity: 0.9; }
+  100% { transform: scale(2.1); opacity: 0; }
+}
+.vn-seal-sub {
+  margin-top: 20rpx;
+  color: #f0e6d2;
+  font-size: 26rpx;
+  letter-spacing: 6rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  text-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.75);
+  animation: sealSubIn 0.5s ease 0.34s both;
+}
+@keyframes sealSubIn {
+  from { opacity: 0; transform: translateY(10rpx); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 知识落印 · 第二步：轻量知识卡 ---------- */
+/* 定位：不再用 bottom 钉在底部（那样必然压住对话框），改为
+   外套一个「安全区容器」——上边界在胶囊与小印章之下，下边界在底部 UI 之上，
+   卡片在容器内垂直、水平居中。这样卡片落在"顶部导航下方、人物立绘中上部"，
+   且换成任何屏高都不会够到底部的对话框 / 选项 / 输入区。 */
+.vn-kcard-zone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* top 由 JS 按胶囊按钮位置算出（内联 style）；下边界给底部 UI 留出净空：
+     .vn-dialog(60rpx + 约240rpx) / .vn-choices(70rpx + 较高，选项多时最高约 500rpx)
+     / aiFree 的输入框 + 推荐问题。取 460rpx 是以选项面板为准的安全值。 */
+  bottom: 460rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32rpx 8vh;   /* 底部额外留白，把视觉重心压到上半部 */
+  /* 空白区域不拦截点击，底下的对话、选项照常可点 */
+  pointer-events: none;
+  z-index: 55;
+}
+/* 纸卡质感；两三秒后自动收起，不阻断剧情 */
+.vn-kcard {
+  position: relative;
+  width: 620rpx;
+  max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+  /* 小屏紧凑：上下内外边距整体收紧 */
+  padding: 22rpx 28rpx 20rpx;
+  background: linear-gradient(180deg, #fbf6ec 0%, #f3ead8 100%);
+  border: 1rpx solid rgba(139, 90, 43, 0.35);
+  border-radius: 18rpx;
+  box-shadow: 0 12rpx 40rpx rgba(0, 0, 0, 0.45);
+  /* 卡片自身要能点：安全区容器是 pointer-events:none，这里恢复交互 */
+  pointer-events: auto;
+  /* fill 用 backwards：动画结束后 transform 交还给静态样式，
+     收起阶段的 transform 过渡才能正常触发（both 会把 transform 锁死） */
+  animation: kcardIn 0.38s cubic-bezier(0.18, 0.89, 0.32, 1.2) backwards;
+}
+@keyframes kcardIn {
+  from { opacity: 0; transform: translateY(-24rpx); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.vn-kcard-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+/* 「诗史印记 · 新获得」——告诉学生"我获得了什么、属于哪一类" */
+.vn-kcard-kicker {
+  color: #a33a2b;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+/* 获得方式标签：回答命中 / 求证命中 / 选择命中 */
+.vn-kcard-label {
+  color: #8b5a2b;
+  font-size: 20rpx;
+  padding: 2rpx 12rpx;
+  border: 1rpx solid rgba(139, 90, 43, 0.4);
+  border-radius: 20rpx;
+}
+.vn-kcard-name {
+  color: #3a2a1a;
+  font-size: 38rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+  line-height: 1.25;
+}
+/* 为什么获得 */
+.vn-kcard-why {
+  margin-top: 10rpx;
+  color: #7a5a35;
+  font-size: 24rpx;
+  line-height: 1.45;
+}
+/* 诗歌摘句（有 poem 时替代 know，卡片高度与原来基本持平） */
+.vn-kcard-poem-title {
+  margin-top: 8rpx;
+  color: #7a5a35;
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-kcard-poem-lines {
+  margin-top: 4rpx;
+}
+/* 每句锁一行（配合 JS 只取 highlight 的前 2 句）→ 卡片高度恒定，不会重新压住底部 */
+.vn-kcard-poem-line {
+  color: #a33a2b;
+  font-size: 27rpx;
+  line-height: 1.5;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 1rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* 学到了什么（一句话）：小屏最多 2 行，超出省略号收尾；
+   完整内容不删，仍然留在「查看完整史料」面板里 */
+.vn-kcard-know {
+  margin-top: 8rpx;
+  color: #4a3520;
+  font-size: 25rpx;
+  line-height: 1.6;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.vn-kcard-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18rpx;
+  margin-top: 14rpx;
+}
+/* 老版本基础库不支持 flex gap，用相邻兄弟 margin 兜底 */
+.vn-kcard-btn + .vn-kcard-btn {
+  margin-left: 18rpx;
+}
+.vn-kcard-btn {
+  font-size: 24rpx;
+  padding: 10rpx 26rpx;
+  border-radius: 30rpx;
+}
+.vn-kcard-btn.ghost {
+  color: #8b5a2b;
+  border: 1rpx solid rgba(139, 90, 43, 0.5);
+}
+.vn-kcard-btn.solid {
+  color: #fdf6e8;
+  background: linear-gradient(135deg, #8b5a2b, #a9743c);
+  box-shadow: 0 4rpx 14rpx rgba(139, 90, 43, 0.4);
+}
+
+/* ---------- 知识卡收起动画 ----------
+   ''（展示）→ kc-shrink（直线飞向右上角、缩到最小、渐隐）。
+   到位后由 JS 驱动右上角小卷轴「张开 → 慢慢收起」，收尾不在此处理。 */
+.vn-kcard {
+  /* 收起时启用 transform + opacity 过渡（入场动画会被 kc-shrink 的 animation:none 关掉） */
+  transition: transform 0.42s cubic-bezier(0.45, 0.05, 0.35, 1), opacity 0.36s ease 0.1s;
+}
+.kc-shrink {
+  animation: none;               /* 关掉入场动画，否则其 fill 会锁死 transform */
+  pointer-events: none;          /* 收起中不接受点击 */
+  transform-origin: 50% 50%;     /* 以中心为轴缩小，确保平移落点精确对准右上小印章 */
+  opacity: 0;                    /* 缩到最小后整卡渐隐消失 */
+  /* 位移 + 缩放 + 透视的 transform 由 JS 实时测量后经内联 style 注入，
+     保证「直线移动到右上角小卷轴、直接缩到最小」在不同屏上落点一致 */
+}
+.kc-body {
+  transition: opacity 0.2s ease, transform 0.26s ease;
+}
+.kc-shrink .kc-body {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+/* ---------- 完整史料面板（主动展开，才给 150–250 字） ---------- */
+.vn-kdetail-mask {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 6, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 48rpx;
+  z-index: 78;
+  animation: fadeIn 0.3s ease;
+}
+.vn-kdetail-card {
+  width: 100%;
+  max-width: 620rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #fbf6ec 0%, #f3ead8 100%);
+  border-radius: 22rpx;
+  padding: 44rpx 44rpx 36rpx;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.45);
+  animation: questEndPop 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+.vn-kdetail-seal {
+  display: inline-block;
+  color: #a33a2b;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+  padding: 2rpx 14rpx;
+  border: 1rpx solid rgba(163, 58, 43, 0.45);
+  border-radius: 6rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-kdetail-name {
+  margin-top: 16rpx;
+  color: #3a2a1a;
+  font-size: 42rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 3rpx;
+}
+/* ---------- 诗歌区（完整史料面板内：印记名称下方、史料正文上方） ---------- */
+/* 宣纸底 + 左侧一道极淡的朱色竖线，作为印记装饰；不用荧光笔那种亮底 */
+.vn-kpoem {
+  margin-top: 20rpx;
+  padding: 20rpx 24rpx 18rpx;
+  background: rgba(163, 58, 43, 0.045);
+  border-left: 3rpx solid rgba(163, 58, 43, 0.28);
+  border-radius: 0 10rpx 10rpx 0;
+}
+.vn-kpoem-title {
+  text-align: center;
+  color: #3a2a1a;
+  font-size: 34rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 4rpx;
+}
+.vn-kpoem-author {
+  margin-top: 4rpx;
+  text-align: center;
+  color: #8b5a2b;
+  font-size: 22rpx;
+  letter-spacing: 2rpx;
+}
+.vn-kpoem-lines {
+  margin-top: 16rpx;
+}
+/* 诗句居中、行距舒展；普通句用深棕 */
+.vn-kpoem-line {
+  text-align: center;
+  color: #4a3520;
+  font-size: 28rpx;
+  line-height: 1.95;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 2rpx;
+}
+/* 关键句：朱砂色，只换字色，不加醒目底色 */
+.vn-kpoem-line.hi {
+  color: #a33a2b;
+}
+/* insight：诗文下方的简短解读 */
+.vn-kpoem-insight {
+  margin-top: 16rpx;
+  padding-top: 14rpx;
+  border-top: 1rpx dashed rgba(139, 90, 43, 0.25);
+  color: #6b5233;
+  font-size: 24rpx;
+  line-height: 1.7;
+  text-align: justify;
+}
+/* displayMode: 'excerpt'（长诗节选）：行距略收，给"节选"提示留出位置 */
+.vn-kpoem-excerpt .vn-kpoem-line {
+  line-height: 1.8;
+}
+.vn-kdetail-body {
+  margin-top: 20rpx;
+  color: #4a3520;
+  font-size: 27rpx;
+  line-height: 1.85;
+  text-align: justify;
+}
+.vn-kdetail-links-t {
+  margin-top: 30rpx;
+  padding-top: 22rpx;
+  border-top: 1rpx solid rgba(139, 90, 43, 0.22);
+  color: #8b5a2b;
+  font-size: 24rpx;
+  letter-spacing: 4rpx;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-kdetail-link {
+  margin-top: 10rpx;
+  color: #6b5233;
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+.vn-kdetail-close {
+  margin-top: 34rpx;
+  text-align: center;
+  color: #8b5a2b;
+  font-size: 26rpx;
+  letter-spacing: 4rpx;
+  padding: 16rpx 0;
+  border-top: 1rpx solid rgba(139, 90, 43, 0.22);
 }
 
 /* ---------- 结尾"完整讲述"（reflect） ---------- */
@@ -387,7 +1007,7 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80rpx 56rpx calc(env(safe-area-inset-bottom) + 60rpx);
+  padding: 80rpx 56rpx calc(env(safe-area-inset-bottom) + 160rpx);
   z-index: 60;
   animation: fadeIn 0.6s ease;
 }
@@ -408,9 +1028,21 @@ page {
   margin-bottom: 14rpx;
   animation: fadeInUp 0.8s ease;
 }
-.vn-reflect-continue {
-  margin-top: 36rpx;
+/* 底部统一操作按钮：讲述逐句浮现期间=「快速阅读」，展开全文/自然读完后同一位置原地切换为「继续」（不再是两个分离按钮） */
+.vn-reflect-btn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 48rpx);
   text-align: center;
+  padding: 12rpx 0;
+}
+.vn-reflect-btn.is-skip {
+  color: rgba(212, 160, 23, 0.72);
+  font-size: 26rpx;
+  letter-spacing: 3rpx;
+}
+.vn-reflect-btn.is-continue {
   color: #d4a017;
   font-size: 30rpx;
   letter-spacing: 4rpx;
@@ -432,6 +1064,8 @@ page {
 .vn-questend-card {
   width: 100%;
   max-width: 620rpx;
+  max-height: 86vh;
+  overflow-y: auto;
   background: linear-gradient(180deg, #fbf6ec 0%, #f3ead8 100%);
   border-radius: 24rpx;
   padding: 56rpx 48rpx 44rpx;
@@ -483,18 +1117,44 @@ page {
   font-family: 'STKaiti', 'KaiTi', serif;
   letter-spacing: 2rpx;
 }
+/* 同行者回望（终章）：宣纸上一段淡朱竖线，像卷尾的题跋，不与主文抢注意力 */
+.vn-questend-recap {
+  margin-top: 24rpx;
+  padding: 4rpx 0 4rpx 20rpx;
+  border-left: 3rpx solid rgba(163, 58, 43, 0.28);
+  text-align: left;
+}
+.vn-questend-recap-line {
+  color: #6b4a26;
+  font-size: 25rpx;
+  line-height: 1.75;
+  font-family: 'STKaiti', 'KaiTi', serif;
+  letter-spacing: 1rpx;
+}
+.vn-questend-actions {
+  margin-top: 34rpx;
+}
 .vn-questend-btn {
-  margin-top: 40rpx;
-  display: inline-block;
-  padding: 20rpx 64rpx;
-  background: linear-gradient(135deg, #8b5a2b, #a9743c);
-  color: #fff;
-  font-size: 30rpx;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20rpx 24rpx;
   border-radius: 44rpx;
+  font-size: 29rpx;
   letter-spacing: 4rpx;
   font-family: 'STKaiti', 'KaiTi', serif;
+}
+.vn-questend-btn.primary {
+  background: linear-gradient(135deg, #8b5a2b, #a9743c);
+  color: #fff;
   box-shadow: 0 8rpx 20rpx rgba(139, 90, 43, 0.35);
 }
+.vn-questend-btn.secondary {
+  margin-top: 18rpx;
+  color: #8b5a2b;
+  border: 2rpx solid #d9c8aa;
+  background: rgba(255, 253, 247, 0.70);
+}
+.vn-questend-btn:active { opacity: 0.82; }
 
 /* ============================================================
    探究式对话头部
@@ -505,60 +1165,36 @@ page {
   padding: 12rpx 24rpx;
   background: rgba(26, 22, 18, 0.9);
 }
+.vn-ai-badge {
+  flex: none;
+  margin-right: 14rpx;
+  padding: 4rpx 12rpx;
+  border: 1rpx solid rgba(216, 184, 120, 0.65);
+  border-radius: 8rpx;
+  color: #f0cf8f;
+  font-size: 20rpx;
+  font-weight: 600;
+  line-height: 30rpx;
+}
 .vn-ai-note {
+  flex: 1;
+  min-width: 0;
   font-size: 22rpx;
   color: #b3a189;
 }
-
-/* ============================================================
-   考据挑战（先生故露错漏，等少年捉）
-   ============================================================ */
-.vn-trap {
-  padding: 16rpx 24rpx;
-  background: rgba(26, 22, 18, 0.9);
-  border-top: 1rpx solid rgba(200, 170, 110, 0.28);
-}
-.vn-trap-hint {
-  margin-top: 0;
-  font-size: 25rpx;
-  color: #d8b878;
-  letter-spacing: 2rpx;
-  font-family: 'STKaiti', 'KaiTi', serif;
-}
-.vn-trap-actions {
-  display: flex;
-  gap: 20rpx;
-  margin-top: 18rpx;
-}
-.vn-trap-btn {
-  flex: 1;
-  text-align: center;
-  padding: 16rpx 0;
-  border-radius: 40rpx;
-  font-size: 27rpx;
-  letter-spacing: 2rpx;
-  font-family: 'STKaiti', 'KaiTi', serif;
-}
-.vn-trap-btn.catch {
-  background: linear-gradient(135deg, #8b5a2b, #b8863f);
-  color: #fff;
-  box-shadow: 0 6rpx 16rpx rgba(139, 90, 43, 0.4);
-}
-.vn-trap-btn.pass {
-  background: transparent;
-  border: 1rpx solid rgba(200, 170, 110, 0.5);
-  color: #cbb894;
-}
-.vn-trap-catch {
-  margin-top: 18rpx;
-  padding: 16rpx 20rpx;
-  border-left: 4rpx solid #c8aa6e;
-  background: rgba(200, 170, 110, 0.12);
+.vn-ai-feedback {
+  flex: none;
+  margin: 0 0 0 12rpx;
+  padding: 4rpx 10rpx;
+  border: 1rpx solid rgba(216, 184, 120, 0.42);
   border-radius: 8rpx;
-  font-size: 26rpx;
-  line-height: 1.7;
-  color: #f0e2c6;
-  font-family: 'STKaiti', 'KaiTi', serif;
+  background: transparent;
+  color: #d5c4a5;
+  font-size: 20rpx;
+  line-height: 30rpx;
+}
+.vn-ai-feedback::after {
+  border: none;
 }
 
 /* ============================================================
@@ -612,5 +1248,28 @@ page {
   font-size: 24rpx;
   line-height: 1.7;
   color: #cbb894;
+  font-family: 'STKaiti', 'KaiTi', serif;
+}
+
+/* ============ 角色姓名条（杜甫线，不显示职业/信任/任务） ============ */
+/* 顶部标题下方；避开胶囊与标题，显示「同行者 · 姓名」 */
+.vn-rolebar {
+  position: absolute;
+  left: 24rpx;
+  right: 24rpx;
+  z-index: 18;                /* 高于背景，低于对话框(20)，不挡交互 */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8rpx;
+  pointer-events: none;       /* 整条只展示，不拦截点击 */
+}
+.vn-role-tag {
+  font-size: 22rpx;
+  color: #e8d9bd;
+  background: rgba(26, 22, 18, 0.72);
+  border: 1rpx solid rgba(200, 170, 110, 0.4);
+  border-radius: 8rpx;
+  padding: 4rpx 16rpx;
   font-family: 'STKaiti', 'KaiTi', serif;
 }

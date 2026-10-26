@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "generatedAt": "2026-10-10T11:30:00+08:00",
+  "character": "sushi",
+  "period": "p1",
+  "title": "少年成名",
+  "count": 19,
+  "sourceManifest": "sushi-p1.json",
+  "note": "每条 emotionPrompt 只保留一个主要情绪，最多一次前后变化；保持当前语速；context_texts 只使用第一条指令。",
+  "plan": [
+    {"nodeId":"n2","emotion":"热情","intensity":0.56,"emotionPrompt":"用热情的语气说话，像在进京路上主动结识同行者。介绍家人时自然大方，不要喊叫，不要提高音量。保持当前语速。"},
+    {"nodeId":"n2b","emotion":"豪迈","intensity":0.54,"emotionPrompt":"用豪迈的语气说话，像对进京应试充满信心。开头可以自然轻笑，但不要显得自负，也不要提高音量。保持当前语速。"},
+    {"nodeId":"n2c","emotion":"自豪","intensity":0.48,"emotionPrompt":"用自豪的语气说话，像在介绍父亲带兄弟进京见世面的决定。语气真诚，不要炫耀。保持当前语速。"},
+    {"nodeId":"n2d","emotion":"随和","intensity":0.40,"emotionPrompt":"用随和的语气说话，像在邀请刚认识的旅伴同行。表达直爽但不要粗鲁，邀请要自然亲近。保持当前语速。"},
+    {"nodeId":"n3","emotion":"怀念","intensity":0.48,"emotionPrompt":"用怀念的语气说话，像在回忆母亲教自己读书的童年。最后的提问带一点期待，不要刻意煽情。保持当前语速。"},
+    {"nodeId":"n5","emotion":"感动","intensity":0.58,"emotionPrompt":"用感动而克制的语气说话，像多年后仍记得母亲替自己承担志向。解释范滂时清楚庄重，不要哽咽，不要提高音量。保持当前语速。"},
+    {"nodeId":"n6","emotion":"感念","intensity":0.54,"emotionPrompt":"用感念的语气说话，像在讲述影响自己一生的母亲教诲。开头有认同感，后半段郑重但不要煽情。保持当前语速。"},
+    {"nodeId":"n7","emotion":"郑重","intensity":0.50,"emotionPrompt":"用郑重的语气说话，像在说明母亲希望自己成为怎样的人。提到直言获罪时不要渲染悲惨，结尾说得清楚有分量。保持当前语速。"},
+    {"nodeId":"n8","emotion":"平静","intensity":0.42,"emotionPrompt":"用平静的语气说话，像在讲一段有趣的应试往事。提到被压到第二时不要抱怨，也不要表现委屈。保持当前语速。"},
+    {"nodeId":"n9a","emotion":"敬佩","intensity":0.48,"emotionPrompt":"用敬佩的语气说话，像在评价欧阳修不徇私的操守。先回应疑问，随后明确表达尊重，不要讽刺。保持当前语速。"},
+    {"nodeId":"n9b","emotion":"淡然","intensity":0.38,"emotionPrompt":"用淡然的语气说话，像真的不把名次放在心上。提到先生评语时略有珍惜，但不要过度兴奋。保持当前语速。"},
+    {"nodeId":"n10","emotion":"感激","intensity":0.60,"emotionPrompt":"用感激的语气说话，像在回忆人生中难得的知遇。引用欧阳修的话时清楚自然，最后的问句不要自我夸耀。保持当前语速。"},
+    {"nodeId":"n11a","emotion":"坦率","intensity":0.46,"emotionPrompt":"用坦率的语气说话，像直接承认自己不擅长收敛锋芒。反问自然，不要赌气，也不要提高音量。保持当前语速。"},
+    {"nodeId":"n11b","emotion":"坚定","intensity":0.62,"emotionPrompt":"用坚定的语气说话，像在说明自己不愿为了安稳变得圆滑。开头有认同感，后面的反问有力量但不要喊叫。保持当前语速。"},
+    {"nodeId":"n13","emotion":"无悔","intensity":0.58,"emotionPrompt":"用无悔的语气说话，像早已接受坚持本心可能付出的代价。破折号后更坚决，但不要悲壮化，也不要提高音量。保持当前语速。"},
+    {"nodeId":"n14","emotion":"庄重","intensity":0.66,"emotionPrompt":"用庄重的语气说话，像在给自己立下一生的誓言。引用句要清楚有力，但不要喊口号，不要故意放慢。保持当前语速。"},
+    {"nodeId":"n15","emotion":"自信","intensity":0.54,"emotionPrompt":"用自信的语气说话，像在坦然说明才华应当用于表达。反问有少年锐气，但不要傲慢，也不要提高音量。保持当前语速。"},
+    {"nodeId":"n16","emotion":"清醒","intensity":0.48,"emotionPrompt":"用清醒的语气说话，像初入仕途时已经察觉前路艰难。前半段平稳叙述，破折号后转为轻微忧虑，不要渲染不祥。保持当前语速。"},
+    {"nodeId":"n17","emotion":"亲切","intensity":0.42,"emotionPrompt":"用亲切的语气说话，像在旅途中邀请朋友继续交谈。列举话题时自然，最后的承诺坦诚开放，不要刻意煽情。保持当前语速。"}
+  ]
+}

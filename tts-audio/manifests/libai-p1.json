@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T16:54:02.739Z",
+  "character": "libai",
+  "period": "p1",
+  "title": "仗剑出蜀",
+  "range": "725–730",
+  "source": "miniprogram\\utils\\stories\\line-libai.js",
+  "count": 20,
+  "items": [
+    {
+      "index": 1,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "（抬头见你，朗声大笑）好！又是个要远行的！我，李白，字太白。今日正要出了这蜀地，仗剑去国、辞亲远游，把这大唐的天下，走它个遍！来，报个名号——你打哪儿来，又要往哪儿去？",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n2b",
+      "emotion": "joy",
+      "text": "去处？天下之大，何处去不得！先出三峡，下江陵，再往金陵、扬州，一路看尽这大唐的繁华去。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "好眼力！我十五岁就好剑术，遍访蜀中名师。这剑不是摆样子的——出门在外，仗剑方能护得一身胆气。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n2d",
+      "emotion": "joy",
+      "text": "哈哈，不必拘束。我这个人，天生就爱笑、爱酒、爱这山川。你且陪我在这江边走走，咱们边走边聊。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n3",
+      "emotion": "joy",
+      "text": "不瞒你说，我五岁诵六甲，十岁观百家，十五岁就写得一手好赋，连那司马相如，我也敢跟他比一比。你且说——旁人五岁时还在玩泥巴，我五岁已能背天下文章，这算不算天生的奇才？",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n5",
+      "emotion": "joy",
+      "text": "天资谈不上，是父亲逼得紧。不过书读多了，心就野了——我不想困在一方书斋里，我要去亲眼看看，书上写的那片天下。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n6",
+      "emotion": "joy",
+      "text": "问得好！读书不是为了做官，是为了心里的那团火——我想像大鹏一样，扶摇直上九万里，让天下人都记住\"李白\"这两个字。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n7",
+      "emotion": "joy",
+      "text": "哈哈，何必自谦。每个人的路不同，我不过起得早些罢了。你这一路走来，定也有你的见识。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n8",
+      "emotion": "serious",
+      "text": "只是有件事，乡里人常劝我，说我读书好，该去考个功名，走科举正途。可我偏不。我这一生，不愿去挤那一张榜。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n9a",
+      "emotion": "serious",
+      "text": "那榜上写的是名次，写不进一个人的才情。我李白，要凭一支笔、一柄剑、一身傲骨，让天子亲自来请我。",
+      "fileName": "n9a.mp3"
+    },
+    {
+      "index": 11,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n9b",
+      "emotion": "joy",
+      "text": "靠诗名，靠侠气！我去干谒公卿，去游历天下，让我的诗替我叩开长安的门。天生我材必有用，何必非走那一条道。",
+      "fileName": "n9b.mp3"
+    },
+    {
+      "index": 12,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n11",
+      "emotion": "calm",
+      "text": "我若肯走那条路，便不是我了。那张榜能拴住多少人的一生，却拴不住我——我要走的，是一条别人没走过的路。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 13,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n12",
+      "emotion": "joy",
+      "text": "痛快！你懂我！人生在世，若只为了一张榜、一顶乌纱，那还有什么意思。我要这天地记住我，凭的是我的诗，不是我的官。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 14,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n13",
+      "emotion": "joy",
+      "text": "试它作甚？我连那榜都不屑一顾。旁人道我狂，我却觉着——一个人若连自己要走哪条路都不敢选，那才真是白活。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 15,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n14",
+      "emotion": "thoughtful",
+      "text": "昨夜我立在峨眉山头，看半轮秋月，映在平羌江里，澄澈得像能照见人心。\"峨眉山月半轮秋，影入平羌江水流\"——这一去，不知何年才能再见这峨眉的月。",
+      "fileName": "n14.mp3"
+    },
+    {
+      "index": 16,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n16",
+      "emotion": "thoughtful",
+      "text": "舍不得，自然是舍不得的。可雏鹰不离巢，怎么飞得高。我这一去，带着这峨眉的月，也带着故乡的水，走到哪儿，都不算独行。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 17,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n17",
+      "emotion": "joy",
+      "text": "说得好！人就是这样，一边舍不得，一边又忍不住往外走。这江水流到哪里，我的心就跟着到哪里。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 18,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n18",
+      "emotion": "thoughtful",
+      "text": "你说得好！月亮不会留人，却会送人。往后我走到天涯海角，只要抬头望见这轮月亮，就还像站在峨眉山上。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 19,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n19",
+      "emotion": "joy",
+      "text": "过了这道荆门，就出了蜀地了。\"山随平野尽，江入大荒流\"——你且看，出了这道山，天地一下子就开阔了！",
+      "fileName": "n19.mp3"
+    },
+    {
+      "index": 20,
+      "character": "libai",
+      "period": "p1",
+      "periodTitle": "仗剑出蜀",
+      "nodeId": "n20",
+      "emotion": "calm",
+      "text": "小子，这一路听我说了这许多，还没听你开口。你心里憋着什么话——家世也好，我的志向也好，只管砸过来，我李白知无不言。",
+      "fileName": "n20.mp3"
+    }
+  ]
+}

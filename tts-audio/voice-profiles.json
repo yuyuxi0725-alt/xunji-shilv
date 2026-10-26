@@ -1,0 +1,384 @@
+{
+  "_locationProfileMap": {
+    "libai": {
+      "qinglian": "libai-p0",
+      "emei": "libai-p1",
+      "jingmen": "libai-p1",
+      "yangzhou": "libai-p1",
+      "anlu": "libai-p1",
+      "changan1": "libai-p2",
+      "zhongnan": "libai-p2",
+      "hanlin": "libai-p3",
+      "luoyang_libai": "libai-p4",
+      "songshan": "libai-p4",
+      "tianmu": "libai-p4",
+      "liangsong": "libai-p4",
+      "xuanzhou": "libai-p4",
+      "youyan": "libai-p4",
+      "lushan": "libai-p5",
+      "yongwang": "libai-p5",
+      "xunyang": "libai-p5",
+      "liuyelang": "libai-p5",
+      "baidi": "libai-p5",
+      "dangtu": "libai-p5"
+    },
+    "dufu": {
+      "luoyang": "dufu-child",
+      "shuhu": "dufu-child",
+      "wuyue": "dufu-youth",
+      "luoyang_shi": "dufu-youth",
+      "taishan": "dufu-youth",
+      "shouang": "dufu-youth",
+      "qizhao": "dufu-youth",
+      "changan": "dufu-p2",
+      "yexian": "dufu-p2",
+      "fengxian": "dufu-p2",
+      "changan_xian": "dufu-p3",
+      "fengxiang": "dufu-p3",
+      "qiangcun": "dufu-p3",
+      "huazhou": "dufu-p3",
+      "qinzhou": "dufu-p4",
+      "tonggu": "dufu-p4",
+      "chengdu": "dufu-p4",
+      "kuizhou": "dufu-p4",
+      "jingzhou": "dufu-p4",
+      "tanzhou": "dufu-p4",
+      "hengzhou": "dufu-p4",
+      "xiangjiang": "dufu-p4"
+    },
+    "sushi": {
+      "meishan": "sushi-p1",
+      "bianjing": "sushi-p2",
+      "fengxiang": "sushi-p2",
+      "hangzhou": "sushi-p3",
+      "mizhou": "sushi-p3",
+      "xuzhou": "sushi-p3",
+      "huzhou": "sushi-p3",
+      "wutai": "sushi-p3",
+      "dinghui": "sushi-p4",
+      "dongpo": "sushi-p4",
+      "chibi": "sushi-p4",
+      "shahu": "sushi-p4",
+      "chengtian": "sushi-p4",
+      "dengzhou": "sushi-p4",
+      "suti": "sushi-p4",
+      "yingzhou": "sushi-p4",
+      "yangzhou": "sushi-p4",
+      "dingzhou": "sushi-p4",
+      "huizhou": "sushi-p5",
+      "danzhou": "sushi-p5",
+      "jinshan": "sushi-p5",
+      "changzhou": "sushi-p5"
+    }
+  },
+  "dufu-child": {
+    "character": "杜甫",
+    "ageStage": "幼年",
+    "locations": [
+      "luoyang",
+      "shuhu"
+    ],
+    "provider": "volcengine",
+    "voiceId": "S_XVxn7mXi2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 5,
+      "loudness_rate": 0
+    }
+  },
+  "dufu-youth": {
+    "character": "杜甫",
+    "ageStage": "青年",
+    "locations": [
+      "wuyue",
+      "luoyang_shi",
+      "taishan",
+      "shouang",
+      "qizhao"
+    ],
+    "provider": "volcengine",
+    "voiceId": "S_X3Gp7mXi2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 25,
+      "loudness_rate": 0
+    }
+  },
+  "dufu-p1": {
+    "character": "杜甫",
+    "period": "p1",
+    "periodTitle": "读书壮游",
+    "provider": "volcengine",
+    "voiceId": "S_pMVX6XDh2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 25,
+      "loudness_rate": 0
+    }
+  },
+  "dufu-p2": {
+    "character": "杜甫",
+    "period": "p2",
+    "periodTitle": "困守长安",
+    "provider": "volcengine",
+    "voiceId": "S_79oo7mXi2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 25,
+      "loudness_rate": 25
+    },
+    "additions": {
+      "pronunciation_dict": {
+        "tone": [
+          "中式/(zhong4)(shi4)"
+        ]
+      }
+    }
+  },
+  "dufu-p3": {
+    "character": "杜甫",
+    "period": "p3",
+    "periodTitle": "陷贼为官",
+    "provider": "volcengine",
+    "voiceId": "S_79oo7mXi2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 25,
+      "loudness_rate": 25
+    }
+  },
+  "dufu-p4": {
+    "character": "杜甫",
+    "period": "p4",
+    "periodTitle": "漂泊西南",
+    "provider": "volcengine",
+    "voiceId": "S_jjUn7mXi2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 30,
+      "loudness_rate": 0
+    }
+  },
+  "libai-p0": {
+    "character": "李白",
+    "period": "p0",
+    "periodTitle": "蜀中青莲乡（童年）",
+    "provider": "volcengine",
+    "voiceId": "S_z5d7fg0j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 0,
+      "loudness_rate": 0
+    }
+  },
+  "libai-p1": {
+    "character": "李白",
+    "period": "p1",
+    "periodTitle": "仗剑出蜀",
+    "provider": "volcengine",
+    "voiceId": "S_Llk8fg0j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 0,
+      "loudness_rate": 0
+    }
+  },
+  "libai-p2": {
+    "character": "李白",
+    "period": "p2",
+    "periodTitle": "干谒求仕",
+    "provider": "volcengine",
+    "voiceId": "S_HfM7fg0j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 20,
+      "loudness_rate": 0
+    }
+  },
+  "libai-p3": {
+    "character": "李白",
+    "period": "p3",
+    "periodTitle": "供奉翰林",
+    "provider": "volcengine",
+    "voiceId": "S_HfM7fg0j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 20,
+      "loudness_rate": 0
+    }
+  },
+  "libai-p4": {
+    "character": "李白",
+    "period": "p4",
+    "periodTitle": "纵酒漫游",
+    "provider": "volcengine",
+    "voiceId": "S_pYX7fg0j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 20,
+      "loudness_rate": 0
+    }
+  },
+  "libai-p5": {
+    "character": "李白",
+    "period": "p5",
+    "periodTitle": "乱世浮沉",
+    "provider": "volcengine",
+    "voiceId": "S_Fcv7fg0j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 30,
+      "loudness_rate": 0
+    }
+  },
+  "sushi-p1": {
+    "character": "苏轼",
+    "period": "p1",
+    "periodTitle": "童年",
+    "ageStage": "童年",
+    "ageRange": "约10岁",
+    "provider": "volcengine",
+    "voiceId": "S_JYChWF2j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 25,
+      "loudness_rate": 0
+    }
+  },
+  "sushi-p2": {
+    "character": "苏轼",
+    "period": "p2",
+    "periodTitle": "青年",
+    "ageStage": "青年",
+    "ageRange": "约20—29岁",
+    "provider": "volcengine",
+    "voiceId": "S_vHLgWF2j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 15,
+      "loudness_rate": 0
+    },
+    "nodeOverrides": {
+      "n10": {
+        "audio": {
+          "speech_rate": 6
+        }
+      },
+      "n13": {
+        "audio": {
+          "speech_rate": -8
+        }
+      }
+    }
+  },
+  "sushi-p3": {
+    "character": "苏轼",
+    "period": "p3",
+    "periodTitle": "壮年",
+    "ageStage": "壮年",
+    "ageRange": "约30—44岁",
+    "provider": "volcengine",
+    "voiceId": "S_P9ZiWF2j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 25,
+      "loudness_rate": 0
+    }
+  },
+  "sushi-p4": {
+    "character": "苏轼",
+    "period": "p4",
+    "periodTitle": "中年",
+    "ageStage": "中年",
+    "ageRange": "约45—59岁",
+    "provider": "volcengine",
+    "voiceId": "S_jFnjWF2j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 20,
+      "loudness_rate": 0
+    }
+  },
+  "sushi-p5": {
+    "character": "苏轼",
+    "period": "p5",
+    "periodTitle": "老年",
+    "ageStage": "老年",
+    "ageRange": "约60岁以上",
+    "provider": "volcengine",
+    "voiceId": "S_nxcgWF2j2",
+    "resourceId": "seed-icl-2.0",
+    "model": "seed-tts-2.0-expressive",
+    "audio": {
+      "format": "mp3",
+      "sample_rate": 24000,
+      "bit_rate": 64000,
+      "speech_rate": 20,
+      "loudness_rate": 0
+    }
+  }
+}

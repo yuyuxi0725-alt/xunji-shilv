@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T16:54:02.853Z",
+  "character": "libai",
+  "period": "p2",
+  "title": "干谒求仕",
+  "range": "730–741",
+  "source": "miniprogram\\utils\\stories\\line-libai.js",
+  "count": 16,
+  "items": [
+    {
+      "index": 1,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "（抬头见你，眼睛一亮）是你！蜀地一别，好些年头了。来来来，坐下喝一杯——看我这副落魄样子，是不是叫你失望了？",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n2b",
+      "emotion": "calm",
+      "text": "好不好的，你且看我这一身。我到长安来求个出身，四处干谒，拜访公卿——\"三十成文章，历抵卿相\"，可到头来，处处碰壁。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "哈哈，别为我难过。我李白什么都能受，唯独受不得人可怜。来，先满上这一杯，话慢慢说。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n2d",
+      "emotion": "joy",
+      "text": "爽快！还是你懂我！落魄归落魄，酒不能断，笑不能少。这天底下，能让我低头的，还没有生出来呢。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n3",
+      "emotion": "sad",
+      "text": "这些年，我拿着自己的诗文，一次次去叩那些权贵的门。那些人，有的连正眼都不瞧我一下。我一个读书人，低声下气地求人，你可知那是什么滋味？",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n5",
+      "emotion": "thoughtful",
+      "text": "委屈我受得。可寒心的是——我满腹才情，那些人却只把我当个求食的门客。我李白，岂是摇尾乞怜之人。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n6",
+      "emotion": "serious",
+      "text": "问得值不值？我也问过自己。可除了求人，还有别的路吗？我凭诗文入世，总好过钻营那些见不得人的门道。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n7",
+      "emotion": "thoughtful",
+      "text": "谁不是如此。可旁人能咽下的这口气，我偏咽不下。我的诗可以跪，我的腰，不行。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n8",
+      "emotion": "serious",
+      "text": "后来我隐居终南山，想走\"终南捷径\"，借玉真公主的引荐，直接面见天子。可这仕途，比蜀道还难——\"蜀道之难，难于上青天\"。我写那蜀道，写的是险，是难，也是我自己这条走不通的路。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n9a",
+      "emotion": "sad",
+      "text": "难啊。\"欲渡黄河冰塞川，将登太行雪满山\"——这世道，处处是冰，处处是雪，想往前走一步，都难如登天。",
+      "fileName": "n9a.mp3"
+    },
+    {
+      "index": 11,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n9b",
+      "emotion": "serious",
+      "text": "碰壁归碰壁，我这一身傲骨，撞不弯。他们可以不用我，却休想让我跪下来求。",
+      "fileName": "n9b.mp3"
+    },
+    {
+      "index": 12,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n9c",
+      "emotion": "thoughtful",
+      "text": "做闲人？我也想。可胸中这团火不灭，我就放不下。纵情山水，那是日后的归处，不是今日的退路。",
+      "fileName": "n9c.mp3"
+    },
+    {
+      "index": 13,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n11",
+      "emotion": "serious",
+      "text": "低头？我李白生就一身傲骨，若为了一顶乌纱就弯下腰，那我还配写那些仰天大笑的诗吗？我宁可穷，也不折这腰。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 14,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n12",
+      "emotion": "serious",
+      "text": "说得好！安能摧眉折腰事权贵，使我不得开心颜！这官，不做也罢；这腰，绝不能弯。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 15,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n13",
+      "emotion": "calm",
+      "text": "逢迎？那不是我。我这人，喜怒都在脸上。要我一面对人笑、一面心里骂，我做不到，也不屑去做。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 16,
+      "character": "libai",
+      "period": "p2",
+      "periodTitle": "干谒求仕",
+      "nodeId": "n14",
+      "emotion": "thoughtful",
+      "text": "罢了，不说这些丧气事。你既来了，就陪我喝个痛快。这长安的酒，苦是苦，倒也能浇愁。你有什么想问的，尽管问，我一边饮，一边答你。",
+      "fileName": "n14.mp3"
+    }
+  ]
+}

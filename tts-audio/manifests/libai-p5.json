@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T16:54:03.208Z",
+  "character": "libai",
+  "period": "p5",
+  "title": "乱世浮沉",
+  "range": "755–762",
+  "source": "miniprogram\\utils\\stories\\line-libai.js",
+  "count": 23,
+  "items": [
+    {
+      "index": 1,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n2",
+      "emotion": "calm",
+      "text": "（见你，先是一怔，随即苦笑）……这乱世里，还能再见你，也算万幸。我在这庐山，躲了许久了。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n2b",
+      "emotion": "calm",
+      "text": "好不好的，你且看这乱世。我在庐山，算是有个安身处。只是这心里，总像压着一块石头，怎么也放不下。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n2c",
+      "emotion": "serious",
+      "text": "乱了。彻底乱了。眼看着山河破碎，我却只能躲在这山里，空有一腔报国志，无处施展。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n2d",
+      "emotion": "sad",
+      "text": "（他反握住你，力道很重）好，好。乱世里，能再见一面故人，是天大的幸事。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n3",
+      "emotion": "serious",
+      "text": "前几日，永王李璘的使者来了，说永王在江陵招兵买马，要平定天下，求贤若渴，特来请我出山。这已是第三次了。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n5",
+      "emotion": "serious",
+      "text": "我何尝不这样想！我这一辈子，求的不过是一个\"为天下做事\"的机会。如今机会来了，我却犹豫了。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n6",
+      "emotion": "thoughtful",
+      "text": "你这一问，正是我忧心的。永王与太子肃宗，已有裂痕。我若入他幕中，日后恐有说不清的是非。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n7",
+      "emotion": "calm",
+      "text": "（他望着远处）凶险，我又何尝不知。可这一腔热血，若再不浇出去，就真的要凉透了。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n8",
+      "emotion": "sad",
+      "text": "我思来想去，一夜没合眼。避祸归隐，保全自身，还是入幕报国，赌这一把？",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n10",
+      "emotion": "serious",
+      "text": "对。我终究没忍住。我这一生，求了一辈子的\"入世\"，如今最后一次机会摆在眼前，我若不抓住，这一腔热血，就真要烂在肚子里了。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n11",
+      "emotion": "thoughtful",
+      "text": "稳妥？我也曾这样劝自己。可我这一生，从没求过稳妥。避祸，那不是我李白。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n12",
+      "emotion": "sad",
+      "text": "观望？等不及了。乱世里，机会像水一样流走。我若再犹豫，就真的要老死在这山中了。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n13",
+      "emotion": "sad",
+      "text": "我入了永王的幕。我满心以为是去平定叛乱、报效国家，却不知，自己一脚踏进了皇室内斗的漩涡。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 14,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n14",
+      "emotion": "sad",
+      "text": "永王兵败。我被打作\"逆臣\"，系在浔阳狱中。那些日子，我透过铁窗望天，一遍遍问自己：我李白，怎么会走到这一步？",
+      "fileName": "n14.mp3"
+    },
+    {
+      "index": 15,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n16",
+      "emotion": "sad",
+      "text": "报国之心，天知地知。可这世道，只看你站错了谁的队。我的妻宗氏，正为我四处奔走求救。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 16,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n17",
+      "emotion": "sad",
+      "text": "（他苦笑）你不必为我难过。我这一生，起起落落，早该料到，走得越高，摔得越重。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 17,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n18",
+      "emotion": "thoughtful",
+      "text": "有。我的妻宗氏，还有几位故旧，都在为我奔走。只不知，这朝廷肯不肯放我一马。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 18,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n19",
+      "emotion": "sad",
+      "text": "后来，我被判\"长流夜郎\"。那一路，山高水远，我戴着重枷，一步一挨。我这一生，写过那么多豪气干云的诗，到头来，却落到这般田地。",
+      "fileName": "n19.mp3"
+    },
+    {
+      "index": 19,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n20",
+      "emotion": "joy",
+      "text": "可就在流放途中，朝廷大赦天下！那一日我到了白帝城，喜极而狂，挥笔写下：\"朝辞白帝彩云间，千里江陵一日还。两岸猿声啼不住，轻舟已过万重山！\"",
+      "fileName": "n20.mp3"
+    },
+    {
+      "index": 20,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n22",
+      "emotion": "joy",
+      "text": "自由了！我李白，这一生所求的，不就是个自由吗？如今，这天、这地、这江水，又都是我的了！",
+      "fileName": "n22.mp3"
+    },
+    {
+      "index": 21,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n23",
+      "emotion": "thoughtful",
+      "text": "看开了。这半生，我狂过、醉过、得意过、也落魄过。到如今，官也做过，牢也坐过，还有什么看不开的。",
+      "fileName": "n23.mp3"
+    },
+    {
+      "index": 22,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n24",
+      "emotion": "calm",
+      "text": "（他笑望着你，眼里有泪光，也有释然）别哭。我这一生，虽九死，犹未悔。",
+      "fileName": "n24.mp3"
+    },
+    {
+      "index": 23,
+      "character": "libai",
+      "period": "p5",
+      "periodTitle": "乱世浮沉",
+      "nodeId": "n25",
+      "emotion": "calm",
+      "text": "我这一生，自比那大鹏——\"大鹏一日同风起，扶摇直上九万里\"。到如今，鹏飞虽倦，心却未老。这最后一段路，你也陪我走完了。想问什么，尽管问——这一生的悔与不悔，我都说给你听。",
+      "fileName": "n25.mp3"
+    }
+  ]
+}

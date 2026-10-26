@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="docx-page-size" content="A4">
+<title>李白 · 诗人台词集</title>
+<style>
+:root {
+  --page-content-width: var(--layout-contentWidth, 15.6cm);
+  --fs-h1: var(--typography-fontSize-h1, 18pt);
+  --fs-h2: var(--typography-fontSize-h2, 15pt);
+  --fs-h3: var(--typography-fontSize-h3, 13pt);
+  --fs-h4: var(--typography-fontSize-h4, 12pt);
+  --fs-body: var(--typography-fontSize-body, 11pt);
+  --fs-small: var(--typography-fontSize-small, 9pt);
+  --ff-heading: var(--typography-fontFamily-heading, 黑体, SimHei, sans-serif);
+  --ff-body: var(--typography-fontFamily-body, 宋体, SimSun, serif);
+  --ff-mono: var(--typography-fontFamily-code, monospace);
+  --lh-body: var(--typography-lineHeight-body, 1.7);
+  --lh-heading: var(--typography-lineHeight-heading, 1.3);
+  --fw-bold: var(--typography-fontWeight-heading, 700);
+  --fw-normal: var(--typography-fontWeight-body, 400);
+  --color-primary: var(--color-primary, #2563EB);
+  --color-text: var(--color-text, #111827);
+  --color-muted: var(--color-textSecondary, #6B7280);
+  --color-border: var(--color-border, #E5E7EB);
+  --color-bg: var(--color-background, #FFFFFF);
+  --color-highlight: var(--color-highlight, #FEF3C7);
+  --spacing-paragraph: var(--spacing-paragraph, 0.5em);
+  --spacing-section: var(--spacing-sectionGap, 2em);
+  --spacing-block: var(--spacing-blockGap, 1.2em);
+  --margin-page: var(--layout-marginTop, 2.5cm);
+  /* 本地别名（避免裸值） */
+  --cell-pad: 0.45em 0.8em;
+  --list-pad: 1.6em;
+  --li-gap: 0.35em;
+  --item-gap: 1.05em;
+  --title-gap: 0.55em;
+  --rule-w: 3px;
+  --cover-gap: 2.6em;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@page { @bottom-center { content: counter(page); } }
+@page cover { @bottom-center { content: none; } }
+section[role="cover"] { page: cover; }
+
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+  max-width: var(--page-content-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--margin-page) 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--ff-heading);
+  line-height: var(--lh-heading);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+  text-align: left;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); margin-bottom: var(--title-gap); }
+h3 { font-size: var(--fs-h3); margin-bottom: var(--title-gap); }
+
+p { margin-bottom: var(--spacing-paragraph); }
+
+table { border-collapse: collapse; width: 100%; margin-bottom: var(--spacing-block); }
+th, td { padding: var(--cell-pad); border: 1px solid var(--color-border); text-align: left; }
+th { font-weight: var(--fw-bold); background: var(--color-highlight); }
+
+/* 封面 */
+section[role="cover"] { padding-bottom: var(--cover-gap); }
+.cover-eyebrow { font-family: var(--ff-heading); font-size: var(--fs-small); color: var(--color-muted); margin-bottom: var(--title-gap); }
+section[role="cover"] > h1 { font-size: var(--fs-h1); margin-bottom: var(--title-gap); }
+.cover-subtitle { font-size: var(--fs-h3); color: var(--color-muted); margin-bottom: var(--cover-gap); }
+.cover-info { margin-bottom: var(--cover-gap); }
+.cover-note { font-size: var(--fs-small); color: var(--color-muted); font-family: var(--ff-mono); }
+
+/* 目录 */
+.doc-toc { margin-bottom: var(--spacing-section); }
+.toc-title { font-family: var(--ff-heading); font-size: var(--fs-h3); font-weight: var(--fw-bold); margin-bottom: var(--title-gap); }
+.toc-list, .toc-list ol, .toc-list ul { list-style: none; list-style-type: none; padding-left: 0; }
+.toc-list li { margin-bottom: var(--li-gap); }
+.toc-list a { color: var(--color-primary); text-decoration: none; }
+
+/* 正文 */
+.intro-text { margin-bottom: var(--spacing-block); }
+.chapter { margin-bottom: var(--spacing-section); }
+.period-desc { color: var(--color-muted); font-size: var(--fs-small); margin-bottom: var(--spacing-block); }
+.dialogue-list { list-style: none; list-style-type: none; padding-left: 0; margin-bottom: var(--spacing-block); }
+.dialogue-item { margin-bottom: var(--item-gap); }
+.line-text { padding-left: var(--list-pad); border-left: var(--rule-w) solid var(--color-primary); margin-bottom: var(--li-gap); }
+.line-meta { font-size: var(--fs-small); color: var(--color-muted); padding-left: var(--list-pad); }
+</style>
+</head>
+<body>
+  <section role="cover" class="cover">
+    <p class="cover-eyebrow" style="text-align: center;">寻迹诗旅</p>
+    <h1 style="text-align: center;">李白 · 诗人台词集</h1>
+    <p class="cover-subtitle" style="text-align: center;">结构化剧本台词全编 · 谪仙长风</p>
+    <table class="cover-info">
+      <thead>
+        <tr><th>项目</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>诗人</td><td>李白</td></tr>
+        <tr><td>故事线标识</td><td>libai（谪仙长风）</td></tr>
+        <tr><td>覆盖时期</td><td>5 个</td></tr>
+        <tr><td>诗人对白</td><td>97 句</td></tr>
+        <tr><td>即兴台词</td><td>10 句</td></tr>
+        <tr><td>数据来源</td><td>miniprogram/utils/stories/line-libai.js</td></tr>
+        <tr><td>提取时间</td><td>2026-10-09T19:25:57+08:00</td></tr>
+      </tbody>
+    </table>
+    <p class="cover-note" style="text-align: center;">仅收录诗人本人台词，旁白与玩家选项不计入</p>
+  </section>
+  <section role="body" data-page-restart="1">
+    <div class="intro">
+      <p class="intro-text">本集从《寻迹诗旅》沉浸式历史文学探究小程序的结构化剧本数据中提取，只保留诗人 李白 本人在剧情节点中说出的话（talk 节点），按剧本时期的先后顺序编排。每句台词下方标注了该句在剧本中的情绪标记、所属知识锚点与节点编号；每个时期末尾另附自由对话（aiFree）环节中诗人的即兴应答。</p>
+    </div>
+    <nav class="doc-toc" aria-label="文档目录">
+      <p class="toc-title">目录</p>
+      <ol class="toc-list">
+<li><a href="#section-1">一、仗剑出蜀（725–730）</a></li>
+<li><a href="#section-2">二、干谒求仕（730–741）</a></li>
+<li><a href="#section-3">三、供奉翰林（742–744）</a></li>
+<li><a href="#section-4">四、纵酒漫游（744–755）</a></li>
+<li><a href="#section-5">五、乱世浮沉（755–762）</a></li>
+      </ol>
+    </nav>
+    <div class="chapter">
+      <h2 id="section-1">一、仗剑出蜀（725–730）</h2>
+      <p class="period-desc">时期简介：少年意气，辞亲远游；代表诗句：峨眉山月半轮秋，影入平羌江水流</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（抬头见你，朗声大笑）好！又是个要远行的！我，李白，字太白。今日正要出了这蜀地，仗剑去国、辞亲远游，把这大唐的天下，走它个遍！来，报个名号——你打哪儿来，又要往哪儿去？」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l2·仗剑出蜀 · 辞亲远游 ｜ 节点 n2</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「去处？天下之大，何处去不得！先出三峡，下江陵，再往金陵、扬州，一路看尽这大唐的繁华去。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2b</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「好眼力！我十五岁就好剑术，遍访蜀中名师。这剑不是摆样子的——出门在外，仗剑方能护得一身胆气。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2c</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「哈哈，不必拘束。我这个人，天生就爱笑、爱酒、爱这山川。你且陪我在这江边走走，咱们边走边聊。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2d</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「不瞒你说，我五岁诵六甲，十岁观百家，十五岁就写得一手好赋，连那司马相如，我也敢跟他比一比。你且说——旁人五岁时还在玩泥巴，我五岁已能背天下文章，这算不算天生的奇才？」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l1·李白家世与早慧 ｜ 节点 n3</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「天资谈不上，是父亲逼得紧。不过书读多了，心就野了——我不想困在一方书斋里，我要去亲眼看看，书上写的那片天下。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n5</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「问得好！读书不是为了做官，是为了心里的那团火——我想像大鹏一样，扶摇直上九万里，让天下人都记住"李白"这两个字。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n6</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「哈哈，何必自谦。每个人的路不同，我不过起得早些罢了。你这一路走来，定也有你的见识。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n7</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「只是有件事，乡里人常劝我，说我读书好，该去考个功名，走科举正途。可我偏不。我这一生，不愿去挤那一张榜。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n8</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「那榜上写的是名次，写不进一个人的才情。我李白，要凭一支笔、一柄剑、一身傲骨，让天子亲自来请我。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n9a</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「靠诗名，靠侠气！我去干谒公卿，去游历天下，让我的诗替我叩开长安的门。天生我材必有用，何必非走那一条道。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n9b</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我若肯走那条路，便不是我了。那张榜能拴住多少人的一生，却拴不住我——我要走的，是一条别人没走过的路。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n11</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「痛快！你懂我！人生在世，若只为了一张榜、一顶乌纱，那还有什么意思。我要这天地记住我，凭的是我的诗，不是我的官。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n12</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「试它作甚？我连那榜都不屑一顾。旁人道我狂，我却觉着——一个人若连自己要走哪条路都不敢选，那才真是白活。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n13</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「昨夜我立在峨眉山头，看半轮秋月，映在平羌江里，澄澈得像能照见人心。"峨眉山月半轮秋，影入平羌江水流"——这一去，不知何年才能再见这峨眉的月。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 锚点 l3·《峨眉山月歌》 ｜ 节点 n14</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「舍不得，自然是舍不得的。可雏鹰不离巢，怎么飞得高。我这一去，带着这峨眉的月，也带着故乡的水，走到哪儿，都不算独行。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n16</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「说得好！人就是这样，一边舍不得，一边又忍不住往外走。这江水流到哪里，我的心就跟着到哪里。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n17</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「你说得好！月亮不会留人，却会送人。往后我走到天涯海角，只要抬头望见这轮月亮，就还像站在峨眉山上。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n18</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「过了这道荆门，就出了蜀地了。"山随平野尽，江入大荒流"——你且看，出了这道山，天地一下子就开阔了！」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l4·《渡荆门送别》 ｜ 节点 n19</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「小子，这一路听我说了这许多，还没听你开口。你心里憋着什么话——家世也好，我的志向也好，只管砸过来，我李白知无不言。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n20</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h3>（一）自由对话 · 即兴台词</h3>
+      <p class="period-desc">以下为自由对话（aiFree）环节中，玩家提问或指出史实错漏时，李白的即兴应答。</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（按剑而立，仰头一笑）我七岁诵六甲，十岁观百家，十五好剑术，遍干诸侯——这几句我可没吹牛。你信不信？」</p>
+        <p class="line-meta note">场景 即兴应答 ｜ 节点 n21</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（一愣，拊掌大笑）好小子！"五岁诵六甲"，是我说岔了一个字。五岁识字、十岁观百家、十五好剑术——我李白的底子，就是这么攒起来的。你耳朵倒比我想的尖，来，敬你一杯！」</p>
+        <p class="line-meta note">场景 被指出史实错漏后 ｜ 节点 n21</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h2 id="section-2">二、干谒求仕（730–741）</h2>
+      <p class="period-desc">时期简介：长安失意，穷愁潦倒；代表诗句：安能摧眉折腰事权贵</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（抬头见你，眼睛一亮）是你！蜀地一别，好些年头了。来来来，坐下喝一杯——看我这副落魄样子，是不是叫你失望了？」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「好不好的，你且看我这一身。我到长安来求个出身，四处干谒，拜访公卿——"三十成文章，历抵卿相"，可到头来，处处碰壁。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n2b</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「哈哈，别为我难过。我李白什么都能受，唯独受不得人可怜。来，先满上这一杯，话慢慢说。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2c</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「爽快！还是你懂我！落魄归落魄，酒不能断，笑不能少。这天底下，能让我低头的，还没有生出来呢。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2d</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「这些年，我拿着自己的诗文，一次次去叩那些权贵的门。那些人，有的连正眼都不瞧我一下。我一个读书人，低声下气地求人，你可知那是什么滋味？」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 锚点 l5·干谒求仕 · 历抵卿相 ｜ 节点 n3</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「委屈我受得。可寒心的是——我满腹才情，那些人却只把我当个求食的门客。我李白，岂是摇尾乞怜之人。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n5</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「问得值不值？我也问过自己。可除了求人，还有别的路吗？我凭诗文入世，总好过钻营那些见不得人的门道。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n6</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「谁不是如此。可旁人能咽下的这口气，我偏咽不下。我的诗可以跪，我的腰，不行。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n7</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「后来我隐居终南山，想走"终南捷径"，借玉真公主的引荐，直接面见天子。可这仕途，比蜀道还难——"蜀道之难，难于上青天"。我写那蜀道，写的是险，是难，也是我自己这条走不通的路。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 锚点 l8·《蜀道难》意象 ｜ 节点 n8</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「难啊。"欲渡黄河冰塞川，将登太行雪满山"——这世道，处处是冰，处处是雪，想往前走一步，都难如登天。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 锚点 l6·《行路难》的困顿 ｜ 节点 n9a</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「碰壁归碰壁，我这一身傲骨，撞不弯。他们可以不用我，却休想让我跪下来求。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n9b</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「做闲人？我也想。可胸中这团火不灭，我就放不下。纵情山水，那是日后的归处，不是今日的退路。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n9c</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「低头？我李白生就一身傲骨，若为了一顶乌纱就弯下腰，那我还配写那些仰天大笑的诗吗？我宁可穷，也不折这腰。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n11</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「说得好！安能摧眉折腰事权贵，使我不得开心颜！这官，不做也罢；这腰，绝不能弯。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 锚点 l7·不折腰的傲骨 ｜ 节点 n12</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「逢迎？那不是我。我这人，喜怒都在脸上。要我一面对人笑、一面心里骂，我做不到，也不屑去做。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n13</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「罢了，不说这些丧气事。你既来了，就陪我喝个痛快。这长安的酒，苦是苦，倒也能浇愁。你有什么想问的，尽管问，我一边饮，一边答你。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n14</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h3>（一）自由对话 · 即兴台词</h3>
+      <p class="period-desc">以下为自由对话（aiFree）环节中，玩家提问或指出史实错漏时，李白的即兴应答。</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（把盏一放）那几年我困在长安，写下"欲渡黄河冰塞川，将登太行雪满天"。这十四个字，写的就是我自己。」</p>
+        <p class="line-meta note">场景 即兴应答 ｜ 节点 n15</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（一顿，随即大笑，把盏顿在案上）"雪满山"，不是"满天"！好，好——连我自己的诗你都背得比我准。冰塞川、雪满山，路都走不通，我却偏要"长风破浪会有时，直挂云帆济沧海"。这才叫李白！」</p>
+        <p class="line-meta note">场景 被指出史实错漏后 ｜ 节点 n15</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h2 id="section-3">三、供奉翰林（742–744）</h2>
+      <p class="period-desc">时期简介：天子赏识，赐金放还；代表诗句：云想衣裳花想容</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（见你，笑着迎上来）你怎么也进宫来了！来来，你看这满园牡丹——今日玄宗天子设宴赏花，正缺一个会写诗的人，便召我来了。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「等到了！想当年我四处碰壁，如今是天子亲自下诏请我入京。这一程，总算没白走。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l9·供奉翰林 · 天子赏识 ｜ 节点 n2b</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「哈哈，是有这么回事。天子见我诗文，降辇步迎，赐我七宝床，亲手调羹。可这些虚礼，我不大放在心上。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2c</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他看出你的神色，笑了笑）高兴是高兴，只是这宫里……处处是规矩，处处是眼睛，远不如外面自在。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n2d</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「最得意的一回，是沉香亭赏牡丹，天子命我作诗。我那时已饮了几杯，借着酒兴，一挥而就——"云想衣裳花想容，春风拂槛露华浓"。天子大喜，命我接连作了三首。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l10·《清平调》 ｜ 节点 n3</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「不错，正是为贵妃作的。花与人相映，人比花更艳。只是这诗，说它好，好在一时；说它险，也险在一时。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n5</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「风光？明面上风光。可这翰林待诏，说穿了，不过是个陪天子饮酒赋诗的弄臣。我的抱负，是经世济民，不是写这些应景的句子。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n6</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「你也瞧出来了。这深宫里的风光，像浮在水上的花，好看，却扎不下根。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n7</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我在宫里，依旧我行我素，纵酒使气。有一回醉中，竟伸出脚去，让那权倾一时的高力士为我脱靴。高力士记恨在心，常在贵妃面前进我的谗言。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 锚点 l11·高力士脱靴 · 赐金放还 ｜ 节点 n8</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「哈哈，痛快是痛快，祸也果然来了。可我那时想的是——我李白连天子的酒都能喝，一个宦官，凭什么让我弯腰。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n10</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「祸，到底还是来了。高力士那等人，我本不该招惹。可若时光倒流，我大概还是会伸出那只脚——有些气，忍不得。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n11</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「吓着你了？在这宫里，我早就看明白了——与其战战兢兢地活，不如痛痛快快地活。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n12</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「渐渐地，谗言日盛。天子待我，也不如从前。我明白，这翰林是待不下去了。有同僚劝我：收敛些，少饮几杯，多奉承几句，这位置谁也夺不走。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n13</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「收敛？我若真能收敛，当初就不会让高力士脱靴了。这官，做成一味讨好人的样子，那还是我李白吗？」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n15</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「对！安能摧眉折腰事权贵，使我不得开心颜！这翰林，我不做了。宁可被放还，还我一个自在身。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n16</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「应付？我这一辈子，最学不会的就是两面。开心颜就是开心颜，摧眉折腰就是摧眉折腰，装不出第二种样子。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n17</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「天宝三载，天子赐金放还——说得体面，其实是变相把我撵出了长安。我牵着马走出城门，回头望那宫阙，心里反倒一阵轻松。只是出城那刻，我仍对天默念了一句：长风破浪会有时，直挂云帆济沧海。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 锚点 l12·《行路难·其一》 ｜ 节点 n18</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「荣宠？那本就是枷锁。我要的不是天子的宠，是我自己的快意。出了这道门，我才是真的李白。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n20</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「爽快！还是你懂我！这宫里待了两年，我早憋坏了。如今还我自由，纵情山水去，饮酒赋诗去，岂不快哉！」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n21</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他拍拍你的肩）不必为我惋惜。有些人求的是功名，我求的，是这颗心不委屈。如今，我找回来了。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n22</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「这宫里的两年，你也看尽了。心里若还有疑问——我的诗也好，这官场也好，趁现在问个痛快。出了这城，咱们再难回头了。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n23</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h3>（一）自由对话 · 即兴台词</h3>
+      <p class="period-desc">以下为自由对话（aiFree）环节中，玩家提问或指出史实错漏时，李白的即兴应答。</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（掸了掸衣上尘土）天宝三载，我奉诏入京，供奉翰林。明皇降辇步迎，御手调羹以饭之——那般礼遇，这辈子只那一回。」</p>
+        <p class="line-meta note">场景 即兴应答 ｜ 节点 n24</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（抚掌）"天宝元年"！我把入京和出京的年头说拧了。元年奉诏入京，三载赐金放还——一进一出，正好两年。这两年，够我把这宫里的冷暖看了个透。你既记得清，那我也就不瞒你：这翰林，我本就没打算久待。」</p>
+        <p class="line-meta note">场景 被指出史实错漏后 ｜ 节点 n24</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h2 id="section-4">四、纵酒漫游（744–755）</h2>
+      <p class="period-desc">时期简介：与李杜同游，理想幻灭；代表诗句：天生我材必有用</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（见你，大笑）你也来了！快来，我给你引见——这位是杜甫，杜子美；这位是高适，高三十五。我们三人结伴，正要寻一处山水，痛饮三日！」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「奇观谈不上，快意是真。我与子美、高三十五，都是不肯低头的人，凑在一起，自然是酒逢知己千杯少！」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l13·李杜相会 · 梁宋同游 ｜ 节点 n2b</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「自在多了！出得长安，天高地阔。这官我虽不做了，可这天下的山水、美酒、知己，都是我的。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2c</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「高兴就对了！人生在世，最难得的，就是有三两知己，一壶好酒。来，你也同去，咱们一醉方休！」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n2d</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「那一回在嵩山元丹丘的山居，我饮到酣处，举杯高歌："人生得意须尽欢，莫使金樽空对月。天生我材必有用，千金散尽还复来！"子美他们听得直拍案。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l14·《将进酒》 ｜ 节点 n3</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「豪情是真。可我自己心里清楚，这豪情，一半是给知己听的，一半是说给自己听的。」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n5</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他顿了顿，笑意淡了些）你听出来了。天生我材必有用——我一遍遍这样说，是因为，我还没真的证明这句话。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n6</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他举杯与你一碰）来！今朝有酒今朝醉，明日的事，明日再说。这世上的烦恼，且都抛给这杯酒！」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n7</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「可你别看我纵酒放歌，我北游幽燕的时候，瞧出那安禄山招兵买马、广结死党，恐有异心。我忧心如焚，却无计可施。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n8</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我但愿是我看错了。可那安禄山，狼子野心，昭然若揭。这太平盛世，怕是撑不了几年了。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n10</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我离了朝，本可不管。可这天下若乱，受苦的是万千百姓。我李白，到底还是放不下这一腔热血。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n11</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他叹了口气）我这个人，嘴上说着求仙问道，可这尘世，终究是放不下的。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n12</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我也曾想，索性归隐，去天姥山寻仙去。"安能摧眉折腰事权贵，使我不得开心颜"——可当真要去时，又迈不开这双脚。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 锚点 l15·《梦游天姥吟留别》 ｜ 节点 n13</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我也劝过自己放下。可放不下。这天下，有我的诗、我的知己、还有那些把命押在这片土地上的百姓。我做不到袖手旁观。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n15</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「对。我嘴上求仙，脚却总往长安的方向走。这腔热血，泼不出去，也凉不下来。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n16</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「酒，我饮过千杯，也浇不灭这心头的火。"抽刀断水水更流，举杯消愁愁更愁"——这愁，不是酒能解的。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n17</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「后来我在宣州谢朓楼上，送别一位故人，写下"抽刀断水水更流，举杯消愁愁更愁"。这半生的愁，就像这江水，抽刀也断不开。这一程山水，你也陪我走遍了。还有什么想问的，只管问，我李白，何时吝啬过话。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 锚点 l16·《宣州谢朓楼饯别校书叔云》 ｜ 节点 n18</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h3>（一）自由对话 · 即兴台词</h3>
+      <p class="period-desc">以下为自由对话（aiFree）环节中，玩家提问或指出史实错漏时，李白的即兴应答。</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（举杯向远）那年我与杜二在梁宋初见，一见如故，便同游了梁宋、齐鲁。他小我十一岁，诗却沉郁得像压着半座山。」</p>
+        <p class="line-meta note">场景 即兴应答 ｜ 节点 n19</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（大笑，以掌击案）"洛阳"！我把初见的地方说错了。是先在洛阳遇上杜二，才一道去的梁宋。那小子写诗比我苦，一句要磨上千遍——我学不来，可我敬他。你连我跟他怎么认识的都记得，好，这一杯你得陪我干了。」</p>
+        <p class="line-meta note">场景 被指出史实错漏后 ｜ 节点 n19</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h2 id="section-5">五、乱世浮沉（755–762）</h2>
+      <p class="period-desc">时期简介：卷入永王之乱，流放遇赦；代表诗句：千里江陵一日还</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（见你，先是一怔，随即苦笑）……这乱世里，还能再见你，也算万幸。我在这庐山，躲了许久了。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n2</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「好不好的，你且看这乱世。我在庐山，算是有个安身处。只是这心里，总像压着一块石头，怎么也放不下。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n2b</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「乱了。彻底乱了。眼看着山河破碎，我却只能躲在这山里，空有一腔报国志，无处施展。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n2c</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他反握住你，力道很重）好，好。乱世里，能再见一面故人，是天大的幸事。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n2d</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「前几日，永王李璘的使者来了，说永王在江陵招兵买马，要平定天下，求贤若渴，特来请我出山。这已是第三次了。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n3</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我何尝不这样想！我这一辈子，求的不过是一个"为天下做事"的机会。如今机会来了，我却犹豫了。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n5</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「你这一问，正是我忧心的。永王与太子肃宗，已有裂痕。我若入他幕中，日后恐有说不清的是非。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n6</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他望着远处）凶险，我又何尝不知。可这一腔热血，若再不浇出去，就真的要凉透了。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n7</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我思来想去，一夜没合眼。避祸归隐，保全自身，还是入幕报国，赌这一把？」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n8</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「对。我终究没忍住。我这一生，求了一辈子的"入世"，如今最后一次机会摆在眼前，我若不抓住，这一腔热血，就真要烂在肚子里了。」</p>
+        <p class="line-meta note">情绪 郑重 ｜ 节点 n10</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「稳妥？我也曾这样劝自己。可我这一生，从没求过稳妥。避祸，那不是我李白。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n11</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「观望？等不及了。乱世里，机会像水一样流走。我若再犹豫，就真的要老死在这山中了。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n12</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我入了永王的幕。我满心以为是去平定叛乱、报效国家，却不知，自己一脚踏进了皇室内斗的漩涡。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 锚点 l17·永王入幕 · 卷入内斗 ｜ 节点 n13</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「永王兵败。我被打作"逆臣"，系在浔阳狱中。那些日子，我透过铁窗望天，一遍遍问自己：我李白，怎么会走到这一步？」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 锚点 l18·系狱浔阳 · 长流夜郎 ｜ 节点 n14</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「报国之心，天知地知。可这世道，只看你站错了谁的队。我的妻宗氏，正为我四处奔走求救。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n16</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他苦笑）你不必为我难过。我这一生，起起落落，早该料到，走得越高，摔得越重。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n17</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「有。我的妻宗氏，还有几位故旧，都在为我奔走。只不知，这朝廷肯不肯放我一马。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n18</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「后来，我被判"长流夜郎"。那一路，山高水远，我戴着重枷，一步一挨。我这一生，写过那么多豪气干云的诗，到头来，却落到这般田地。」</p>
+        <p class="line-meta note">情绪 黯然 ｜ 节点 n19</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「可就在流放途中，朝廷大赦天下！那一日我到了白帝城，喜极而狂，挥笔写下："朝辞白帝彩云间，千里江陵一日还。两岸猿声啼不住，轻舟已过万重山！"」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 锚点 l19·《早发白帝城》 ｜ 节点 n20</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「自由了！我李白，这一生所求的，不就是个自由吗？如今，这天、这地、这江水，又都是我的了！」</p>
+        <p class="line-meta note">情绪 欣喜 ｜ 节点 n22</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「看开了。这半生，我狂过、醉过、得意过、也落魄过。到如今，官也做过，牢也坐过，还有什么看不开的。」</p>
+        <p class="line-meta note">情绪 沉思 ｜ 节点 n23</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（他笑望着你，眼里有泪光，也有释然）别哭。我这一生，虽九死，犹未悔。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 节点 n24</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「我这一生，自比那大鹏——"大鹏一日同风起，扶摇直上九万里"。到如今，鹏飞虽倦，心却未老。这最后一段路，你也陪我走完了。想问什么，尽管问——这一生的悔与不悔，我都说给你听。」</p>
+        <p class="line-meta note">情绪 平静 ｜ 锚点 l20·《临终歌》· 大鹏意象 ｜ 节点 n25</p>
+      </li>
+      </ol>
+    </div>
+    <div class="chapter">
+      <h3>（一）自由对话 · 即兴台词</h3>
+      <p class="period-desc">以下为自由对话（aiFree）环节中，玩家提问或指出史实错漏时，李白的即兴应答。</p>
+      <ol class="dialogue-list">
+      <li class="dialogue-item">
+        <p class="line-text">「（望江长叹）永王三次遣使来招我，我当他真是奉了太子之命东巡，便入了他的幕府。谁想后来……唉，那一步，是我此生最悔的一步。」</p>
+        <p class="line-meta note">场景 即兴应答 ｜ 节点 n26</p>
+      </li>
+      <li class="dialogue-item">
+        <p class="line-text">「（一滞，随即苦笑）你说得对——永王是玄宗之子、肃宗之弟，哪来的"奉太子之命"。是我自己急着报国，把什么都看成了机会。这一步错，换来浔阳狱，换来夜郎三千里。可我到底还是被赦了——"千里江陵一日还"，你听，我李白这辈子，连倒霉都倒得痛快。」</p>
+        <p class="line-meta note">场景 被指出史实错漏后 ｜ 节点 n26</p>
+      </li>
+      </ol>
+    </div>
+  </section>
+</body>
+</html>

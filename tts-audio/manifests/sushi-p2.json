@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T12:17:46.814Z",
+  "character": "sushi",
+  "period": "p2",
+  "title": "密州湖州",
+  "range": "1074–1079",
+  "source": "miniprogram\\utils\\stories\\line-sushi.js",
+  "count": 24,
+  "items": [
+    {
+      "index": 1,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n2",
+      "emotion": "joy",
+      "text": "（见你，眼睛一亮，翻身下马）是你！蜀地一别，好些年头了。你怎么寻到这密州来了？来来来，随我回衙，咱们好好叙叙旧。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n2b",
+      "emotion": "calm",
+      "text": "好不好的，你且看这密州的百姓。我这官做得，说不上显赫，倒还算踏实。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n2c",
+      "emotion": "joy",
+      "text": "政声不敢当。不过是做了些该做的事——为民请命，为官一任，总要替这一方水土做点什么。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n2d",
+      "emotion": "calm",
+      "text": "（他拍拍你的肩，笑了笑）不碍事。做官哪有不吃苦的。你既来了，陪我走走，看看这密州的山水。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n3",
+      "emotion": "serious",
+      "text": "当年我在朝中，见新法推行，多有扰民之处，便直言进谏。结果得罪了新党，被外放杭州做通判。我这一离京，就是好些年。",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n5",
+      "emotion": "calm",
+      "text": "值得。我明知直说会招祸，可看见百姓受累，这嘴就闭不上。做官，若只想着自己的乌纱，那还算什么父母官。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n6",
+      "emotion": "joy",
+      "text": "你懂我！为官一任，若不能替百姓说话、替百姓做事，那这官不做也罢。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n7",
+      "emotion": "thoughtful",
+      "text": "你想起我当年了？是，我还是那个不肯藏着掖着的性子。只是如今，这性子用在了为百姓说话上。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n8",
+      "emotion": "joy",
+      "text": "在密州，我出猎归来，写下\"老夫聊发少年狂，左牵黄，右擎苍\"。旁人笑我，说我一把年纪还学那少年狂态。你说，这\"狂\"字，是褒还是贬？",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n10",
+      "emotion": "joy",
+      "text": "对。鬓虽斑，心未老。\"会挽雕弓如满月，西北望，射天狼\"——我这报国的心，一刻也没凉过。",
+      "fileName": "n10.mp3"
+    },
+    {
+      "index": 11,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n11",
+      "emotion": "thoughtful",
+      "text": "你听出来了。我外放多年，报国无门，只好借这射猎，泄一泄胸中的块垒。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n12",
+      "emotion": "joy",
+      "text": "（他仰头一笑）来，改日随我出猎，你也试试那纵马弯弓的滋味！",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n13",
+      "emotion": "thoughtful",
+      "text": "那年中秋，我在密州，想起七年未见的舍弟子由，对月独饮，写下\"人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。\"",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 14,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n15",
+      "emotion": "calm",
+      "text": "那是我的心里话。人虽不能团圆，共看一轮明月，也算团圆了。",
+      "fileName": "n15.mp3"
+    },
+    {
+      "index": 15,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n16",
+      "emotion": "thoughtful",
+      "text": "你懂我。月有圆缺，人有离合，这本就是天理。看透了，也就不那么痛了。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 16,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n17",
+      "emotion": "calm",
+      "text": "不必说。有些话，写出来比说出来更近。等你哪天想家，抬头看看月亮，就都懂了。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 17,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n18",
+      "emotion": "serious",
+      "text": "后来我到徐州，正赶上黄河决口，洪水围城。我领着军民筑堤，睡在城墙上，一连数十日。那一回，城保住了，我却瘦脱了形。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 18,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n20",
+      "emotion": "calm",
+      "text": "谈不上难得。洪水要淹的是全城百姓，我这一州长官，不站在最前面，还站在哪里。",
+      "fileName": "n20.mp3"
+    },
+    {
+      "index": 19,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n21",
+      "emotion": "joy",
+      "text": "怕？城在人在，城亡我亡。我若不先上城墙，谁还肯拼命。",
+      "fileName": "n21.mp3"
+    },
+    {
+      "index": 20,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n22",
+      "emotion": "calm",
+      "text": "（他拍拍你）不必这样看我。为官一任，护这一方百姓，是分内的事。",
+      "fileName": "n22.mp3"
+    },
+    {
+      "index": 21,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n22b",
+      "emotion": "thoughtful",
+      "text": "自保？我也想过。可看见百姓受累，这嘴就闭不上。做官，若只想着自己的乌纱，那还算什么父母官。",
+      "fileName": "n22b.mp3"
+    },
+    {
+      "index": 22,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n22c",
+      "emotion": "serious",
+      "text": "对。我明知直说会招祸，可为民请命，是我做官的本分。宁可被外放、被排挤，我也要替百姓把话说出来。",
+      "fileName": "n22c.mp3"
+    },
+    {
+      "index": 23,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n22d",
+      "emotion": "calm",
+      "text": "逢迎？我最学不会的就是\"站队\"。我心里只站一队——百姓。谁对百姓好，我就向着谁。",
+      "fileName": "n22d.mp3"
+    },
+    {
+      "index": 24,
+      "character": "sushi",
+      "period": "p2",
+      "periodTitle": "密州湖州",
+      "nodeId": "n23",
+      "emotion": "thoughtful",
+      "text": "你随我走这一程，也看见我这官是怎么做的了。这官场，新旧两党斗得厉害，我夹在中间，两头不讨好。可我只认一杆秤——百姓。你心里若有疑问，尽管问。",
+      "fileName": "n23.mp3"
+    }
+  ]
+}

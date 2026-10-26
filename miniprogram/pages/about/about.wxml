@@ -1,0 +1,53 @@
+<!-- pages/about/about.wxml —— 关于（版本号 + 备案号公示 + AI 生成内容标识） -->
+<scroll-view class="about-page" scroll-y enhanced>
+  <view class="paper">
+
+    <!-- 头部：名称 + 口号 + 版本 -->
+    <view class="brand">
+      <view class="brand-name">{{name}}</view>
+      <view class="brand-slogan">循一卷诗书，赴一场千年之约</view>
+      <view class="brand-version">版本 {{version}}</view>
+    </view>
+
+    <!-- 简介 -->
+    <view class="section">
+      <view class="section-title">关于</view>
+      <view class="paragraph">{{name}}是一款沉浸式历史文学探究小程序，让历史人物以 AI 对话的方式"活"过来，陪伴青少年循着诗书与行迹，走进诗人真实的生命历程。</view>
+    </view>
+
+    <!-- 备案信息（上线公示，显著位置） -->
+    <view class="section">
+      <view class="section-title">备案信息</view>
+      <view class="beian-box">
+        <view class="beian-row">
+          <text class="beian-label">备案号</text>
+          <text class="beian-value">{{icpDisplay}}</text>
+        </view>
+        <view class="beian-row" wx:if="{{policeNo}}">
+          <text class="beian-label">公安备案号</text>
+          <text class="beian-value">{{policeNo}}</text>
+        </view>
+        <view class="beian-actions">
+          <view class="beian-btn" bindtap="onCopyBeian">复制备案号</view>
+          <view class="beian-btn" bindtap="onCopyUrl">复制查询网址</view>
+        </view>
+        <view class="beian-hint">可前往工业和信息化部备案管理系统（beian.miit.gov.cn）查询核验</view>
+      </view>
+    </view>
+
+    <!-- 人工智能生成内容标识 -->
+    <view class="section">
+      <view class="section-title">人工智能生成内容</view>
+      <view class="paragraph">本小程序中的 AI 对话内容由人工智能生成，仅用于学习参考，可能存在不准确之处，请结合教材及权威资料辨别使用。相关回复已在交互区域以"AI 生成"显式标识。</view>
+      <view class="paragraph">部分视觉素材由 AI 辅助生成。</view>
+    </view>
+
+    <!-- 主办单位（备案主体） -->
+    <view class="section" wx:if="{{company}}">
+      <view class="section-title">主办单位</view>
+      <view class="paragraph">{{company}}</view>
+    </view>
+
+    <view class="footer">© {{company || name}} 版权所有</view>
+  </view>
+</scroll-view>

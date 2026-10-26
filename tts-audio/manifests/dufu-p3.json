@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-10T03:05:00.000Z",
+  "character": "dufu",
+  "period": "p3",
+  "title": "陷贼为官",
+  "range": "756–759",
+  "source": "miniprogram\\utils\\stories\\line-dufu.js",
+  "count": 19,
+  "items": [
+    {
+      "index": 1,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n2",
+      "emotion": "serious",
+      "text": "（压低声音）小兄弟？真的是你……长安一别，不想竟在这般光景里再见。你怎也陷在这城里了。小声些，叛军就在街口巡逻。",
+      "fileName": "n2.mp3"
+    },
+    {
+      "index": 2,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n2b",
+      "emotion": "thoughtful",
+      "text": "好，好……我没事。只是这一城的人，都没了活路。你且随我来，寻个僻静处说话。",
+      "fileName": "n2b.mp3"
+    },
+    {
+      "index": 3,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n2c",
+      "emotion": "calm",
+      "text": "逃？城破之后九门皆闭，出去便是死。可我在这城里，也并非只是等死——你随我来。",
+      "fileName": "n2c.mp3"
+    },
+    {
+      "index": 4,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n2d",
+      "emotion": "sad",
+      "text": "（他反手握住你，力道很重）……你还活着，很好。乱世里，活着已是万幸。随我来，别在街上多留。",
+      "fileName": "n2d.mp3"
+    },
+    {
+      "index": 5,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n3",
+      "emotion": "sad",
+      "text": "夜里我常望着月亮出神。\"今夜鄜州月，闺中只独看\"——妻儿还在鄜州，音信全无，不知生死。我这做丈夫的，连一句平安都送不到。你说，这算不算我此生最无用的时刻？",
+      "fileName": "n3.mp3"
+    },
+    {
+      "index": 6,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n5",
+      "emotion": "thoughtful",
+      "text": "但愿如此。\"烽火连三月，家书抵万金\"——这\"万金\"，是每一个破碎的家庭，一分一寸称出来的。但愿月圆之夜，人也能团圆。",
+      "fileName": "n5.mp3"
+    },
+    {
+      "index": 7,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n6",
+      "emotion": "calm",
+      "text": "会平安的——你这话，我记下了。乱世里的一句吉言，比千金还重。但愿月圆之夜，人也能团圆。",
+      "fileName": "n6.mp3"
+    },
+    {
+      "index": 8,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n7",
+      "emotion": "thoughtful",
+      "text": "你不用说话，陪着就好。这月色照着长安的断墙，也照着鄜州的闺阁——天下人望的，原是同一轮月亮。",
+      "fileName": "n7.mp3"
+    },
+    {
+      "index": 9,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n8",
+      "emotion": "sad",
+      "text": "开春后我登上城头。山河还在，国却已破了。\"国破山河在，城春草木深\"——草木长得越深，人烟就越稀。这首《春望》，我是一字一字，哽出来的。",
+      "fileName": "n8.mp3"
+    },
+    {
+      "index": 10,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n9",
+      "emotion": "serious",
+      "text": "回到城里，我打听到一件事：肃宗已在灵武即位，行在设于凤翔，正召集天下义士。我决意逃出去，投奔朝廷。",
+      "fileName": "n9.mp3"
+    },
+    {
+      "index": 11,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n11",
+      "emotion": "serious",
+      "text": "那日金光门出逃，我扮作难民，混在流民里。穿行在叛军的刀锋与逃难的人潮之间，风餐露宿，九死一生。可我心里只有一个念头——去凤翔，见天子。",
+      "fileName": "n11.mp3"
+    },
+    {
+      "index": 12,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n12",
+      "emotion": "serious",
+      "text": "等？等不来太平的。次日我便扮作难民混出了金光门，穿行在叛军与流民之间，九死一生，一路往凤翔去。",
+      "fileName": "n12.mp3"
+    },
+    {
+      "index": 13,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n13",
+      "emotion": "serious",
+      "text": "熬？我这半生都在熬，早熬够了。数日后我扮作难民混出金光门，往凤翔去——纵是死在半路，也好过困在城里，眼看山河沦丧。",
+      "fileName": "n13.mp3"
+    },
+    {
+      "index": 14,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n14",
+      "emotion": "thoughtful",
+      "text": "到了凤翔，我\"麻鞋见天子，衣袖露两肘\"——一双麻鞋，破袖露肘，狼狈得很。可肃宗感念我冒死来投，授我左拾遗。谏官——终于能当面向圣上直言了。",
+      "fileName": "n14.mp3"
+    },
+    {
+      "index": 15,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n16",
+      "emotion": "serious",
+      "text": "我为房琯说了几句公道话，便被贬出京，去做华州司功参军。……你若问我悔不悔？直言获罪，罪在我身；缄默保身，耻在我心。",
+      "fileName": "n16.mp3"
+    },
+    {
+      "index": 16,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n17",
+      "emotion": "serious",
+      "text": "我做不到。眼见忠良获罪而一言不发，这官做得再稳，夜里也睡不安稳。……后来我直言获罪，被贬华州。可我不悔。",
+      "fileName": "n17.mp3"
+    },
+    {
+      "index": 17,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n18",
+      "emotion": "thoughtful",
+      "text": "朝堂之上，转圜只在转瞬。我终究还是选择了直言——为此被贬华州。……你若问我悔不悔？直言获罪，罪在我身；缄默保身，耻在我心。",
+      "fileName": "n18.mp3"
+    },
+    {
+      "index": 18,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n19",
+      "emotion": "sad",
+      "text": "贬官之后，我从洛阳回华州，一路夜宿荒村。亲眼见差吏深夜抓人充军——\"吏呼一何怒，妇啼一何苦\"，老妇人被带走，只留下一村哭声。我把这些都写了下来：《三吏》《三别》。",
+      "fileName": "n19.mp3"
+    },
+    {
+      "index": 19,
+      "character": "dufu",
+      "period": "p3",
+      "periodTitle": "陷贼为官",
+      "nodeId": "n20",
+      "emotion": "thoughtful",
+      "text": "小兄弟，你随我走这一程，看尽了这乱世。乱世里诗还有什么用——这些年我也反复问自己。你心里若还有疑问，趁今夜都在，尽管问我。",
+      "fileName": "n20.mp3"
+    }
+  ]
+}

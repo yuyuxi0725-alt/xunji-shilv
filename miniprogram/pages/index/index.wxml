@@ -1,41 +1,8 @@
-<!-- pages/index/index.wxml —— 首页（动态封面 + 穿越开场动画） -->
+<!-- pages/index/index.wxml —— 首页（动态封面） -->
 <view class="page">
 
-  <!-- ===== 穿越开场动画层（点击"开始穿越"后播放） ===== -->
-  <view class="portal-layer {{portalFade ? 'portal-fade' : ''}}" wx:if="{{showPortal}}">
-    <!-- 纯 CSS 穿越动画：水墨晕染 + 卷轴展开（无水印、无加载延迟） -->
-    <view class="portal-ink ink-1"></view>
-    <view class="portal-ink ink-2"></view>
-    <view class="portal-ink ink-3"></view>
-
-    <!-- 卷轴：自画面中央向上下展开 -->
-    <view class="portal-scroll">
-      <view class="portal-rod rod-top">
-        <view class="rod-knob k-l"></view>
-        <view class="rod-knob k-r"></view>
-      </view>
-      <view class="portal-paper">
-        <view class="paper-seal">夢</view>
-        <view class="paper-poem poem-l1">一夢千年</view>
-        <view class="paper-poem poem-l2">循一卷詩書 · 赴一場千年之約</view>
-        <view class="portal-figures">
-          <view class="pf pf-1"><image src="{{linePortraits[0]}}" mode="aspectFit" /></view>
-          <view class="pf pf-2"><image src="{{linePortraits[1]}}" mode="aspectFit" /></view>
-          <view class="pf pf-3"><image src="{{linePortraits[2]}}" mode="aspectFit" /></view>
-        </view>
-      </view>
-      <view class="portal-rod rod-bottom">
-        <view class="rod-knob k-l"></view>
-        <view class="rod-knob k-r"></view>
-      </view>
-    </view>
-
-    <!-- 收束白光：卷轴定格后泛白切入 -->
-    <view class="portal-flash"></view>
-  </view>
-
   <!-- ===== 封面层 ===== -->
-  <view class="cover" wx:if="{{!showPortal}}">
+  <view class="cover">
     <!-- 背景：动态视频（云存储） + 静态竖版图兜底 -->
     <!-- 视频未取到链接时由下方 cover-bg 静态图兜底，poster 不支持本地路径故不用 -->
     <video
@@ -64,17 +31,44 @@
 
     <!-- 标题区 -->
     <view class="cover-title-wrap">
-      <view class="cover-title gufeng-title">寻迹 · 古今</view>
+      <!-- 标题改用艺术字图片（本地小图，不依赖云链接，保证首屏必显） -->
+      <image class="cover-title-img" src="/assets/brand/title-logo.png" mode="widthFix" />
       <view class="cover-subtitle">一梦千年，与先贤同游</view>
     </view>
 
     <!-- 登录 / 入口 -->
     <view class="cover-action">
-      <button class="btn-start" bindtap="onStart" loading="{{logging}}">开始穿越之旅</button>
-      <view class="privacy-tip" wx:if="{{!loggedIn}}">
-        登录即代表同意
-        <navigator open-type="openPrivacyContract" class="privacy-link">《隐私保护指引》</navigator>
-      </view>
+      <view class="age-notice">适龄提示 · 本服务面向年满14周岁用户</view>
+      <button class="btn-start {{(!agreementChecked || !ageConfirmed) ? 'btn-start-disabled' : ''}}" bindtap="onStart" loading="{{logging}}">开始穿越之旅</button>
+      <checkbox-group class="age-row" bindchange="onAgeChange">
+        <label class="agreement-label">
+          <checkbox
+            class="agreement-checkbox"
+            value="age14"
+            checked="{{ageConfirmed}}"
+            color="#b07b3e"
+          />
+          <text>我确认已满14周岁</text>
+        </label>
+      </checkbox-group>
+      <checkbox-group class="agreement-row" bindchange="onAgreementChange">
+        <label class="agreement-label">
+          <checkbox
+            class="agreement-checkbox"
+            value="agree"
+            checked="{{agreementChecked}}"
+            color="#b07b3e"
+          />
+          <text>我已阅读并同意</text>
+        </label>
+        <navigator url="/pages/agreement/agreement" class="privacy-link">《用户服务协议》</navigator>
+        <text class="agreement-and">和</text>
+        <text class="privacy-link" bindtap="onOpenPrivacy">《隐私政策》</text>
+      </checkbox-group>
+      <view class="agreement-hint">两项均由本人自主确认；未勾选不会登录或收集账号标识</view>
     </view>
   </view>
+
+  <!-- 微信官方隐私授权弹窗（隐私接口调用前统一同步授权状态） -->
+  <privacy-popup />
 </view>

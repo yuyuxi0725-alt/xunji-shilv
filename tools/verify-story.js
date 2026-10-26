@@ -9,7 +9,7 @@
 const path = require('path');
 const S = p => require(path.join(__dirname, '..', 'miniprogram', 'utils', 'stories', p));
 
-const lines = { dufu: S('line-dufu'), libai: S('line-libai') };
+const lines = { dufu: S('line-dufu'), libai: S('line-libai'), sushi: S('line-sushi') };
 const problems = [];
 const notes = [];
 

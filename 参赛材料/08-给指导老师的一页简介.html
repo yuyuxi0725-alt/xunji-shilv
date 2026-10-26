@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寻迹诗旅 —— 一页简介</title>
+<style>
+  :root{
+    --ink:#2b1e12;
+    --brown:#8b5a2b;
+    --brown-deep:#5c3a1e;
+    --paper:#f7f0e4;
+    --accent:#a8432a;
+    --line:#d8c6a8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:"STKaiti","KaiTi","FangSong","Microsoft YaHei",serif;
+    background:#e8e0d0;
+    color:var(--ink);
+    display:flex;
+    justify-content:center;
+    padding:40px 16px;
+    line-height:1.7;
+  }
+  .page{
+    width:794px;
+    max-width:100%;
+    background:var(--paper);
+    border:1px solid var(--line);
+    box-shadow:0 6px 24px rgba(60,40,20,.18);
+    padding:52px 58px;
+    position:relative;
+  }
+  .page::before{
+    content:"";
+    position:absolute;inset:14px;
+    border:1px solid var(--line);
+    pointer-events:none;
+  }
+  .head{
+    text-align:center;
+    margin-bottom:30px;
+  }
+  .brand{
+    font-size:34px;
+    letter-spacing:8px;
+    color:var(--brown-deep);
+    font-weight:bold;
+  }
+  .brand .dot{
+    color:var(--accent);
+  }
+  .subtitle{
+    margin-top:10px;
+    font-size:16px;
+    color:var(--brown);
+    letter-spacing:2px;
+  }
+  .rule{
+    border:none;
+    border-top:2px solid var(--brown);
+    width:72px;
+    margin:16px auto 0;
+  }
+  .pos{
+    background:#fff8ec;
+    border-left:4px solid var(--brown);
+    padding:14px 18px;
+    margin:24px 0;
+    font-size:17px;
+    color:var(--ink);
+  }
+  h2{
+    font-size:19px;
+    color:var(--brown-deep);
+    margin:26px 0 10px;
+    letter-spacing:1px;
+  }
+  h2 .num{
+    display:inline-block;
+    width:24px;height:24px;
+    line-height:24px;
+    text-align:center;
+    background:var(--brown);
+    color:#fff;
+    border-radius:50%;
+    font-size:14px;
+    margin-right:8px;
+  }
+  p{font-size:15.5px;margin:8px 0;}
+  .innov{
+    margin:6px 0 6px 2px;
+    padding-left:2px;
+  }
+  .innov b{
+    color:var(--accent);
+  }
+  .scale{
+    background:#f3ead8;
+    border:1px solid var(--line);
+    padding:16px 18px;
+    margin:14px 0;
+    font-size:15px;
+  }
+  .scale .big{
+    font-size:17px;
+    color:var(--brown-deep);
+    font-weight:bold;
+  }
+  .tech{
+    font-size:14.5px;
+    color:#5a4632;
+  }
+  .foot{
+    margin-top:30px;
+    text-align:center;
+    font-size:13px;
+    color:#8a7358;
+    letter-spacing:1px;
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    .page{box-shadow:none;border:none;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="head">
+    <div class="brand">寻迹<span class="dot">·</span>古今</div>
+    <div class="subtitle">让古代诗人「活过来」，教中学生读诗</div>
+    <hr class="rule">
+  </div>
+
+  <div class="pos">
+    让中学生「被古代诗人亲自引导着做一次历史探究」的沉浸式古诗文学习小程序。
+  </div>
+
+  <h2><span class="num">1</span>要解决的问题</h2>
+  <p>中学生背古诗「背得出、读不懂」——能默写满分，却说不清诗人为什么在春天看见花开反而流泪。课本、视频、题库给的都是结论，学生始终缺一次属于自己的判断。</p>
+
+  <h2><span class="num">2</span>三个创新点</h2>
+  <p class="innov"><b>把 AI 从「回答机器」变成「会追问的历史老师」</b>——学生穿越到唐朝与北宋，成为杜甫、李白、苏轼的「少年同游者」，被诗人当面追问、考察。</p>
+  <p class="innov"><b>「考据挑战」反用大模型幻觉</b>——诗人会故意说错一处可核查的史实，由学生抓出来，把行业公认的「AI 编造」风险做成训练批判性思维的游戏机制。</p>
+  <p class="innov"><b>看得见的学习成果</b>——通关后收获「知识锚点」集卡、「我的诗笺」与「行迹地图」，让「玩过」沉淀为「学到了什么」。</p>
+
+  <h2><span class="num">3</span>已完成的规模</h2>
+  <div class="scale">
+    三条人物线：杜甫（仁·韧·史）／李白（狂·仙·逸）／苏轼（旷·达·通）<br>
+    <span class="big">14 个时期 · 408 个剧情节点 · 69 张史料卡</span><br>
+    56 枚知识锚点 · 14 处考据挑战 · 72 张场景图 · 17 张立绘<br>
+    61 项引擎自动化断言全部通过（可现场核验）
+  </div>
+
+  <h2><span class="num">4</span>技术形态</h2>
+  <p class="tech">微信小程序（体验版可扫码）＋ 微信云开发后端 ＋ DeepSeek 大模型驱动角色对话，内容安全双向过滤。</p>
+
+  <div class="foot">循一卷诗书，赴一场千年之约</div>
+</div>
+</body>
+</html>
